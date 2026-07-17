@@ -1,0 +1,6 @@
+# Ignore heavy / tooling files when publishing
+david-esl-homepage.before-lesson-split.html
+dist/
+*.tmp
+.DS_Store
+Thumbs.db
