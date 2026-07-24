@@ -1,13 +1,23 @@
-# Lesson pages
+﻿# Lesson pages (SEO slug URLs)
 
-Each file under `lessons/{grade}/{en|ko}/{01-18}.html` is a **full HTML page**.
+Structure from the `종합.zip` deploy package:
 
-- Linked from the main site list in `index.html`
-- Shared styles: `assets/lesson-page.css`
-- Back link returns to `index.html#k1` (etc.)
+```
+lessons/
+  index.html                 <- all grades hub
+  k1/
+    index.html               <- K1 grade list
+    greetings-hello-routine/
+      index.html             <- individual lesson
+  k2/ ... g6/
+```
 
-Rebuild:
+- Canonical URLs: `https://readykoreaesl.com/lessons/{grade}/{slug}/`
+- Listed in root `sitemap.xml` / `robots.txt`
+- Main site: `../index.html`
+
+Optional rebuild from source:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File build-full-lesson-pages.ps1
+powershell -ExecutionPolicy Bypass -File build-lesson-dist.ps1
 ```
