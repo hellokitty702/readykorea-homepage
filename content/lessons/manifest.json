@@ -1,0 +1,866 @@
+[
+  {
+    "id": "k1",
+    "label": "Kindergarten K1",
+    "lessons": [
+      {
+        "slug": "classroom-routine-commands-phonics-intro",
+        "title": "K1 Lesson 01: Classroom Routine, Commands & Phonics Intro",
+        "description": "K1 Lesson 01: Classroom Routine, Commands & Phonics Intro Grade: K1 (Ages 3-4) Time: 30 minutes Look · Listen · Sit · Circle Time · /s/ Phonics · Teac"
+      },
+      {
+        "slug": "greetings-hello-routine",
+        "title": "K1 Lesson 02: Greetings & Hello Routine",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 02: Greetings & Hello Routine Grade: K1 (Ages 3-4) Time: 30 minutes Hello · Hi · How are you?"
+      },
+      {
+        "slug": "classroom-objects-commands",
+        "title": "K1 Lesson 03: Classroom Objects & Commands",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 03: Classroom Objects & Commands Grade: K1 (Ages 3-4) Time: 30 minutes Book · Pencil · Chair ·"
+      },
+      {
+        "slug": "numbers-1-10-counting-loop",
+        "title": "K1 Lesson 04: Numbers 1-10 Counting Loop",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 04: Numbers 1-10 Counting Loop Grade: K1 (Ages 3-4) Time: 30 minutes One–Ten · How many? · Cou"
+      },
+      {
+        "slug": "colors-everywhere",
+        "title": "K1 Lesson 05: Colors Everywhere",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 05: Colors Everywhere Grade: K1 (Ages 3-4) Time: 30 minutes Red · Blue · Yellow · Green · Oran"
+      },
+      {
+        "slug": "farm-animals-tpr",
+        "title": "K1 Lesson 06: Farm Animals TPR",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 06: Farm Animals TPR Grade: K1 (Ages 3-4) Time: 30 minutes Cow · Pig · Duck · Sheep · Horse ·"
+      },
+      {
+        "slug": "body-parts-song-simon-says",
+        "title": "K1 Lesson 07: Body Parts Song & Simon Says",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 07: Body Parts Song & Simon Says Grade: K1 (Ages 3-4) Time: 30 minutes Head · Shoulders · Knee"
+      },
+      {
+        "slug": "my-family-picture-talk",
+        "title": "K1 Lesson 08: My Family Picture Talk",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 08: My Family Picture Talk Grade: K1 (Ages 3-4) Time: 30 minutes Mom · Dad · Brother · Sister"
+      },
+      {
+        "slug": "action-verbs-jump-run",
+        "title": "K1 Lesson 09: Action Verbs Jump & Run",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 09: Action Verbs Jump & Run Grade: K1 (Ages 3-4) Time: 30 minutes Jump · Run · Walk · Sit · St"
+      },
+      {
+        "slug": "food-fruits-taste-game",
+        "title": "K1 Lesson 10: Food & Fruits Taste Game",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 10: Food & Fruits Taste Game Grade: K1 (Ages 3-4) Time: 30 minutes Apple · Banana · Orange · G"
+      },
+      {
+        "slug": "weather-seasons",
+        "title": "K1 Lesson 11: Weather & Seasons",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 11: Weather & Seasons Grade: K1 (Ages 3-4) Time: 30 minutes Sun · Rain · Cloud · Hot · Cold ·"
+      },
+      {
+        "slug": "feelings-faces",
+        "title": "K1 Lesson 12: Feelings Faces",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 12: Feelings Faces Grade: K1 (Ages 3-4) Time: 30 minutes Happy · Sad · Angry · Scared · Surpri"
+      },
+      {
+        "slug": "shapes-hunt",
+        "title": "K1 Lesson 13: Shapes Hunt",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 13: Shapes Hunt Grade: K1 (Ages 3-4) Time: 30 minutes Circle · Square · Triangle · Star · Clas"
+      },
+      {
+        "slug": "phonics-group-1-s-a-t",
+        "title": "K1 Lesson 14: Phonics Group 1 — s, a, t",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 14: Phonics Group 1 — s, a, t Grade: K1 (Ages 3-4) Time: 30 minutes /s/ snake · /a/ apple · /t"
+      },
+      {
+        "slug": "phonics-group-1-i-p-n",
+        "title": "K1 Lesson 15: Phonics Group 1 — i, p, n",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 15: Phonics Group 1 — i, p, n Grade: K1 (Ages 3-4) Time: 30 minutes /i/ insect · /p/ puff · /n"
+      },
+      {
+        "slug": "sight-words-round-1",
+        "title": "K1 Lesson 16: Sight Words Round 1",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 16: Sight Words Round 1 Grade: K1 (Ages 3-4) Time: 30 minutes a · I · the · see · go · Word Wa"
+      },
+      {
+        "slug": "songs-goodbye-routine",
+        "title": "K1 Lesson 17: Songs & Goodbye Routine",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 17: Songs & Goodbye Routine Grade: K1 (Ages 3-4) Time: 30 minutes Hello Song · Goodbye Song ·"
+      },
+      {
+        "slug": "k1-final-review",
+        "title": "K1 Lesson 18: K1 Final Review",
+        "description": "📎 Parent one-pager (KO/EN) — link coming soon K1 Lesson 18: K1 Final Review Grade: K1 (Ages 3-4) Time: 30 minutes Review Stations · Commands · Colors"
+      }
+    ]
+  },
+  {
+    "id": "k2",
+    "label": "Kindergarten K2",
+    "lessons": [
+      {
+        "slug": "cvc-blending",
+        "title": "K2 Lesson 01: CVC Blending",
+        "description": "K2 Lesson 01: CVC Blending Age: 4-5 years Duration: 40 min Objectives Blend 3-letter CVC words orally (cat, pin, mat). Match spoken words to picture c"
+      },
+      {
+        "slug": "classroom-command-loop-tpr",
+        "title": "K2 Lesson 02: Classroom Command Loop (TPR)",
+        "description": "K2 Lesson 02: Classroom Command Loop (TPR) Age: 4-5 years Duration: 40 min Objectives Follow 2-step classroom commands (Stand up and clap). Use Open,"
+      },
+      {
+        "slug": "phonics-groups-2-3-ck-e",
+        "title": "K2 Lesson 03: Phonics Groups 2-3: c/k & e",
+        "description": "K2 Lesson 03: Phonics Groups 2-3: c/k & e Age: 4-5 years Duration: 40 min Objectives Produce /k/ and /e/ sounds with Jolly actions. Identify c/k at wo"
+      },
+      {
+        "slug": "cvc-blending-blitz",
+        "title": "K2 Lesson 04: CVC Blending Blitz",
+        "description": "K2 Lesson 04: CVC Blending Blitz Age: 4-5 years Duration: 40 min Objectives Blend 8+ CVC words in one session. Read CVC words on flashcards without pi"
+      },
+      {
+        "slug": "dolch-primer-structural-anchors",
+        "title": "K2 Lesson 05: Dolch Primer: Structural Anchors",
+        "description": "K2 Lesson 05: Dolch Primer: Structural Anchors Age: 4-5 years Duration: 40 min Objectives Recognize: the, a, I, you, it, is. Point to words in a share"
+      },
+      {
+        "slug": "dolch-primer-action-links",
+        "title": "K2 Lesson 06: Dolch Primer: Action Links",
+        "description": "K2 Lesson 06: Dolch Primer: Action Links Age: 4-5 years Duration: 40 min Objectives Recognize: see, go, can, run, play, like. Read 3-word phrases: \"I"
+      },
+      {
+        "slug": "guided-reading-ort-stage-2",
+        "title": "K2 Lesson 07: Guided Reading: ORT Stage 2",
+        "description": "K2 Lesson 07: Guided Reading: ORT Stage 2 Age: 4-5 years Duration: 40 min Objectives Follow a Level 2 ORT book with teacher guidance. Answer \"Who?\" an"
+      },
+      {
+        "slug": "numbers-quantities",
+        "title": "K2 Lesson 08: Numbers & Quantities",
+        "description": "K2 Lesson 08: Numbers & Quantities Age: 4-5 years Duration: 40 min Objectives Count and label quantities 1-15. Ask and answer \"How many?\" in a full se"
+      },
+      {
+        "slug": "colors-descriptions",
+        "title": "K2 Lesson 09: Colors & Descriptions",
+        "description": "K2 Lesson 09: Colors & Descriptions Age: 4-5 years Duration: 40 min Objectives Describe objects with color + noun: \"a red ball.\" Use big / small with"
+      },
+      {
+        "slug": "animals-habitats",
+        "title": "K2 Lesson 10: Animals & Habitats",
+        "description": "K2 Lesson 10: Animals & Habitats Age: 4-5 years Duration: 40 min Objectives Name 8 animals and their habitats (farm, sea, jungle). Say \"A ___ lives in"
+      },
+      {
+        "slug": "family-possessives",
+        "title": "K2 Lesson 11: Family & Possessives",
+        "description": "K2 Lesson 11: Family & Possessives Age: 4-5 years Duration: 40 min Objectives Use my, your, his, her with family words. Ask \"Who is this?\" and answer"
+      },
+      {
+        "slug": "food-likes-dislikes",
+        "title": "K2 Lesson 12: Food Likes & Dislikes",
+        "description": "K2 Lesson 12: Food Likes & Dislikes Age: 4-5 years Duration: 40 min Objectives Say \"I like ___.\" and \"I don't like ___.\" Ask \"Do you like ___?\" and an"
+      },
+      {
+        "slug": "weather-week-chart",
+        "title": "K2 Lesson 13: Weather Week Chart",
+        "description": "K2 Lesson 13: Weather Week Chart Age: 4-5 years Duration: 40 min Objectives Describe daily weather and temperature feel (hot, cold). Record weather on"
+      },
+      {
+        "slug": "action-verbs-sentences",
+        "title": "K2 Lesson 14: Action Verbs & Sentences",
+        "description": "K2 Lesson 14: Action Verbs & Sentences Age: 4-5 years Duration: 40 min Objectives Build SVO sentences: \"I eat apples.\" \"She runs fast.\" Use 6 verbs: e"
+      },
+      {
+        "slug": "prepositions-in-on-under",
+        "title": "K2 Lesson 15: Prepositions: In, On, Under",
+        "description": "K2 Lesson 15: Prepositions: In, On, Under Age: 4-5 years Duration: 40 min Objectives Use in, on, under with classroom objects. Follow \"Put the book __"
+      },
+      {
+        "slug": "story-time-read-aloud",
+        "title": "K2 Lesson 16: Story Time Read-Aloud",
+        "description": "K2 Lesson 16: Story Time Read-Aloud Age: 4-5 years Duration: 40 min Objectives Listen to a full picture book and sequence 3 events. Retell beginning,"
+      },
+      {
+        "slug": "phonics-review-game",
+        "title": "K2 Lesson 17: Phonics Review Game",
+        "description": "K2 Lesson 17: Phonics Review Game Age: 4-5 years Duration: 40 min Objectives Review Groups 1-3 sounds and CVC blending. Apply phonics in a low-pressur"
+      },
+      {
+        "slug": "k2",
+        "title": "[원장용] K2 커리큘럼 분석서",
+        "description": "K2 Lesson 18: K2 Final Assessment Age: 4-5 years Duration: 40 min Objectives Demonstrate CVC blending, 10 sight words, and one full sentence. Complete"
+      }
+    ]
+  },
+  {
+    "id": "k3",
+    "label": "Kindergarten K3",
+    "lessons": [
+      {
+        "slug": "advanced-quantities",
+        "title": "K3 Lesson 01: Advanced Quantities",
+        "description": "K3 Lesson 01: Advanced Quantities Age: 5-6 years Duration: 45 min Objectives Count and describe quantities with subject + verb: \"Three frogs jump.\" Us"
+      },
+      {
+        "slug": "full-sentence-frames-i-have",
+        "title": "K3 Lesson 02: Full Sentence Frames (I have...)",
+        "description": "K3 Lesson 02: Full Sentence Frames (I have...) Age: 5-6 years Duration: 45 min Objectives Produce \"I have ___.\" and \"I don't have ___.\" reliably. Ask"
+      },
+      {
+        "slug": "long-vowel-magic-silent-e",
+        "title": "K3 Lesson 03: Long Vowel Magic: Silent E",
+        "description": "K3 Lesson 03: Long Vowel Magic: Silent E Age: 5-6 years Duration: 45 min Objectives Understand silent e changes short to long vowel (cap → cape). Read"
+      },
+      {
+        "slug": "phonics-groups-4-5-intro",
+        "title": "K3 Lesson 04: Phonics Groups 4-5 Intro",
+        "description": "K3 Lesson 04: Phonics Groups 4-5 Intro Age: 5-6 years Duration: 45 min Objectives Learn Jolly Phonics Group 4-5 sounds with actions. Blend CVCC and CC"
+      },
+      {
+        "slug": "ort-magic-key-prep",
+        "title": "K3 Lesson 05: ORT Magic Key Prep",
+        "description": "K3 Lesson 05: ORT Magic Key Prep Age: 5-6 years Duration: 45 min Objectives Preview Magic Key series characters and story structure. Read ORT Stage 4-"
+      },
+      {
+        "slug": "numbers-11-20-compare",
+        "title": "K3 Lesson 06: Numbers 11-20 & Compare",
+        "description": "K3 Lesson 06: Numbers 11-20 & Compare Age: 5-6 years Duration: 45 min Objectives Count 11-20 fluently. Use more than / less than with numbers. Vocab e"
+      },
+      {
+        "slug": "classroom-rules-routines",
+        "title": "K3 Lesson 07: Classroom Rules & Routines",
+        "description": "K3 Lesson 07: Classroom Rules & Routines Age: 5-6 years Duration: 45 min Objectives State 5 classroom rules in full sentences. Explain why with \"becau"
+      },
+      {
+        "slug": "animals-adjectives",
+        "title": "K3 Lesson 08: Animals & Adjectives",
+        "description": "K3 Lesson 08: Animals & Adjectives Age: 5-6 years Duration: 45 min Objectives Describe animals with 2 adjectives: \"A big brown bear.\" Compare two anim"
+      },
+      {
+        "slug": "family-descriptions",
+        "title": "K3 Lesson 09: Family & Descriptions",
+        "description": "K3 Lesson 09: Family & Descriptions Age: 5-6 years Duration: 45 min Objectives Describe family members with age and appearance. Say \"My ___ is ___ yea"
+      },
+      {
+        "slug": "food-drinks-order",
+        "title": "K3 Lesson 10: Food & Drinks Order",
+        "description": "K3 Lesson 10: Food & Drinks Order Age: 5-6 years Duration: 45 min Objectives Order food politely: \"Can I have ___ please?\" Role-play cafe server and c"
+      },
+      {
+        "slug": "weather-clothes",
+        "title": "K3 Lesson 11: Weather & Clothes",
+        "description": "K3 Lesson 11: Weather & Clothes Age: 5-6 years Duration: 45 min Objectives Match weather to clothing: \"It is rainy. I wear a coat.\" Name 8 clothing it"
+      },
+      {
+        "slug": "feelings-because",
+        "title": "K3 Lesson 12: Feelings & Because",
+        "description": "K3 Lesson 12: Feelings & Because Age: 5-6 years Duration: 45 min Objectives Express feelings with reason: \"I am happy because...\" Use sad, angry, tire"
+      },
+      {
+        "slug": "shapes-patterns",
+        "title": "K3 Lesson 13: Shapes & Patterns",
+        "description": "K3 Lesson 13: Shapes & Patterns Age: 5-6 years Duration: 45 min Objectives Name shapes + patterns: circle, square, triangle, rectangle, star. Continue"
+      },
+      {
+        "slug": "sight-words-advanced",
+        "title": "K3 Lesson 14: Sight Words Advanced",
+        "description": "K3 Lesson 14: Sight Words Advanced Age: 5-6 years Duration: 45 min Objectives Read 15 Dolch Primer words in isolation and in sentences. Build 5-word s"
+      },
+      {
+        "slug": "story-comprehension",
+        "title": "K3 Lesson 15: Story Comprehension",
+        "description": "K3 Lesson 15: Story Comprehension Age: 5-6 years Duration: 45 min Objectives Answer Who, What, Where after a story. Retell 3 events in order with firs"
+      },
+      {
+        "slug": "pre-starters-listening-drill",
+        "title": "K3 Lesson 16: Pre-Starters Listening Drill",
+        "description": "K3 Lesson 16: Pre-Starters Listening Drill Age: 5-6 years Duration: 45 min Objectives Follow YLE Pre-Starters listening task formats (color, draw line"
+      },
+      {
+        "slug": "pre-starters-speaking-drill",
+        "title": "K3 Lesson 17: Pre-Starters Speaking Drill",
+        "description": "K3 Lesson 17: Pre-Starters Speaking Drill Age: 5-6 years Duration: 45 min Objectives Answer personal questions: name, age, family, favorites. Describe"
+      },
+      {
+        "slug": "k3",
+        "title": "[원장용] K3 커리큘럼 분석서",
+        "description": "K3 Lesson 18: K3 Final Exam Prep Age: 5-6 years Duration: 45 min Objectives Review phonics 4-5, sight words, sentence frames, and YLE task types. Comp"
+      }
+    ]
+  },
+  {
+    "id": "g1",
+    "label": "Grade 1",
+    "lessons": [
+      {
+        "slug": "past-tense-action-relay",
+        "title": "G1 Lesson 01: Past Tense Action Relay",
+        "description": "G1 Lesson 01: Past Tense Action Relay Age: 6-7 years Duration: 40 min Objectives Recognize and say regular past tense verbs: walked, jumped, played. P"
+      },
+      {
+        "slug": "sight-word-scavenger-hunt",
+        "title": "G1 Lesson 02: Sight Word Scavenger Hunt",
+        "description": "G1 Lesson 02: Sight Word Scavenger Hunt Age: 6-7 years Duration: 40 min Objectives Read sight words a, I, the, see, go instantly without sounding out."
+      },
+      {
+        "slug": "phonics-consonant-blends",
+        "title": "G1 Lesson 03: Phonics: Consonant Blends",
+        "description": "G1 Lesson 03: Phonics: Consonant Blends Age: 6-7 years Duration: 40 min Objectives Identify initial consonant blends bl, cr, st, tr in spoken and writ"
+      },
+      {
+        "slug": "descriptive-writing-my-monster",
+        "title": "G1 Lesson 04: Descriptive Writing: My Monster",
+        "description": "G1 Lesson 04: Descriptive Writing: My Monster Age: 6-7 years Duration: 40 min Objectives Use adjectives (big, scary, furry) before nouns in written se"
+      },
+      {
+        "slug": "sentence-building-blocks",
+        "title": "G1 Lesson 05: Sentence Building Blocks",
+        "description": "G1 Lesson 05: Sentence Building Blocks Age: 6-7 years Duration: 40 min Objectives Arrange word cards into grammatically correct simple sentences. Dist"
+      },
+      {
+        "slug": "where-is-the-ball-prepositions",
+        "title": "G1 Lesson 06: Where is the Ball? (Prepositions)",
+        "description": "G1 Lesson 06: Where is the Ball? (Prepositions) Age: 6-7 years Duration: 40 min Objectives Understand and use prepositions: in, on, under, next to, be"
+      },
+      {
+        "slug": "treetops-story-mapping",
+        "title": "G1 Lesson 07: TreeTops Story Mapping",
+        "description": "G1 Lesson 07: TreeTops Story Mapping Age: 6-7 years Duration: 40 min Objectives Identify beginning, middle, and end of a short TreeTops graded reader"
+      },
+      {
+        "slug": "comparison-game-taller-vs-shorter",
+        "title": "G1 Lesson 08: Comparison Game: Taller vs Shorter",
+        "description": "G1 Lesson 08: Comparison Game: Taller vs Shorter Age: 6-7 years Duration: 40 min Objectives Use comparative adjectives: taller, shorter, bigger, small"
+      },
+      {
+        "slug": "show-tell-presentation",
+        "title": "G1 Lesson 09: Show & Tell Presentation",
+        "description": "G1 Lesson 09: Show & Tell Presentation Age: 6-7 years Duration: 40 min Objectives Prepare and deliver a 3-sentence show-and-tell about a personal item"
+      },
+      {
+        "slug": "shape-hunting-in-the-classroom",
+        "title": "G1 Lesson 10: Shape Hunting in the Classroom",
+        "description": "G1 Lesson 10: Shape Hunting in the Classroom Age: 6-7 years Duration: 40 min Objectives Identify circles, squares, triangles, and rectangles in the en"
+      },
+      {
+        "slug": "animal-charades-tpr",
+        "title": "G1 Lesson 11: Animal Charades (TPR)",
+        "description": "G1 Lesson 11: Animal Charades (TPR) Age: 6-7 years Duration: 40 min Objectives Act out animal movements: run, fly, swim, hop without speaking. Guess a"
+      },
+      {
+        "slug": "my-family-tree-project",
+        "title": "G1 Lesson 12: My Family Tree Project",
+        "description": "G1 Lesson 12: My Family Tree Project Age: 6-7 years Duration: 40 min Objectives Label family members: mom, dad, sister, brother on a tree diagram. Pre"
+      },
+      {
+        "slug": "action-verb-freeze-dance",
+        "title": "G1 Lesson 13: Action Verb Freeze Dance",
+        "description": "G1 Lesson 13: Action Verb Freeze Dance Age: 6-7 years Duration: 40 min Objectives Follow action commands: dance, jump, run, stop, freeze in real time."
+      },
+      {
+        "slug": "food-survey-i-likedont-like",
+        "title": "G1 Lesson 14: Food Survey: I Like/Don't Like",
+        "description": "G1 Lesson 14: Food Survey: I Like/Don't Like Age: 6-7 years Duration: 40 min Objectives Ask and answer food preference questions using like and don't"
+      },
+      {
+        "slug": "my-daily-schedule",
+        "title": "G1 Lesson 15: My Daily Schedule",
+        "description": "G1 Lesson 15: My Daily Schedule Age: 6-7 years Duration: 40 min Objectives Sequence daily routine events: wake up, eat, school, homework, sleep. Narra"
+      },
+      {
+        "slug": "emotion-guessing-game",
+        "title": "G1 Lesson 16: Emotion Guessing Game",
+        "description": "G1 Lesson 16: Emotion Guessing Game Age: 6-7 years Duration: 40 min Objectives Recognize and name emotions: happy, sad, angry, scared, excited. Respon"
+      },
+      {
+        "slug": "weather-forecast-roleplay",
+        "title": "G1 Lesson 17: Weather Forecast Roleplay",
+        "description": "G1 Lesson 17: Weather Forecast Roleplay Age: 6-7 years Duration: 40 min Objectives Describe weather using sunny, rainy, cloudy, hot, cold. Deliver a s"
+      },
+      {
+        "slug": "g1",
+        "title": "[원장용] G1 커리큘럼 분석서",
+        "description": "G1 Lesson 18: G1 Final Test Age: 6-7 years Duration: 40 min Objectives Review past tense, consonant blends, sight words, and core sentence frames. Com"
+      }
+    ]
+  },
+  {
+    "id": "g2",
+    "label": "Grade 2",
+    "lessons": [
+      {
+        "slug": "why-because-bridge",
+        "title": "G2 Lesson 01: Why & Because Bridge",
+        "description": "G2 Lesson 01: Why & Because Bridge Age: 7-8 years Duration: 50 min Objectives Ask and answer why-questions using because in full sentences. Connect a"
+      },
+      {
+        "slug": "future-plans-tomorrows-agenda",
+        "title": "G2 Lesson 02: Future Plans: Tomorrow's Agenda",
+        "description": "G2 Lesson 02: Future Plans: Tomorrow's Agenda Age: 7-8 years Duration: 50 min Objectives Use will and going to for near-future plans in spoken and wri"
+      },
+      {
+        "slug": "daily-routine-my-day-summary",
+        "title": "G2 Lesson 03: Daily Routine: My Day Summary",
+        "description": "G2 Lesson 03: Daily Routine: My Day Summary Age: 7-8 years Duration: 50 min Objectives Sequence a full day using first, then, next, and finally. Narra"
+      },
+      {
+        "slug": "the-mysterious-box-adjectives",
+        "title": "G2 Lesson 04: The Mysterious Box (Adjectives)",
+        "description": "G2 Lesson 04: The Mysterious Box (Adjectives) Age: 7-8 years Duration: 50 min Objectives Describe object textures and appearance with adjectives: smoo"
+      },
+      {
+        "slug": "debate-cats-vs-dogs",
+        "title": "G2 Lesson 05: Debate: Cats vs Dogs",
+        "description": "G2 Lesson 05: Debate: Cats vs Dogs Age: 7-8 years Duration: 50 min Objectives State an opinion with I think ___ because ___. Respond with agree/disagr"
+      },
+      {
+        "slug": "inference-game-what-happened",
+        "title": "G2 Lesson 06: Inference Game: What Happened?",
+        "description": "G2 Lesson 06: Inference Game: What Happened? Age: 7-8 years Duration: 50 min Objectives Identify visual clues in a picture scene (spilled milk, open d"
+      },
+      {
+        "slug": "adverb-power-acting-actions",
+        "title": "G2 Lesson 07: Adverb Power: Acting Actions",
+        "description": "G2 Lesson 07: Adverb Power: Acting Actions Age: 7-8 years Duration: 50 min Objectives Understand adverbs modify verbs: quickly, slowly, happily, quiet"
+      },
+      {
+        "slug": "magic-tree-house-recap",
+        "title": "G2 Lesson 08: Magic Tree House Recap",
+        "description": "G2 Lesson 08: Magic Tree House Recap Age: 7-8 years Duration: 50 min Objectives Identify hero, setting, problem, and solution in a Magic Tree House ch"
+      },
+      {
+        "slug": "20-questions-challenge",
+        "title": "G2 Lesson 09: 20 Questions Challenge",
+        "description": "G2 Lesson 09: 20 Questions Challenge Age: 7-8 years Duration: 50 min Objectives Form yes/no questions with correct word order: Is it ___? / Can it ___"
+      },
+      {
+        "slug": "city-vs-country-comparison",
+        "title": "G2 Lesson 10: City vs Country Comparison",
+        "description": "G2 Lesson 10: City vs Country Comparison Age: 7-8 years Duration: 50 min Objectives Compare city and country life with comparative adjectives: busier,"
+      },
+      {
+        "slug": "the-best-food-ever-superlatives",
+        "title": "G2 Lesson 11: The Best Food Ever (Superlatives)",
+        "description": "G2 Lesson 11: The Best Food Ever (Superlatives) Age: 7-8 years Duration: 50 min Objectives Use superlative adjectives: best, tastiest, biggest, most d"
+      },
+      {
+        "slug": "consultation-what-should-i-do",
+        "title": "G2 Lesson 12: Consultation: What Should I Do?",
+        "description": "G2 Lesson 12: Consultation: What Should I Do? Age: 7-8 years Duration: 50 min Objectives Describe a simple problem and ask for advice: \"What should I"
+      },
+      {
+        "slug": "sequence-making-a-sandwich",
+        "title": "G2 Lesson 13: Sequence: Making a Sandwich",
+        "description": "G2 Lesson 13: Sequence: Making a Sandwich Age: 7-8 years Duration: 50 min Objectives Follow and give multi-step instructions in correct order. Use seq"
+      },
+      {
+        "slug": "favorite-holiday-opinion",
+        "title": "G2 Lesson 14: Favorite Holiday Opinion",
+        "description": "G2 Lesson 14: Favorite Holiday Opinion Age: 7-8 years Duration: 50 min Objectives Share favorite holiday traditions using I think / In my opinion fram"
+      },
+      {
+        "slug": "where-is-the-cat-prepositions",
+        "title": "G2 Lesson 15: Where is the Cat? (Prepositions)",
+        "description": "G2 Lesson 15: Where is the Cat? (Prepositions) Age: 7-8 years Duration: 50 min Objectives Use extended prepositions: under, behind, next to, between,"
+      },
+      {
+        "slug": "weekend-journal-entry",
+        "title": "G2 Lesson 16: Weekend Journal Entry",
+        "description": "G2 Lesson 16: Weekend Journal Entry Age: 7-8 years Duration: 50 min Objectives Write a past-tense weekend journal with at least three events. Use verb"
+      },
+      {
+        "slug": "story-building-chain",
+        "title": "G2 Lesson 17: Story Building Chain",
+        "description": "G2 Lesson 17: Story Building Chain Age: 7-8 years Duration: 50 min Objectives Contribute one grammatically correct sentence to a collaborative class s"
+      },
+      {
+        "slug": "g2",
+        "title": "[원장용] G2 커리큘럼 분석서",
+        "description": "G2 Lesson 18: G2 Final Assessment Age: 7-8 years Duration: 50 min Objectives Review because clauses, comparatives/superlatives, adverbs, and sequence"
+      }
+    ]
+  },
+  {
+    "id": "g3",
+    "label": "Grade 3",
+    "lessons": [
+      {
+        "slug": "skeletal-root-study",
+        "title": "G3 Lesson 01: Skeletal Root Study",
+        "description": "G3 Lesson 01: Skeletal Root Study Age: 8-9 years Duration: 60 min Objectives Identify Greek and Latin root words on a labeled skeleton diagram. Connec"
+      },
+      {
+        "slug": "reading-comprehension-the-brave-rabbit",
+        "title": "G3 Lesson 02: Reading Comprehension: The Brave Rabbit",
+        "description": "G3 Lesson 02: Reading Comprehension: The Brave Rabbit Age: 8-9 years Duration: 60 min Objectives Read a narrative passage silently and annotate unknow"
+      },
+      {
+        "slug": "grammar-basics-past-tense",
+        "title": "G3 Lesson 03: Grammar Basics: Past Tense",
+        "description": "G3 Lesson 03: Grammar Basics: Past Tense Age: 8-9 years Duration: 60 min Objectives Sort regular and irregular past-tense verbs in spoken and written"
+      },
+      {
+        "slug": "word-roots-base-words-and-meaning",
+        "title": "G3 Lesson 04: Word Roots: Base Words and Meaning",
+        "description": "G3 Lesson 04: Word Roots: Base Words and Meaning Age: 8-9 years Duration: 60 min Objectives Analyze base words in word families and explain how meanin"
+      },
+      {
+        "slug": "reported-speech-he-said-that",
+        "title": "G3 Lesson 05: Reported Speech: He Said That",
+        "description": "G3 Lesson 05: Reported Speech: He Said That Age: 8-9 years Duration: 60 min Objectives Convert direct quotes into reported speech using said, told, an"
+      },
+      {
+        "slug": "junie-b-jones-style-voice-and-humor",
+        "title": "G3 Lesson 06: Junie B. Jones Style: Voice and Humor",
+        "description": "G3 Lesson 06: Junie B. Jones Style: Voice and Humor Age: 8-9 years Duration: 60 min Objectives Identify first-person narrator voice, honesty, and humo"
+      },
+      {
+        "slug": "past-continuous-was-and-were-doing",
+        "title": "G3 Lesson 07: Past Continuous: Was and Were Doing",
+        "description": "G3 Lesson 07: Past Continuous: Was and Were Doing Age: 8-9 years Duration: 60 min Objectives Form past continuous with was/were + verb-ing in affirmat"
+      },
+      {
+        "slug": "word-roots-prefixes-un-and-re",
+        "title": "G3 Lesson 08: Word Roots: Prefixes un- and re-",
+        "description": "G3 Lesson 08: Word Roots: Prefixes un- and re- Age: 8-9 years Duration: 60 min Objectives Break words into prefix and root parts and define un- (not/o"
+      },
+      {
+        "slug": "junie-b-jones-style-character-feelings",
+        "title": "G3 Lesson 09: Junie B. Jones Style: Character Feelings",
+        "description": "G3 Lesson 09: Junie B. Jones Style: Character Feelings Age: 8-9 years Duration: 60 min Objectives Track character emotions across a scene using an fee"
+      },
+      {
+        "slug": "comparatives-and-superlatives-in-context",
+        "title": "G3 Lesson 10: Comparatives and Superlatives in Context",
+        "description": "G3 Lesson 10: Comparatives and Superlatives in Context Age: 8-9 years Duration: 60 min Objectives Use comparative and superlative forms including irre"
+      },
+      {
+        "slug": "reported-speech-questions-and-commands",
+        "title": "G3 Lesson 11: Reported Speech: Questions and Commands",
+        "description": "G3 Lesson 11: Reported Speech: Questions and Commands Age: 8-9 years Duration: 60 min Objectives Transform direct questions into reported form using a"
+      },
+      {
+        "slug": "informational-reading-animal-habitats",
+        "title": "G3 Lesson 12: Informational Reading: Animal Habitats",
+        "description": "G3 Lesson 12: Informational Reading: Animal Habitats Age: 8-9 years Duration: 60 min Objectives Read a nonfiction passage on animal habitats and ident"
+      },
+      {
+        "slug": "junie-b-jones-style-dialogue-writing",
+        "title": "G3 Lesson 13: Junie B. Jones Style: Dialogue Writing",
+        "description": "G3 Lesson 13: Junie B. Jones Style: Dialogue Writing Age: 8-9 years Duration: 60 min Objectives Write a short dialogue scene with correct quotation ma"
+      },
+      {
+        "slug": "modal-verbs-must-should-and-can",
+        "title": "G3 Lesson 14: Modal Verbs: Must, Should, and Can",
+        "description": "G3 Lesson 14: Modal Verbs: Must, Should, and Can Age: 8-9 years Duration: 60 min Objectives Distinguish must (rule), should (advice), and can (ability"
+      },
+      {
+        "slug": "word-roots-suffixes-ful-and-less",
+        "title": "G3 Lesson 15: Word Roots: Suffixes -ful and -less",
+        "description": "G3 Lesson 15: Word Roots: Suffixes -ful and -less Age: 8-9 years Duration: 60 min Objectives Analyze -ful (full of) and -less (without) suffix pattern"
+      },
+      {
+        "slug": "opinion-paragraph-writing",
+        "title": "G3 Lesson 16: Opinion Paragraph Writing",
+        "description": "G3 Lesson 16: Opinion Paragraph Writing Age: 8-9 years Duration: 60 min Objectives Plan an opinion paragraph using a graphic organizer with reasons an"
+      },
+      {
+        "slug": "junie-b-jones-style-story-summary",
+        "title": "G3 Lesson 17: Junie B. Jones Style: Story Summary",
+        "description": "G3 Lesson 17: Junie B. Jones Style: Story Summary Age: 8-9 years Duration: 60 min Objectives Summarize a chapter using a five-sentence frame (setting,"
+      },
+      {
+        "slug": "g3",
+        "title": "[원장용] G3 커리큘럼 분석서",
+        "description": "G3 Lesson 18: G3 Mastery Review Age: 8-9 years Duration: 60 min Objectives Review word roots, reported speech, Junie B. Jones reading skills, and G3 g"
+      }
+    ]
+  },
+  {
+    "id": "g4",
+    "label": "Grade 4",
+    "lessons": [
+      {
+        "slug": "nature-vs-nurture-debate",
+        "title": "G4 Lesson 01: Nature vs Nurture Debate",
+        "description": "G4 Lesson 01: Nature vs Nurture Debate Age: 9-10 years Duration: 60 min Objectives Define nature (genetics) and nurture (environment) in accessible de"
+      },
+      {
+        "slug": "grammar-deep-dive-adverbs",
+        "title": "G4 Lesson 02: Grammar Deep Dive: Adverbs",
+        "description": "G4 Lesson 02: Grammar Deep Dive: Adverbs Age: 9-10 years Duration: 60 min Objectives Classify adverbs of manner, frequency, and time in sentences and"
+      },
+      {
+        "slug": "charlottes-web-character-analysis",
+        "title": "G4 Lesson 03: Charlotte's Web: Character Analysis",
+        "description": "G4 Lesson 03: Charlotte's Web: Character Analysis Age: 9-10 years Duration: 60 min Objectives Identify character traits for Wilbur and Charlotte using"
+      },
+      {
+        "slug": "debate-frames-agree-and-disagree",
+        "title": "G4 Lesson 04: Debate Frames: Agree and Disagree",
+        "description": "G4 Lesson 04: Debate Frames: Agree and Disagree Age: 9-10 years Duration: 60 min Objectives Use agree/disagree frames with claim, reason, and evidence"
+      },
+      {
+        "slug": "research-skills-finding-reliable-sources",
+        "title": "G4 Lesson 05: Research Skills: Finding Reliable Sources",
+        "description": "G4 Lesson 05: Research Skills: Finding Reliable Sources Age: 9-10 years Duration: 60 min Objectives Apply a simple reliability checklist to websites a"
+      },
+      {
+        "slug": "charlottes-web-setting-and-mood",
+        "title": "G4 Lesson 06: Charlotte's Web: Setting and Mood",
+        "description": "G4 Lesson 06: Charlotte's Web: Setting and Mood Age: 9-10 years Duration: 60 min Objectives Identify setting details (barn, farm, season) and mood wor"
+      },
+      {
+        "slug": "present-perfect-experience-and-results",
+        "title": "G4 Lesson 07: Present Perfect: Experience and Results",
+        "description": "G4 Lesson 07: Present Perfect: Experience and Results Age: 9-10 years Duration: 60 min Objectives Form present perfect with have/has + past participle"
+      },
+      {
+        "slug": "debate-frames-building-a-rebuttal",
+        "title": "G4 Lesson 08: Debate Frames: Building a Rebuttal",
+        "description": "G4 Lesson 08: Debate Frames: Building a Rebuttal Age: 9-10 years Duration: 60 min Objectives Draft rebuttal paragraphs using concession language (Howe"
+      },
+      {
+        "slug": "research-skills-note-taking-and-paraphrasing",
+        "title": "G4 Lesson 09: Research Skills: Note-Taking and Paraphrasing",
+        "description": "G4 Lesson 09: Research Skills: Note-Taking and Paraphrasing Age: 9-10 years Duration: 60 min Objectives Take keyword notes from a short article withou"
+      },
+      {
+        "slug": "charlottes-web-theme-and-message",
+        "title": "G4 Lesson 10: Charlotte's Web: Theme and Message",
+        "description": "G4 Lesson 10: Charlotte's Web: Theme and Message Age: 9-10 years Duration: 60 min Objectives Define theme as a big idea/message supported by multiple"
+      },
+      {
+        "slug": "conditional-sentences-first-and-second",
+        "title": "G4 Lesson 11: Conditional Sentences: First and Second",
+        "description": "G4 Lesson 11: Conditional Sentences: First and Second Age: 9-10 years Duration: 60 min Objectives Form first conditional (If + present, will + verb) f"
+      },
+      {
+        "slug": "debate-practice-structured-classroom-forum",
+        "title": "G4 Lesson 12: Debate Practice: Structured Classroom Forum",
+        "description": "G4 Lesson 12: Debate Practice: Structured Classroom Forum Age: 9-10 years Duration: 60 min Objectives Participate in a timed classroom debate with ass"
+      },
+      {
+        "slug": "research-project-outline-and-thesis",
+        "title": "G4 Lesson 13: Research Project: Outline and Thesis",
+        "description": "G4 Lesson 13: Research Project: Outline and Thesis Age: 9-10 years Duration: 60 min Objectives Write a one-sentence thesis stating focus and opinion o"
+      },
+      {
+        "slug": "charlottes-web-literary-response-writing",
+        "title": "G4 Lesson 14: Charlotte's Web: Literary Response Writing",
+        "description": "G4 Lesson 14: Charlotte's Web: Literary Response Writing Age: 9-10 years Duration: 60 min Objectives Write a literary response paragraph answering a g"
+      },
+      {
+        "slug": "passive-voice-introduction",
+        "title": "G4 Lesson 15: Passive Voice Introduction",
+        "description": "G4 Lesson 15: Passive Voice Introduction Age: 9-10 years Duration: 60 min Objectives Distinguish active and passive sentences and identify be + past p"
+      },
+      {
+        "slug": "research-presentation-slide-and-script",
+        "title": "G4 Lesson 16: Research Presentation: Slide and Script",
+        "description": "G4 Lesson 16: Research Presentation: Slide and Script Age: 9-10 years Duration: 60 min Objectives Create a three-slide research presentation (title, f"
+      },
+      {
+        "slug": "b1-bridge-review-reading-and-argument",
+        "title": "G4 Lesson 17: B1 Bridge Review: Reading and Argument",
+        "description": "G4 Lesson 17: B1 Bridge Review: Reading and Argument Age: 9-10 years Duration: 60 min Objectives Complete mixed review tasks on paragraph structure, a"
+      },
+      {
+        "slug": "g4",
+        "title": "[원장용] G4 커리큘럼 분석서",
+        "description": "G4 Lesson 18: G4 Critical Review Portfolio Age: 9-10 years Duration: 60 min Objectives Compile debate, research, and literary response samples into a"
+      }
+    ]
+  },
+  {
+    "id": "g5",
+    "label": "Grade 5",
+    "lessons": [
+      {
+        "slug": "global-supply-chain-logic",
+        "title": "G5 Lesson 01: Global Supply Chain Logic",
+        "description": "G5 Lesson 01: Global Supply Chain Logic Age: 10-11 years Duration: 70 min Objectives Trace cause-and-effect chains from production to retail using a s"
+      },
+      {
+        "slug": "essay-prep-argumentative-writing",
+        "title": "G5 Lesson 02: Essay Prep: Argumentative Writing",
+        "description": "G5 Lesson 02: Essay Prep: Argumentative Writing Age: 10-11 years Duration: 70 min Objectives Distinguish argumentative essays from opinion paragraphs"
+      },
+      {
+        "slug": "word-roots-prefixes",
+        "title": "G5 Lesson 03: Word Roots: Prefixes",
+        "description": "G5 Lesson 03: Word Roots: Prefixes Age: 10-11 years Duration: 70 min Objectives Define common academic prefixes (pre-, sub-, trans-, inter-, re-) and"
+      },
+      {
+        "slug": "time-for-kids-current-events-reading",
+        "title": "G5 Lesson 04: TIME for Kids: Current Events Reading",
+        "description": "G5 Lesson 04: TIME for Kids: Current Events Reading Age: 10-11 years Duration: 70 min Objectives Read a current events article using headline-first an"
+      },
+      {
+        "slug": "supply-chain-basics-how-products-reach-us",
+        "title": "G5 Lesson 05: Supply Chain Basics: How Products Reach Us",
+        "description": "G5 Lesson 05: Supply Chain Basics: How Products Reach Us Age: 10-11 years Duration: 70 min Objectives Map the journey of a product from factory to con"
+      },
+      {
+        "slug": "essay-structure-introduction-and-thesis",
+        "title": "G5 Lesson 06: Essay Structure: Introduction and Thesis",
+        "description": "G5 Lesson 06: Essay Structure: Introduction and Thesis Age: 10-11 years Duration: 70 min Objectives Analyze strong essay openings for hook types: ques"
+      },
+      {
+        "slug": "word-roots-greek-and-latin-bases",
+        "title": "G5 Lesson 07: Word Roots: Greek and Latin Bases",
+        "description": "G5 Lesson 07: Word Roots: Greek and Latin Bases Age: 10-11 years Duration: 70 min Objectives Identify Greek and Latin bases (bio, graph, tele, auto, s"
+      },
+      {
+        "slug": "time-for-kids-opinion-and-editorial-features",
+        "title": "G5 Lesson 08: TIME for Kids: Opinion and Editorial Features",
+        "description": "G5 Lesson 08: TIME for Kids: Opinion and Editorial Features Age: 10-11 years Duration: 70 min Objectives Distinguish news reports from opinion/editori"
+      },
+      {
+        "slug": "supply-chain-case-study-global-trade",
+        "title": "G5 Lesson 09: Supply Chain Case Study: Global Trade",
+        "description": "G5 Lesson 09: Supply Chain Case Study: Global Trade Age: 10-11 years Duration: 70 min Objectives Analyze a short case study on global trade delays usi"
+      },
+      {
+        "slug": "essay-structure-body-paragraphs-and-peel",
+        "title": "G5 Lesson 10: Essay Structure: Body Paragraphs and PEEL",
+        "description": "G5 Lesson 10: Essay Structure: Body Paragraphs and PEEL Age: 10-11 years Duration: 70 min Objectives Apply PEEL structure: Point, Evidence, Explain, L"
+      },
+      {
+        "slug": "advanced-connectors-for-academic-writing",
+        "title": "G5 Lesson 11: Advanced Connectors for Academic Writing",
+        "description": "G5 Lesson 11: Advanced Connectors for Academic Writing Age: 10-11 years Duration: 70 min Objectives Use advanced connectors (however, therefore, furth"
+      },
+      {
+        "slug": "time-for-kids-data-and-infographics",
+        "title": "G5 Lesson 12: TIME for Kids: Data and Infographics",
+        "description": "G5 Lesson 12: TIME for Kids: Data and Infographics Age: 10-11 years Duration: 70 min Objectives Read charts and infographics from a nonfiction feature"
+      },
+      {
+        "slug": "supply-chain-ethics-and-sustainability",
+        "title": "G5 Lesson 13: Supply Chain Ethics and Sustainability",
+        "description": "G5 Lesson 13: Supply Chain Ethics and Sustainability Age: 10-11 years Duration: 70 min Objectives Discuss ethical issues in production and delivery: l"
+      },
+      {
+        "slug": "essay-structure-conclusion-and-call-to-action",
+        "title": "G5 Lesson 14: Essay Structure: Conclusion and Call to Action",
+        "description": "G5 Lesson 14: Essay Structure: Conclusion and Call to Action Age: 10-11 years Duration: 70 min Objectives Study effective conclusions that restate the"
+      },
+      {
+        "slug": "word-roots-suffixes-in-academic-vocabulary",
+        "title": "G5 Lesson 15: Word Roots: Suffixes in Academic Vocabulary",
+        "description": "G5 Lesson 15: Word Roots: Suffixes in Academic Vocabulary Age: 10-11 years Duration: 70 min Objectives Analyze suffix patterns (-tion, -ist, -ive, -ab"
+      },
+      {
+        "slug": "argumentative-essay-workshop-full-draft",
+        "title": "G5 Lesson 16: Argumentative Essay Workshop: Full Draft",
+        "description": "G5 Lesson 16: Argumentative Essay Workshop: Full Draft Age: 10-11 years Duration: 70 min Objectives Write a complete argumentative essay draft from in"
+      },
+      {
+        "slug": "time-for-kids-media-literacy-and-fact-checking",
+        "title": "G5 Lesson 17: TIME for Kids: Media Literacy and Fact Checking",
+        "description": "G5 Lesson 17: TIME for Kids: Media Literacy and Fact Checking Age: 10-11 years Duration: 70 min Objectives Evaluate online headlines for credibility u"
+      },
+      {
+        "slug": "g5",
+        "title": "[원장용] G5 커리큘럼 분석서",
+        "description": "G5 Lesson 18: G5 Final Essay Presentation Age: 10-11 years Duration: 70 min Objectives Present a polished argumentative essay orally with brief visual"
+      }
+    ]
+  },
+  {
+    "id": "g6",
+    "label": "Grade 6",
+    "lessons": [
+      {
+        "slug": "climate-change-syntax",
+        "title": "G6 Lesson 01: Climate Change Syntax",
+        "description": "G6 Lesson 01: Climate Change Syntax Age: 11-12 years Duration: 80 min Objectives Identify causative and passive structures inside authentic climate-po"
+      },
+      {
+        "slug": "grammar-causative-verbs-havemake",
+        "title": "G6 Lesson 02: Grammar: Causative Verbs (Have/Make)",
+        "description": "G6 Lesson 02: Grammar: Causative Verbs (Have/Make) Age: 11-12 years Duration: 80 min Objectives Distinguish \"have someone do\" from \"make someone do\" a"
+      },
+      {
+        "slug": "syntax-complex-sentence-construction",
+        "title": "G6 Lesson 03: Syntax: Complex Sentence Construction",
+        "description": "G6 Lesson 03: Syntax: Complex Sentence Construction Age: 11-12 years Duration: 80 min Objectives Combine two simple sentences into one complex sentenc"
+      },
+      {
+        "slug": "critical-reading-news-editorial",
+        "title": "G6 Lesson 04: Critical Reading: News Editorial",
+        "description": "G6 Lesson 04: Critical Reading: News Editorial Age: 11-12 years Duration: 80 min Objectives Locate the thesis and supporting claims in a news editoria"
+      },
+      {
+        "slug": "grammar-passive-voice-intermediate",
+        "title": "G6 Lesson 05: Grammar: Passive Voice (Intermediate)",
+        "description": "G6 Lesson 05: Grammar: Passive Voice (Intermediate) Age: 11-12 years Duration: 80 min Objectives Form the passive across present, past, future, and co"
+      },
+      {
+        "slug": "syntax-appositives-and-clarity",
+        "title": "G6 Lesson 06: Syntax: Appositives and Clarity",
+        "description": "G6 Lesson 06: Syntax: Appositives and Clarity Age: 11-12 years Duration: 80 min Objectives Insert appositive phrases to rename or define a noun concis"
+      },
+      {
+        "slug": "critical-reading-persuasive-articles",
+        "title": "G6 Lesson 07: Critical Reading: Persuasive Articles",
+        "description": "G6 Lesson 07: Critical Reading: Persuasive Articles Age: 11-12 years Duration: 80 min Objectives Identify persuasive techniques such as appeals to emo"
+      },
+      {
+        "slug": "grammar-gerunds-vs-infinitives",
+        "title": "G6 Lesson 08: Grammar: Gerunds vs Infinitives",
+        "description": "G6 Lesson 08: Grammar: Gerunds vs Infinitives Age: 11-12 years Duration: 80 min Objectives Sort common verbs by whether they take a gerund, an infinit"
+      },
+      {
+        "slug": "syntax-parallel-structure",
+        "title": "G6 Lesson 09: Syntax: Parallel Structure",
+        "description": "G6 Lesson 09: Syntax: Parallel Structure Age: 11-12 years Duration: 80 min Objectives Recognize and fix faulty parallelism in lists and series. Use co"
+      },
+      {
+        "slug": "critical-reading-debating-public-policy",
+        "title": "G6 Lesson 10: Critical Reading: Debating Public Policy",
+        "description": "G6 Lesson 10: Critical Reading: Debating Public Policy Age: 11-12 years Duration: 80 min Objectives Skim opposing policy briefs and identify each side"
+      },
+      {
+        "slug": "grammar-mixed-conditionals",
+        "title": "G6 Lesson 11: Grammar: Mixed Conditionals",
+        "description": "G6 Lesson 11: Grammar: Mixed Conditionals Age: 11-12 years Duration: 80 min Objectives Form mixed conditionals linking a past condition to a present r"
+      },
+      {
+        "slug": "syntax-conciseness-and-flow",
+        "title": "G6 Lesson 12: Syntax: Conciseness and Flow",
+        "description": "G6 Lesson 12: Syntax: Conciseness and Flow Age: 11-12 years Duration: 80 min Objectives Cut redundancy and wordiness from academic sentences. Improve"
+      },
+      {
+        "slug": "critical-reading-literary-criticism",
+        "title": "G6 Lesson 13: Critical Reading: Literary Criticism",
+        "description": "G6 Lesson 13: Critical Reading: Literary Criticism Age: 11-12 years Duration: 80 min Objectives Read a short critical excerpt and identify its interpr"
+      },
+      {
+        "slug": "grammar-subjunctive-mood",
+        "title": "G6 Lesson 14: Grammar: Subjunctive Mood",
+        "description": "G6 Lesson 14: Grammar: Subjunctive Mood Age: 11-12 years Duration: 80 min Objectives Use the base-form subjunctive after suggest, recommend, and insis"
+      },
+      {
+        "slug": "syntax-cohesion-in-paragraphs",
+        "title": "G6 Lesson 15: Syntax: Cohesion in Paragraphs",
+        "description": "G6 Lesson 15: Syntax: Cohesion in Paragraphs Age: 11-12 years Duration: 80 min Objectives Identify cohesive devices: reference words, transitions, and"
+      },
+      {
+        "slug": "writing-workshop-thesis-driven-essay",
+        "title": "G6 Lesson 16: Writing Workshop: Thesis-Driven Essay",
+        "description": "G6 Lesson 16: Writing Workshop: Thesis-Driven Essay Age: 11-12 years Duration: 80 min Objectives Plan and draft a thesis-driven essay on a current iss"
+      },
+      {
+        "slug": "final-exam-ket-strategy",
+        "title": "G6 Lesson 17: Final Exam: KET Strategy",
+        "description": "G6 Lesson 17: Final Exam: KET Strategy Age: 11-12 years Duration: 80 min Objectives Apply reading strategies: skim for gist, scan for detail, and infe"
+      },
+      {
+        "slug": "g6",
+        "title": "[원장용] G6 커리큘럼 분석서",
+        "description": "G6 Lesson 18: G6 Final Thesis Report Age: 11-12 years Duration: 80 min Objectives Present a polished thesis report orally with visual support. Field p"
+      }
+    ]
+  }
+]

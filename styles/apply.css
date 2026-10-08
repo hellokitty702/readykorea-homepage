@@ -1,0 +1,91 @@
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --ink-3: #64748b;
+    --line: rgba(15, 23, 42, 0.08);
+    --bg: #f8fafc;
+    --gold: #fbbf24;
+  }
+  body {
+    font-family: "Montserrat", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 36px 20px 64px;
+  }
+  .intro {
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .lead {
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 560px;
+  }
+  .panel {
+    background: #fff;
+    border: 0.5px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+  }
+  .panel-top {
+    padding: 18px 20px;
+    border-bottom: 0.5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .panel-top p {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .open-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 10px;
+  }
+  .open-form:hover { background: #fcd34d; }
+  .form-frame {
+    width: 100%;
+    min-height: 1200px;
+    border: 0;
+    display: block;
+    background: #fff;
+  }
+  .note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    .form-frame { min-height: 1400px; }
+  }

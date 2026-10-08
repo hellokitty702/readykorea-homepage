@@ -1,0 +1,81 @@
+<div class="wrap support-wrap">
+
+  <section class="support-hub" id="support-center">
+    <header class="support-hub-head">
+      <div class="support-tag">Support Center</div>
+      <h2>Essential Resources for Your Life in Korea</h2>
+      <p>Immigration, banking, housing, healthcare, and daily life — curated for E-2 teachers. Start with the top priorities, or search the full guide archive below.</p>
+    </header>
+
+    <div class="support-search-wrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <input type="search" id="support-search" placeholder="Search guides — immigration, ARC, banking, housing…" autocomplete="off" aria-controls="support-archive-list" aria-label="Search support guides">
+      <div class="support-search-meta" id="support-search-meta" aria-live="polite"></div>
+    </div>
+
+    <div class="support-priority-section">
+      <div class="support-priority-label">Top 10 Priority Actions</div>
+      <div class="support-priority-grid" id="support-priority-grid" role="list"></div>
+    </div>
+
+    <!-- Immigration Office Finder (preserved) -->
+    <div class="support-hub-block" id="support-immig-finder">
+      <h3>Find Your Immigration Office</h3>
+      <p class="block-lead">Among the most searched topics by Korea ESL teachers — select your region to see typical office assignments.</p>
+      <div class="immig-finder-grid" id="immig-finder-grid">
+        <button type="button" class="immig-city-btn" data-immig-city="seoul">
+          <span class="immig-city-name">Seoul</span>
+          <span class="immig-city-sub">Metropolitan · multiple branches</span>
+        </button>
+        <button type="button" class="immig-city-btn" data-immig-city="gyeonggi">
+          <span class="immig-city-name">Gyeonggi</span>
+          <span class="immig-city-sub">Suwon · Incheon · Uijeongbu</span>
+        </button>
+        <button type="button" class="immig-city-btn" data-immig-city="busan">
+          <span class="immig-city-name">Busan</span>
+          <span class="immig-city-sub">Busan · Haeundae jurisdiction</span>
+        </button>
+        <button type="button" class="immig-city-btn" data-immig-city="incheon">
+          <span class="immig-city-name">Incheon</span>
+          <span class="immig-city-sub">Songdo · airport corridor</span>
+        </button>
+        <button type="button" class="immig-city-btn" data-immig-city="daegu">
+          <span class="immig-city-name">Daegu</span>
+          <span class="immig-city-sub">Yeongnam · EPIK hub</span>
+        </button>
+        <button type="button" class="immig-city-btn" data-immig-city="jeju">
+          <span class="immig-city-name">Jeju</span>
+          <span class="immig-city-sub">Island · single office</span>
+        </button>
+      </div>
+      <div class="immig-result-panel" id="immig-result-panel" aria-live="polite">
+        <h4 class="immig-panel-title">Select a city above</h4>
+        <p class="immig-panel-body">Your immigration office is determined by your <strong>registered address</strong> (주소), not your school location. Tap a region to see typical office assignments.</p>
+        <ul class="immig-panel-list"></ul>
+        <a class="support-official-link" href="https://www.hikorea.go.kr/info/InfoFrnRelMainPage.do" target="_blank" rel="noopener">
+          <span class="sol-badge">Gov</span>
+          <span class="sol-text">
+            <span class="sol-title">HiKorea Jurisdiction Finder</span>
+            <span class="sol-sub">Official office lookup by address</span>
+          </span>
+          <span class="sol-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="support-disclaimer"><strong>Disclaimer:</strong> Always verify your jurisdiction on the official <a class="support-official-link" href="https://www.hikorea.go.kr" target="_blank" rel="noopener"><span class="sol-text"><span class="sol-title">HiKorea</span></span></a> site based on your specific address. Office assignments change — this tool is a starting point, not legal advice.</p>
+    </div>
+
+    <!-- Hidden archive for SEO + deep search -->
+    <details class="support-archive-details" id="support-archive">
+      <summary>
+        <span class="support-archive-label">Browse All Guides</span>
+        <span class="support-archive-count" id="support-archive-count">207 guides</span>
+      </summary>
+      <div class="support-archive-inner">
+        <p class="support-archive-hint">Full index for search engines and power users. Type in the search bar above to filter instantly.</p>
+        <div class="support-archive-list" id="support-archive-list" role="list"></div>
+        <div class="support-archive-empty" id="support-archive-empty" hidden="">No guides match your search.</div>
+      </div>
+    </details>
+  </section>
+
+</div>

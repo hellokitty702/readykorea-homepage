@@ -1,0 +1,35 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f172a; --ink-2: #334155; --ink-3: #64748b;
+  --line: rgba(15, 23, 42, 0.08); --bg: #ffffff; --bg-2: #f8fafc;
+  --accent: #0f172a; --info: #0284c7;
+}
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: var(--ink); background: var(--bg-2); line-height: 1.6; font-size: 15px;
+}
+h1, h2, h3 { font-family: "Montserrat", "Pretendard", sans-serif; letter-spacing: -0.02em; }
+a { color: var(--info); }
+.site-bar {
+  background: var(--accent); color: #fff; padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.site-bar a { color: #fff; text-decoration: none; font-weight: 600; }
+.site-bar .back { opacity: 0.9; font-weight: 500; font-size: 14px; }
+.site-bar .back:hover { text-decoration: underline; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px 20px 60px; }
+.lesson-shell {
+  background: #fff; border: 0.5px solid var(--line); border-radius: 12px; padding: 24px;
+}
+.lesson-shell .lesson-detail,
+.lesson-shell article.lesson-plan { display: block !important; margin-top: 0 !important; border: none !important; padding: 0 !important; }
+.pager {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  margin-top: 24px; padding-top: 16px; border-top: 0.5px solid var(--line);
+}
+.pager a {
+  display: inline-block; padding: 10px 16px; border-radius: 8px;
+  background: #fff; border: 0.5px solid var(--line); color: var(--ink); text-decoration: none; font-size: 14px;
+}
+.pager a:hover { background: var(--bg-2); }
+.pager .disabled { opacity: 0.4; pointer-events: none; }

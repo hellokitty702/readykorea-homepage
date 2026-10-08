@@ -1,11 +1,20 @@
-# Ignore heavy / tooling files when publishing
-david-esl-homepage.before-lesson-split.html
-dist/
-*.tmp
+# dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# OS / editor
 .DS_Store
 Thumbs.db
+*.tmp
+
+# Legacy tooling scratch output
+dist/
 _zip_inspect/
 _zip_staging/
 lessons_from_zip/
 lessons_old_backup/
-robots.txt.new

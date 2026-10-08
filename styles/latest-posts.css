@@ -1,0 +1,20 @@
+.latest-posts { padding: 56px 0; background: var(--bg); border-top: 0.5px solid var(--line); }
+.latest-posts .lp-head { text-align: center; margin-bottom: 28px; }
+.latest-posts .lp-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.latest-posts h2 { font-family: "Montserrat", sans-serif; font-size: clamp(26px, 3.5vw, 32px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+.latest-posts .lp-sub { color: var(--ink-3); font-size: 14px; }
+.latest-posts .lp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1000px; margin: 0 auto; }
+.latest-posts .lp-card { display: flex; flex-direction: column; padding: 22px; border: 0.5px solid var(--line); border-radius: 14px; background: white; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s, border-color .15s; min-height: 180px; }
+.latest-posts .lp-card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(15,23,42,.06); border-color: rgba(15,23,42,.18); }
+.latest-posts .lp-card.is-soon { opacity: 0.72; cursor: default; }
+.latest-posts .lp-card.is-soon:hover { transform: none; box-shadow: none; }
+.latest-posts .lp-date { font-size: 12px; color: var(--ink-4); margin-bottom: 10px; }
+.latest-posts .lp-card h3 { font-family: "Montserrat", sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.35; }
+.latest-posts .lp-card p { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; flex: 1; }
+.latest-posts .lp-more { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--info); }
+.latest-posts .lp-all { text-align: center; margin-top: 24px; }
+.latest-posts .lp-all a { font-size: 14px; font-weight: 600; color: var(--info); text-decoration: none; }
+.latest-posts .lp-all a:hover { text-decoration: underline; }
+@media (max-width: 860px) {
+  .latest-posts .lp-grid { grid-template-columns: 1fr; max-width: 480px; }
+}
