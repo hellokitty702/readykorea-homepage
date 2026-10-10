@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { BlogNav } from '@/components/blog/blog-nav';
-import { PostList } from '@/components/blog/post-list';
-import { getPublishedPosts } from '@/lib/blog';
+import { BlogTabs } from '@/components/blog/blog-tabs';
+import { FeaturedPostCard, PostGrid } from '@/components/blog/post-grid';
+import { getFeaturedPost, getPublishedPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Blog · ReadyKorea ESL Tips for Teachers in Korea',
@@ -10,19 +10,26 @@ export const metadata: Metadata = {
   alternates: { canonical: '/blog/' },
 };
 
+// The old static blog filtered its tabs with /blog/#<category>; those links now open the category page.
+const hashRedirect =
+  "(function(){var s=location.hash.slice(1);if(/^[a-z0-9-]+$/.test(s))location.replace('/blog/category/'+s+'/')})()";
+
 // Prerendered; saving a post in the admin panel revalidates it (lib/actions/posts.ts).
 export default async function BlogIndexPage() {
-  const posts = await getPublishedPosts();
+  const featured = await getFeaturedPost();
+  const posts = await getPublishedPosts({ byCategory: true, exceptId: featured?.id });
   return (
     <main className="wrap">
+      <script dangerouslySetInnerHTML={{ __html: hashRedirect }} />
       <div className="eyebrow">ReadyKorea Blog</div>
       <h1>Tips for teaching English in Korea</h1>
       <p className="lead">
-        Practical guides for native English teachers — classroom ideas, hagwon life, and getting ready for your first
-        year in Korea.
+        Practical guides for native English teachers — grouped by visa &amp; legal, settling in, career success, and
+        life in Korea.
       </p>
-      <BlogNav />
-      <PostList posts={posts} empty="No posts yet. Check back soon." />
+      {featured && <FeaturedPostCard post={featured} />}
+      <BlogTabs />
+      <PostGrid posts={posts} empty="No posts yet. Check back soon." />
     </main>
   );
 }

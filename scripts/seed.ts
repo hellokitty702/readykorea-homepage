@@ -1,5 +1,6 @@
-// Adds the content the old site had: two Job Board listings, and the blog posts and categories copied
-// from www.readykoreaesl.com (seed-posts.json; their images are in public/images/).
+// Adds the content the old site had: two Job Board listings, the blog categories (seed-categories.json;
+// they also make the header's Blog menu) and the blog posts copied from www.readykoreaesl.com
+// (seed-posts.json; their images are in public/images/).
 // Safe to re-run: skips jobs, posts and categories whose slug (or job ID) already exists.
 // Usage: bun run db:seed
 import './env';
@@ -8,6 +9,7 @@ import { sanitizePostHtml } from '@/lib/blog-html';
 import { parseTagNames, setPostTags } from '@/lib/blog-tags';
 import { categories, jobs, posts, type JobBadge, type JobContent } from '@/lib/db/schema';
 import { slugify } from '@/lib/slug';
+import seedCategories from './seed-categories.json';
 import seedJobs from './seed-jobs.json';
 import seedPosts from './seed-posts.json';
 
@@ -39,8 +41,19 @@ const rows = await db
 
 console.log(rows.length ? `Added jobs: ${rows.map((r) => r.code).join(', ')}` : 'Jobs already present, nothing added.');
 
-// Blog
-await db.insert(categories).values(seedPosts.categories).onConflictDoNothing();
+// Blog categories, in the order of the file (the old blog's order)
+const newCategories = await db
+  .insert(categories)
+  .values(seedCategories.map((category, i) => ({ ...category, position: i + 1 })))
+  .onConflictDoNothing()
+  .returning({ slug: categories.slug });
+console.log(
+  newCategories.length
+    ? `Added categories: ${newCategories.map((c) => c.slug).join(', ')}`
+    : 'Categories already present, nothing added.',
+);
+
+// Blog posts
 const categoryIds = new Map(
   (await db.select({ id: categories.id, slug: categories.slug }).from(categories)).map((c) => [c.slug, c.id]),
 );

@@ -326,6 +326,7 @@ export async function listPosts(status?: PostStatus) {
       slug: posts.slug,
       title: posts.title,
       status: posts.status,
+      isFeatured: posts.isFeatured,
       publishedAt: posts.publishedAt,
       updatedAt: posts.updatedAt,
       category: categories.name,
@@ -359,13 +360,14 @@ export function listCategories() {
       slug: categories.slug,
       name: categories.name,
       description: categories.description,
+      position: categories.position,
       posts: count(posts.id),
       published: sql<number>`count(${posts.id}) filter (where ${posts.status} = 'published')`.mapWith(Number),
     })
     .from(categories)
     .leftJoin(posts, eq(posts.categoryId, categories.id))
     .groupBy(categories.id)
-    .orderBy(asc(categories.name));
+    .orderBy(asc(categories.position), asc(categories.name));
 }
 
 /** Existing tag names, suggested while typing in the post form. */

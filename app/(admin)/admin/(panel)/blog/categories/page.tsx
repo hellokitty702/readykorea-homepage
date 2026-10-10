@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 import { CategoryRowActions, NewCategoryForm } from '@/components/admin/category-forms';
-import { card, cardFlush, cardTitle, code, cx, muted, num, small, strong, table } from '@/components/admin/styles';
+import { button, card, cardFlush, cardTitle, code, cx, muted, num, small, strong, table } from '@/components/admin/styles';
 import { Empty, PageHeader, PageSub } from '@/components/admin/ui';
+import { moveCategory } from '@/lib/actions/posts';
 import { listCategories } from '@/lib/admin/queries';
 import { requireAdmin } from '@/lib/auth/dal';
 import { categoryPath } from '@/lib/blog';
@@ -16,7 +18,10 @@ export default async function CategoriesPage() {
   return (
     <>
       <PageHeader title="Categories" crumbs={[{ href: '/admin/blog/', label: 'Blog' }]}>
-        <PageSub>Each post can have one category. The blog lists categories that have published posts.</PageSub>
+        <PageSub>
+          Each post can have one category. The header's Blog menu and the blog list the categories that have published
+          posts, in this order.
+        </PageSub>
       </PageHeader>
 
       <section className={cardFlush}>
@@ -24,6 +29,7 @@ export default async function CategoriesPage() {
           <table className={table()}>
             <thead>
               <tr>
+                <th>Order</th>
                 <th>Category</th>
                 <th>Page</th>
                 <th className={num}>Posts</th>
@@ -33,8 +39,33 @@ export default async function CategoriesPage() {
               </tr>
             </thead>
             <tbody>
-              {list.map((c) => (
+              {list.map((c, i) => (
                 <tr key={c.id}>
+                  <td className="w-px whitespace-nowrap">
+                    <form action={moveCategory} className="flex gap-1">
+                      <input type="hidden" name="id" value={c.id} />
+                      <button
+                        className={button('default', 'sm')}
+                        name="move"
+                        value="up"
+                        disabled={i === 0}
+                        aria-label={`Move ${c.name} up`}
+                        title="Move up"
+                      >
+                        <ArrowUp className="size-3.5" aria-hidden="true" />
+                      </button>
+                      <button
+                        className={button('default', 'sm')}
+                        name="move"
+                        value="down"
+                        disabled={i === list.length - 1}
+                        aria-label={`Move ${c.name} down`}
+                        title="Move down"
+                      >
+                        <ArrowDown className="size-3.5" aria-hidden="true" />
+                      </button>
+                    </form>
+                  </td>
                   <td>
                     <span className={strong}>{c.name}</span>
                     {c.description && <div className={cx(muted, small, 'max-w-md')}>{c.description}</div>}

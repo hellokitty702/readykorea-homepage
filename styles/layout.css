@@ -217,6 +217,8 @@ header.site {
   border-top: 1px solid #f1f5f9;
 }
 .nav-flyout-link:hover { background: #f8fafc; }
+a.nav-flyout-link,
+a.nav-flyout-link:hover { text-decoration: none; }
 .nav-flyout-title {
   font-size: 12px;
   font-weight: 600;

@@ -1,6 +1,7 @@
 'use client';
 
 import { Check, Copy } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useActionState, useEffect, useState } from 'react';
 import { deleteMedia, saveMediaAlt, type MediaActionState } from '@/lib/actions/media';
@@ -78,7 +79,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
               {item.usedIn.map((post, i) => (
                 <span key={post.id}>
                   {i > 0 && ', '}
-                  <a href={`/admin/blog/${post.id}/`}>{post.title}</a>
+                  <Link href={`/admin/blog/${post.id}/`}>{post.title}</Link>
                 </span>
               ))}
             </>

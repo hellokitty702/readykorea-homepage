@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { startTransition, useActionState, useState, type FormEvent } from 'react';
 import { saveJob, type JobFormState } from '@/lib/actions/jobs';
 import type { Job, JobContent, JobFaq } from '@/lib/db/schema';
@@ -235,9 +236,9 @@ export function JobForm({ job, defaults }: { job?: Job; defaults?: { code: strin
         <button className={button('primary')} disabled={pending}>
           {pending ? 'Saving…' : job ? 'Save changes' : 'Create job'}
         </button>
-        <a className={button('ghost')} href={job ? `/admin/jobs/${job.id}/` : '/admin/jobs/'}>
+        <Link className={button('ghost')} href={job ? `/admin/jobs/${job.id}/` : '/admin/jobs/'}>
           Cancel
-        </a>
+        </Link>
       </div>
     </form>
   );

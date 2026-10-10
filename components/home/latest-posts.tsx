@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { fmtPostDate, getPublishedPosts, postPath } from '@/lib/blog';
 import '@/styles/latest-posts.css';
 
@@ -25,12 +26,12 @@ export async function LatestPosts() {
         </div>
         <div className="lp-grid">
           {posts.map((post) => (
-            <a key={post.id} className="lp-card" href={postPath(post.slug)}>
+            <Link key={post.id} className="lp-card" href={postPath(post.slug)}>
               <div className="lp-date">{fmtPostDate(post.publishedAt)}</div>
               <h3>{post.title}</h3>
               <p>{post.teaser || post.summary}</p>
               <span className="lp-more">Read article →</span>
-            </a>
+            </Link>
           ))}
           {COMING_SOON.slice(0, Math.max(0, 3 - posts.length)).map((post) => (
             <div key={post.title} className="lp-card is-soon" aria-disabled="true">
@@ -41,7 +42,7 @@ export async function LatestPosts() {
           ))}
         </div>
         <div className="lp-all">
-          <a href="/blog/">View all posts →</a>
+          <Link href="/blog/">View all posts →</Link>
         </div>
       </div>
     </section>

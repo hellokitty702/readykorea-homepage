@@ -114,6 +114,8 @@ export function HeaderNav() {
     header.addEventListener(
       'click',
       (e) => {
+        // Links navigate without a page load (next/link), so close the menu they were in.
+        if ((e.target as Element).closest('a[href]')) closeAll();
         const el = (e.target as Element).closest<HTMLElement>('[data-nav]');
         if (!el || el.matches('a[href]')) return;
         e.preventDefault();

@@ -1,14 +1,19 @@
+import Link from 'next/link';
+import { categoryPath, getBlogCategories } from '@/lib/blog';
+
 // Site header shared by every page (originally the homepage header). Styles: styles/layout.css.
 // Menu entries point at homepage sections via `data-nav`: on the homepage public/js/home.js
-// switches panels in place; on other pages HeaderNav.tsx sends the visitor to `/#<target>`.
+// switches panels in place; on other pages header-nav.tsx sends the visitor to `/#<target>`.
+// Entries with `href` (blog, categories) are plain links; both scripts leave those alone.
 
-type FlyoutLink = { nav: string; title: string; accent?: boolean };
+type FlyoutLink = { title: string; accent?: boolean } & ({ nav: string } | { href: string });
 type TopItem =
   | { label: string; items: FlyoutLink[] } // dropdown
   | { label: string; nav: string } // homepage section
   | { label: string; href: string }; // separate page
 type MobileLink = { title: string; sub: string; accent?: boolean } & ({ nav: string } | { href: string });
 
+/** Desktop menu; the Blog entry is filled in with the blog's categories (see SiteHeader). */
 const EN_NAV: TopItem[] = [
   {
     label: 'Free Lesson Plans',
@@ -100,20 +105,26 @@ function NavRow({ items, label, lang }: { items: TopItem[]; label: string; lang:
                 </button>
                 <div className="nav-flyout" role="menu">
                   <div className="nav-flyout-inner">
-                    {item.items.map((link) => (
-                      <button
-                        key={link.nav}
-                        type="button"
-                        className={link.accent ? 'nav-flyout-link nav-flyout-link--accent' : 'nav-flyout-link'}
-                        data-nav={link.nav}
-                        role="menuitem"
-                      >
-                        <span className="nav-flyout-title">{link.title}</span>
-                        <span className="nav-flyout-chevron" aria-hidden="true">
-                          ›
-                        </span>
-                      </button>
-                    ))}
+                    {item.items.map((link) => {
+                      const className = link.accent ? 'nav-flyout-link nav-flyout-link--accent' : 'nav-flyout-link';
+                      const content = (
+                        <>
+                          <span className="nav-flyout-title">{link.title}</span>
+                          <span className="nav-flyout-chevron" aria-hidden="true">
+                            ›
+                          </span>
+                        </>
+                      );
+                      return 'href' in link ? (
+                        <Link key={link.href} className={className} href={link.href} role="menuitem">
+                          {content}
+                        </Link>
+                      ) : (
+                        <button key={link.nav} type="button" className={className} data-nav={link.nav} role="menuitem">
+                          {content}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -127,9 +138,9 @@ function NavRow({ items, label, lang }: { items: TopItem[]; label: string; lang:
             );
           }
           return (
-            <a key={item.label} className="nav-top-link" href={item.href} style={{ textDecoration: 'none' }}>
+            <Link key={item.label} className="nav-top-link" href={item.href} style={{ textDecoration: 'none' }}>
               {item.label}
-            </a>
+            </Link>
           );
         })}
       </nav>
@@ -149,7 +160,7 @@ function MobileLinks({ links, lang }: { links: MobileLink[]; lang: 'en' | 'ko' }
         );
         if ('href' in link) {
           return (
-            <a
+            <Link
               key={link.title}
               className="main-nav-link"
               href={link.href}
@@ -157,7 +168,7 @@ function MobileLinks({ links, lang }: { links: MobileLink[]; lang: 'en' | 'ko' }
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
               {content}
-            </a>
+            </Link>
           );
         }
         return (
@@ -176,7 +187,31 @@ function MobileLinks({ links, lang }: { links: MobileLink[]; lang: 'en' | 'ko' }
   );
 }
 
-export function SiteHeader() {
+/**
+ * "Blog" opens a dropdown of the categories that have published posts. Pages are cached, so saving a
+ * post or category refreshes every page (lib/actions/posts.ts).
+ */
+export async function SiteHeader() {
+  const categories = await getBlogCategories();
+  const enNav: TopItem[] = categories.length
+    ? EN_NAV.map((item) =>
+        'href' in item && item.href === '/blog/'
+          ? {
+              label: item.label,
+              items: [
+                { href: '/blog/', title: 'All Posts' },
+                ...categories.map((c) => ({ href: categoryPath(c.slug), title: c.name })),
+              ],
+            }
+          : item,
+      )
+    : EN_NAV;
+  const enMobile = categories.length
+    ? EN_MOBILE.map((link) =>
+        'href' in link && link.href === '/blog/' ? { ...link, sub: categories.map((c) => c.name).join(' · ') } : link,
+      )
+    : EN_MOBILE;
+
   return (
     <header className="site">
       <div className="wrap nav">
@@ -189,7 +224,7 @@ export function SiteHeader() {
             레디<span className="brand-gold">코리아</span>
           </span>
         </a>
-        <NavRow items={EN_NAV} label="Teacher navigation" lang="en" />
+        <NavRow items={enNav} label="Teacher navigation" lang="en" />
         <NavRow items={KO_NAV} label="School navigation" lang="ko" />
         <div className="nav-right">
           <div className="main-nav-dd nav-menu-mobile" id="nav-menu-mobile">
@@ -201,7 +236,7 @@ export function SiteHeader() {
               </span>
             </button>
             <div className="main-nav-menu" role="menu">
-              <MobileLinks links={EN_MOBILE} lang="en" />
+              <MobileLinks links={enMobile} lang="en" />
               <MobileLinks links={KO_MOBILE} lang="ko" />
             </div>
           </div>

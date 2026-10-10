@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { JsonLd } from '@/components/json-ld';
@@ -213,14 +214,14 @@ export default async function JobPage({ params }: Props) {
           </div>
 
           <div className="job-detail-apply-wrap">
-            <a className="job-detail-apply" href={applyHref(job)}>
+            <Link className="job-detail-apply" href={applyHref(job)}>
               <span>
                 <Label name="apply" />
               </span>
               <span className="job-id">
                 <Label name="jobId" />: {job.code}
               </span>
-            </a>
+            </Link>
           </div>
         </article>
       </div>

@@ -1,6 +1,6 @@
 'use server';
 
-import { and, eq, like, ne, or } from 'drizzle-orm';
+import { and, asc, eq, like, max, ne, or } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import * as z from 'zod';
@@ -54,13 +54,12 @@ const PostSchema = z.object({
   seoDescription: z.string().trim().max(400, { error: 'Keep it under 400 characters.' }),
 });
 
-/** Blog index, post pages, category and tag pages, and the homepage "Latest Posts" all show posts. */
+/**
+ * Every page: besides the blog pages and the homepage "Latest Posts", the header on all pages lists
+ * the categories that have published posts (components/layout/site-header.tsx).
+ */
 function revalidateBlog() {
-  revalidatePath('/');
-  revalidatePath('/blog/');
-  revalidatePath('/blog/[slug]', 'page');
-  revalidatePath('/blog/category/[slug]', 'page');
-  revalidatePath('/blog/tag/[slug]', 'page');
+  revalidatePath('/', 'layout');
 }
 
 /** `base`, or `base-2`, `base-3`… if another row has it. */
@@ -129,7 +128,7 @@ export async function savePost(_prev: PostFormState, formData: FormData): Promis
   let base = slugify(data.title) || 'post';
   if (RESERVED_POST_SLUGS.includes(base)) base = `${base}-post`;
   const slug = data.slug || (await freeSlug(posts, base, id));
-  const values = { ...data, slug, body, youtubeId: youtube ?? '' };
+  const values = { ...data, slug, body, youtubeId: youtube ?? '', isFeatured: formData.get('isFeatured') === 'on' };
 
   let postId = id;
   const result = await db.transaction(async (tx) => {
@@ -200,11 +199,37 @@ export async function saveCategory(_prev: CategoryFormState, formData: FormData)
     slug = await freeSlug(categories, slugify(name) || 'category', id);
   }
 
-  if (id) await db.update(categories).set({ name, slug, description }).where(eq(categories.id, id));
-  else await db.insert(categories).values({ name, slug, description });
+  if (id) {
+    await db.update(categories).set({ name, slug, description }).where(eq(categories.id, id));
+  } else {
+    // New categories go last.
+    const [{ last }] = await db.select({ last: max(categories.position) }).from(categories);
+    await db.insert(categories).values({ name, slug, description, position: (last ?? 0) + 1 });
+  }
   revalidateBlog();
-  revalidatePath('/admin/blog/categories/');
   return { ok: id ? 'Category saved.' : `Added “${name}”.` };
+}
+
+/** Moves a category one place up or down. FormData: `id`, `move` ("up" or "down"). */
+export async function moveCategory(formData: FormData) {
+  await requireAdmin();
+  const id = Number(formData.get('id'));
+  const step = formData.get('move') === 'up' ? -1 : 1;
+  await db.transaction(async (tx) => {
+    const list = await tx
+      .select({ id: categories.id })
+      .from(categories)
+      .orderBy(asc(categories.position), asc(categories.name));
+    const from = list.findIndex((c) => c.id === id);
+    const to = from + step;
+    if (from < 0 || to < 0 || to >= list.length) return;
+    [list[from], list[to]] = [list[to], list[from]];
+    // Renumber 1…n, which also tidies gaps and ties.
+    for (const [i, c] of list.entries()) {
+      await tx.update(categories).set({ position: i + 1 }).where(eq(categories.id, c.id));
+    }
+  });
+  revalidateBlog();
 }
 
 /** Posts in a deleted category stay published, without a category. */
@@ -212,5 +237,4 @@ export async function deleteCategory(formData: FormData) {
   await requireAdmin();
   await db.delete(categories).where(eq(categories.id, Number(formData.get('id'))));
   revalidateBlog();
-  revalidatePath('/admin/blog/categories/');
 }

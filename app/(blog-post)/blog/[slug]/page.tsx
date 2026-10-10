@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { TagLinks } from '@/components/blog/post-list';
+import { TagLinks } from '@/components/blog/tag-links';
 import { categoryPath, fmtPostDate, getPublishedPost, getPublishedPosts, postPath } from '@/lib/blog';
 import { totalLessons } from '@/lib/lessons';
 
@@ -42,11 +43,11 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="wrap">
       <div className="eyebrow">
-        <a href="/blog/">ReadyKorea Blog</a>
+        <Link href="/blog/">ReadyKorea Blog</Link>
         {post.category && (
           <>
             {' · '}
-            <a href={categoryPath(post.category.slug)}>{post.category.name}</a>
+            <Link href={categoryPath(post.category.slug)}>{post.category.name}</Link>
           </>
         )}
       </div>
@@ -79,15 +80,15 @@ export default async function BlogPostPage({ params }: Props) {
             {totalLessons} free ESL lesson plans for Kindergarten K1–K3 and Elementary G1–G6 — built for Korean
             classrooms.
           </p>
-          <a className="cta-btn" href="/lessons/">
+          <Link className="cta-btn" href="/lessons/">
             Browse free lesson plans →
-          </a>
+          </Link>
         </div>
       )}
 
       <div className="footer-note">
         <span>ReadyKorea Blog</span>
-        <a href="/blog/">All posts</a>
+        <Link href="/blog/">All posts</Link>
       </div>
     </article>
   );

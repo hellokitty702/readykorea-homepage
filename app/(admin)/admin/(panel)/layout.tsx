@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { AdminNav } from '@/components/admin/admin-nav';
 import { Brand } from '@/components/admin/brand';
@@ -15,9 +16,9 @@ export default async function AdminPanelLayout({ children }: { children: ReactNo
     // The gradient keeps the sidebar column dark below the sticky sidebar on long pages.
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[232px_1fr] lg:bg-[linear-gradient(to_right,var(--color-slate-900)_232px,transparent_232px)]">
       <aside className="flex flex-row flex-wrap items-center gap-2.5 bg-slate-900 px-4 py-3 text-slate-200 lg:sticky lg:top-0 lg:h-screen lg:flex-col lg:flex-nowrap lg:items-stretch lg:gap-4.5 lg:px-3.5 lg:py-5">
-        <a className="px-2 text-base text-white hover:no-underline" href="/admin/">
+        <Link className="px-2 text-base text-white hover:no-underline" href="/admin/">
           <Brand />
-        </a>
+        </Link>
         <AdminNav />
         <div className="flex items-center gap-1 lg:mt-auto lg:grid lg:border-t lg:border-white/10 lg:pt-3.5">
           <div className="hidden px-2.5 pb-2 lg:grid">

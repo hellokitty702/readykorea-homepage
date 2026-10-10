@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { startTransition, useActionState, useState, type FormEvent } from 'react';
 import { savePost, type PostFormState } from '@/lib/actions/posts';
 import type { Post } from '@/lib/db/schema';
@@ -123,6 +124,20 @@ export function PostForm({
                 <option value="published">Published (on the blog)</option>
               </select>
             </Field>
+            <label className="flex items-start gap-2.5">
+              <input
+                type="checkbox"
+                name="isFeatured"
+                defaultChecked={post?.isFeatured}
+                className="mt-0.5 size-4 shrink-0 accent-blue-700"
+              />
+              <span>
+                <span className={cx(fieldLabel, 'block')}>Featured</span>
+                <span className="block text-xs text-slate-500">
+                  The newest featured post is shown big on top of /blog/ and of its category page.
+                </span>
+              </span>
+            </label>
             <Field
               label="Category"
               htmlFor="categoryId"
@@ -245,9 +260,9 @@ export function PostForm({
         <button className={button('primary')} disabled={pending}>
           {pending ? 'Saving…' : post ? 'Save changes' : 'Save post'}
         </button>
-        <a className={button('ghost')} href="/admin/blog/">
+        <Link className={button('ghost')} href="/admin/blog/">
           Cancel
-        </a>
+        </Link>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { PostList } from '@/components/blog/post-list';
+import { PostGrid } from '@/components/blog/post-grid';
 import { getPublishedPosts, getTag, tagPath } from '@/lib/blog';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,13 +28,13 @@ export default async function TagPage({ params }: Props) {
   return (
     <main className="wrap">
       <div className="eyebrow">
-        <a href="/blog/">ReadyKorea Blog</a> · Tag
+        <Link href="/blog/">ReadyKorea Blog</Link> · Tag
       </div>
       <h1>#{tag.name}</h1>
       <p className="lead">
         {posts.length} {posts.length === 1 ? 'post' : 'posts'} tagged “{tag.name}”.
       </p>
-      <PostList posts={posts} empty="No published posts with this tag yet." />
+      <PostGrid posts={posts} empty="No published posts with this tag yet." />
     </main>
   );
 }

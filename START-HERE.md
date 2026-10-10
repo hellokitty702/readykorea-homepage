@@ -14,7 +14,7 @@ bun run start      # 빌드 결과 로컬 실행 (http://localhost:3000)
 bun run typecheck  # 타입 검사
 
 bun run db:migrate     # DB 테이블 생성/업데이트 (drizzle/ 의 마이그레이션 적용)
-bun run db:seed        # 기존 Job Board 공고 2개 + 블로그 글 17개와 카테고리 추가 (이미 있으면 건너뜀)
+bun run db:seed        # 기존 Job Board 공고 2개, 블로그 카테고리 4개(scripts/seed-categories.json), 블로그 글 17개 추가 (이미 있으면 건너뜀)
 bun run admin:create admin@example.com "이름"   # 관리자 계정 생성 (비밀번호는 한 번만 출력)
 bun run db:generate    # lib/db/schema.ts 수정 후 새 마이그레이션 파일 생성
 bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
@@ -53,7 +53,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 | `/lessons/k1/greetings-hello-routine/` 개별 레슨 | `app/(site)/lessons/[grade]/[slug]/page.tsx` |
 | `/apply/` 지원하기 | `app/(apply)/apply/page.tsx` |
 | `/jobs/kindergarten-lead-teacher-k2-k3/` 공고 상세 | `app/(site)/jobs/[slug]/page.tsx` (`/jobs/` 는 `/#jobs` 로 이동) |
-| `/blog/` 블로그 | `app/(blog)/blog/page.tsx` |
+| `/blog/` 블로그 (맨 위 추천 글 + 카테고리 탭 + 카드 목록, 카테고리 순서대로 묶음) | `app/(blog)/blog/page.tsx` (예전 `/blog/#visa-legal` 링크는 카테고리 페이지로 이동) |
 | `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(blog)/blog/category/[slug]/page.tsx`, `app/(blog)/blog/tag/[slug]/page.tsx` |
 | `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(blog-post)/blog/[slug]/page.tsx` |
 | `/uploads/…` 업로드한 이미지 (로컬 개발 전용) | `app/uploads/[...key]/route.ts` |
@@ -70,7 +70,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 |-------------|------|
 | 메인 홈페이지 각 화면 (홈, AI Lab, Forum, K1~G6 등) | `content/home/levels/*.html` |
 | 지역 가이드 (서울, 부산 …) | `content/home/regions/*.html` |
-| 상단 헤더 / 메뉴 (모든 페이지 공통) | `components/layout/site-header.tsx` (메뉴 항목은 파일 위쪽 목록) |
+| 상단 헤더 / 메뉴 (모든 페이지 공통) | `components/layout/site-header.tsx` (메뉴 항목은 파일 위쪽 목록). **Blog** 메뉴의 하위 항목은 공개된 글이 있는 블로그 카테고리로 자동 구성됩니다 |
 | 하단 푸터 (모든 페이지 공통) | `components/layout/site-footer.tsx` |
 | 메인 화면 동작 (메뉴 이동, EN/한글 전환, 모달, 계산기 등) | `public/js/home.js` |
 | Support Center 가이드 데이터 / 학년별 커리큘럼 카드 | `public/js/support-guides.js`, `public/js/grade-curriculum.js` |
@@ -107,7 +107,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 - **로그인**: `/admin/login/` — `admin` 역할만 로그인할 수 있습니다 (`user` 역할은 불가). 세션은 DB(`sessions`)에 저장되고 7일간 유지됩니다.
 - **지원서**: `/apply/` 양식(기존 Google Form 과 같은 질문)과 Job Board 의 "Apply Now" 버튼이 DB(`applications`)에 저장합니다. 관리자 → Applications 에서 단계를 옮기고 메모를 남기면 모두 타임라인(`application_events`)에 기록됩니다.
 - **공고**: 관리자 → Jobs 에서 작성/수정/공개/마감합니다. 공개(Published)된 공고만 홈페이지 Job Board, 공고 상세 페이지(`/jobs/주소/`), 지원서 양식에 나옵니다. 지원서가 있는 공고는 삭제할 수 없고 마감만 가능합니다. 공고 주소는 한 번 정하면 바꾸지 않는 것이 좋습니다 (공유된 링크가 깨집니다).
-- **블로그**: 관리자 → Blog 에서 글을 쓰고, **Categories** 에서 카테고리를 관리합니다. 글마다 카테고리는 하나, 태그는 최대 12개입니다. 태그는 입력하면 만들어지고, 쓰는 글이 없어지면 자동으로 지워집니다.
+- **블로그**: 관리자 → Blog 에서 글을 쓰고, **Categories** 에서 카테고리를 관리합니다. 글마다 카테고리는 하나, 태그는 최대 12개입니다. 태그는 입력하면 만들어지고, 쓰는 글이 없어지면 자동으로 지워집니다. 카테고리 목록의 ↑/↓ 버튼으로 순서를 바꾸면 헤더 Blog 메뉴, 블로그 탭, `/blog/` 카드 순서가 함께 바뀝니다. 글 편집 화면의 **Featured** 를 체크하면 추천 글이 됩니다: `/blog/` 맨 위에는 가장 최근(공개일 기준) 추천 글이, 카테고리 페이지 맨 위에는 그 카테고리의 가장 최근 추천 글이 크게 나오고, 아래 카드 목록에서는 빠집니다.
 - **미디어**: 관리자 → Media 에서 이미지를 올리고, 주소 복사, 대체 텍스트(alt) 수정, 삭제를 합니다. 글에서 사용 중인 이미지는 어느 글에서 쓰는지 표시되고, 그 글에서 빼기 전에는 삭제할 수 없습니다.
 - 공고 상세의 한국어 입력은 선택입니다. 현재 사이트가 한국어 모드일 때는 Job Board 자체가 숨겨집니다 (기존 동작).
 - 무료 자료 팝업, AI Resume 버튼, 푸터 링크는 아직 기존 Google Form 으로 연결됩니다.

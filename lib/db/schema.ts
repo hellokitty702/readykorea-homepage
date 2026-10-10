@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import {
+  boolean,
   date,
   index,
   integer,
@@ -175,6 +176,8 @@ export const categories = pgTable('categories', {
   name: varchar('name', { length: 80 }).notNull(),
   /** Intro on the category page. */
   description: varchar('description', { length: 400 }).notNull().default(''),
+  /** Order in the header's Blog menu and the blog's category list, lowest first. */
+  position: integer('position').notNull().default(0),
   ...timestamps,
 });
 
@@ -201,6 +204,8 @@ export const posts = pgTable(
     teaser: varchar('teaser', { length: 200 }).notNull().default(''),
     /** Article HTML from the admin editor, sanitized on save (lib/blog-html.ts). */
     body: text('body').notNull().default(''),
+    /** Shown in the big card on top of the blog (the newest featured post) and of its category page. */
+    isFeatured: boolean('is_featured').notNull().default(false),
     /** Optional YouTube video shown above the article. */
     youtubeId: varchar('youtube_id', { length: 20 }).notNull().default(''),
     seoTitle: varchar('seo_title', { length: 200 }).notNull().default(''),

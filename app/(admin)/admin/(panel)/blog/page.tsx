@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   alertOk,
+  badge,
   button,
   cardFlush,
   cx,
@@ -91,7 +92,10 @@ export default async function BlogPostsPage({
                     </div>
                   </td>
                   <td>
-                    <PostStatusBadge status={post.status} />
+                    <span className="flex flex-wrap gap-1.5">
+                      <PostStatusBadge status={post.status} />
+                      {post.isFeatured && <span className={cx(badge, 'bg-amber-100 text-amber-800')}>Featured</span>}
+                    </span>
                   </td>
                   <td>{fmtDate(post.publishedAt)}</td>
                   <td className={muted}>{fmtDate(post.updatedAt)}</td>
