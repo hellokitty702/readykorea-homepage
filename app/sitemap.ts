@@ -4,6 +4,7 @@ import { getPublishedJobs } from '@/lib/job-board';
 import { jobPath } from '@/lib/job-fields';
 import { gradePath, grades, lessonPath, lessonsPath } from '@/lib/lessons';
 import { absoluteUrl } from '@/lib/site';
+import { FOR_TEACHERS_GUIDES, REGIONS } from '@/lib/site-pages';
 
 // Built on every request, so jobs and posts appear as soon as they are published.
 export const dynamic = 'force-dynamic';
@@ -54,11 +55,34 @@ async function lessonEntries(): Promise<Entry[]> {
   ];
 }
 
+// Guides and info pages (lib/site-pages.ts), stored in content/pages/.
+function pageEntries(): Entry[] {
+  const paths = [
+    '/why-korea/',
+    '/why-korea/tools/',
+    '/why-korea/survival/',
+    '/regions/',
+    ...REGIONS.map(({ slug }) => `/regions/${slug}/`),
+    '/for-teachers/',
+    ...FOR_TEACHERS_GUIDES.map(({ slug }) => `/for-teachers/${slug}/`),
+    '/why-readykorea/',
+    '/school-posting/',
+    '/curriculum-consulting/',
+    '/ai-lab/',
+    '/forum/',
+    '/tefl/',
+    '/support/',
+  ];
+  return paths.map((path) => ({ url: url(path), changeFrequency: 'monthly', priority: 0.7 }));
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sections = await Promise.all([jobEntries(), blogEntries(), lessonEntries()]);
   return [
     { url: url('/'), changeFrequency: 'weekly', priority: 1.0 },
     { url: url('/apply/'), changeFrequency: 'monthly', priority: 0.9 },
+    { url: url('/jobs/'), changeFrequency: 'daily', priority: 0.9 },
     ...sections.flat(),
+    ...pageEntries(),
   ];
 }

@@ -217,8 +217,16 @@ header.site {
   border-top: 1px solid #f1f5f9;
 }
 .nav-flyout-link:hover { background: #f8fafc; }
+/* Menu entries are links (next/link) styled like the buttons they replaced. */
 a.nav-flyout-link,
-a.nav-flyout-link:hover { text-decoration: none; }
+a.nav-top-link,
+a.nav-action,
+a.main-nav-link,
+a.nav-flyout-link:hover,
+a.nav-top-link:hover,
+a.nav-action:hover,
+a.main-nav-link:hover { text-decoration: none; }
+a.main-nav-link { color: inherit; }
 .nav-flyout-title {
   font-size: 12px;
   font-weight: 600;

@@ -92,9 +92,6 @@
   }
   .hero-flags-row span { white-space: nowrap; }
 
-  /* Home · simple landing (4 sections only) */
-  #level-home.home-simple .home-extended { display: none !important; }
-  body.home-view-simple .platform-performance { display: none; }
   .home-jobs-preview {
     padding: 48px 0;
     border-bottom: 0.5px solid var(--line);
@@ -489,9 +486,6 @@
   .home-summary-card.ai     .hsc-emoji { filter: drop-shadow(0 2px 4px rgba(109,40,217,0.2)); }
   .home-summary-card.forum  .hsc-emoji { filter: drop-shadow(0 2px 4px rgba(13,148,136,0.2)); }
 
-  /* Hide the long narrative sections on home view */
-  .home-narrative-hidden { display: none !important; }
-
   /* "Explore more" hint shown below summary cards */
   .home-summary-more {
     text-align: center;
@@ -769,15 +763,11 @@
   html[lang="en"] .ailab-kr,
   html[lang="en"] .ko-only { display: none !important; }
   html[lang="ko"] .en-only { display: none !important; }
-  html[lang="ko"] #school-posting,
-  html[lang="ko"] #curriculum-consulting,
-  html[lang="ko"] #why-readykorea { display: none !important; }
-  html[lang="ko"] #school-posting.is-nav-visible,
-  html[lang="ko"] #curriculum-consulting.is-nav-visible,
-  html[lang="ko"] #why-readykorea.is-nav-visible { display: block !important; }
+  /* The Korean homepage is for schools: no teacher Job Board or About section (both have their own pages). */
+  html[lang="ko"] #level-home #why-readykorea,
+  html[lang="ko"] #level-home #jobs { display: none !important; }
   html[lang="en"] .job-card-actions .post-job-btn { display: none !important; }
   html[lang="ko"] .job-card-actions .apply-btn { display: none !important; }
-  html[lang="ko"] #jobs { display: none !important; }
   html[lang="ko"] #jobs .section-head .meta { display: none !important; }
 
   /* Legacy primary / quick nav — removed from layout */
@@ -912,22 +902,8 @@
     font-size: 11px; color: var(--ink-4); font-weight: 500;
   }
 
-  /* Legacy level-tab kept hidden — JS still references it */
-  .level-tab { display: none !important; }
-  .level-tab-bar { display: none !important; }
-
   .level-content { display: none; }
   .level-content.active { display: block; }
-
-  /* Guide category panels — show one section group at a time */
-  #level-why-korea.guide-mode [data-guide-panel],
-  #level-for-teachers.guide-mode [data-guide-panel] {
-    display: none !important;
-  }
-  #level-why-korea.guide-mode [data-guide-panel].guide-panel-visible,
-  #level-for-teachers.guide-mode [data-guide-panel].guide-panel-visible {
-    display: block !important;
-  }
 
   /* E-2 Visa hub · categorized sub-navigation */
   .e2-visa-hub {
@@ -1002,8 +978,9 @@
   }
   .e2-visa-nav-btn--jump:hover { color: #1d4ed8; }
   .e2-visa-main { padding: 28px 32px 36px; min-width: 0; }
-  .e2-visa-main [data-e2-panel] { display: none; }
-  .e2-visa-main [data-e2-panel].e2-panel-visible { display: block; }
+  /* Sub-panels show one at a time; the hub's buttons that open them (also data-e2-panel) always show. */
+  .e2-visa-main [data-e2-panel]:not(button) { display: none; }
+  .e2-visa-main [data-e2-panel]:not(button).e2-panel-visible { display: block; }
   #while-in-korea .e2-visa-main [data-wik-panel] { display: none; }
   #while-in-korea .e2-visa-main [data-wik-panel].wik-panel-visible { display: block; }
   @media (max-width: 900px) {
@@ -1432,12 +1409,6 @@
     padding: 0 8px; align-self: center;
     font-weight: 500;
   }
-  .level-tab.home {
-    background: transparent; color: var(--ink-2);
-  }
-  .level-tab.home.active {
-    background: var(--accent); color: white;
-  }
 
   /* Landing page level cards */
   .level-grid {
@@ -1606,42 +1577,6 @@
   .lesson:last-child { border-bottom: none; }
   .lesson:hover { background: var(--bg-2); }
   .lesson.active { background: var(--bg-2); }
-  #level-k1 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k1 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-k2 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k2 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-k3 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k3 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-k1 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k1 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-k2 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k2 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-k3 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-k3 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g1 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g1 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g1 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g1 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g2 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g2 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g2 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g2 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g3 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g3 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g3 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g3 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g4 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g4 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g4 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g4 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g5 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g5 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g5 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g5 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g6 .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g6 .lesson-detail-panel .lesson-detail.active { display: block; }
-  #level-g6 .ko-only .lesson-detail-panel .lesson-detail { display: none; }
-  #level-g6 .ko-only .lesson-detail-panel .lesson-detail.active { display: block; }
   .lesson-num {
     width: 28px; height: 28px;
     border-radius: 6px; background: var(--bg-3);

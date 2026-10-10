@@ -140,10 +140,9 @@ export default async function JobPage({ params }: Props) {
         }}
       />
       <div className="wrap">
-        {/* Plain link: the homepage needs a full load to run its scripts. */}
-        <a className="job-detail-back" href="/#jobs">
+        <Link className="job-detail-back" href="/jobs/">
           <Label name="back" />
-        </a>
+        </Link>
         <article className="job-detail-page">
           <header className="job-detail-header">
             {job.badge && (

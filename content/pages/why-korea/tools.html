@@ -1,0 +1,446 @@
+<div class="wrap">
+  <section class="magnets-section" id="calculators" data-guide-panel="tools" style="scroll-margin-top: 72px;">
+    <div class="magnets-head">
+      <div class="eyebrow">Free Tools · 강사 무료 도구</div>
+      <h2>The 3 tools every teacher in Korea wants.</h2>
+      <p>Built into ReadyKorea. No login required to try them. Bookmark this page — these get updated monthly.</p>
+    </div>
+
+    <!-- 1. SAVINGS CALCULATOR (with location selector) -->
+    <div id="savings-calculator">
+
+      <!-- Location selector — premium dark-navy tabs -->
+      <div class="calc-location-bar">
+        <div class="calc-location-label">📍 Choose your placement region · 배치 지역 선택</div>
+        <div class="calc-location-tabs">
+          <button class="calc-loc-tab active" data-loc="daechi">
+            <span class="loc-name">Daechi / Gangnam</span>
+            <span class="loc-kr">대치 · 강남</span>
+          </button>
+          <button class="calc-loc-tab" data-loc="songdo">
+            <span class="loc-name">Songdo</span>
+            <span class="loc-kr">인천 송도</span>
+          </button>
+          <button class="calc-loc-tab" data-loc="bundang">
+            <span class="loc-name">Bundang</span>
+            <span class="loc-kr">경기 분당</span>
+          </button>
+          <button class="calc-loc-tab" data-loc="busan">
+            <span class="loc-name">Busan / Haeundae</span>
+            <span class="loc-kr">부산 해운대</span>
+          </button>
+        </div>
+      </div>
+
+    <div class="calc-card">
+      <div class="calc-left">
+        <div class="calc-eyebrow">💰 Cost of Living &amp; Savings Calculator</div>
+        <h3>How much can I really save?</h3>
+        <p class="calc-sub">Drag the sliders. See your monthly take-home and savings update live.<br><span style="color: var(--ink-4);">Defaults adjust to your selected region above.</span></p>
+
+        <div class="calc-input-group">
+          <label>Monthly salary (KRW)</label>
+          <div class="calc-row">
+            <input type="range" id="calc-salary" min="2200000" max="4500000" step="100000" value="2800000">
+            <div class="calc-val" id="calc-salary-val">₩2,800,000</div>
+          </div>
+        </div>
+
+        <div class="calc-input-group">
+          <label>Monthly food + transport + nights out</label>
+          <div class="calc-row">
+            <input type="range" id="calc-spend" min="500000" max="2000000" step="50000" value="900000">
+            <div class="calc-val" id="calc-spend-val">₩900,000</div>
+          </div>
+        </div>
+
+        <label class="calc-checkbox-row">
+          <input type="checkbox" id="calc-housing" checked="">
+          <span>Housing provided by school (saves ~₩600,000/mo)</span>
+        </label>
+
+        <label class="calc-checkbox-row">
+          <input type="checkbox" id="calc-pension" checked="">
+          <span>Pension contribution match (refunded when leaving)</span>
+        </label>
+      </div>
+
+      <div class="calc-right">
+        <div class="calc-result-label">Estimated monthly savings</div>
+        <div class="calc-result-num" id="calc-result-usd">$1,300</div>
+        <div class="calc-result-curr"><span id="calc-result-krw">≈ ₩1,720,000</span> · sent home each month</div>
+        <div class="calc-result-breakdown" id="calc-breakdown">
+          <div class="br-row"><span>Gross salary</span><span id="br-salary">₩2,800,000</span></div>
+          <div class="br-row"><span>− Tax + pension</span><span id="br-tax">₩240,000</span></div>
+          <div class="br-row"><span>− Rent</span><span id="br-rent">₩0</span></div>
+          <div class="br-row"><span>− Living spend</span><span id="br-spend">₩900,000</span></div>
+          <div class="br-row total"><span>Net savings</span><span id="br-net">₩1,660,000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIFESTYLE SNAPSHOT — populated per location -->
+    <div class="lifestyle-snapshot" id="lifestyle-snapshot">
+      <div class="lifestyle-snapshot-inner">
+        <div class="ls-eyebrow">📍 Lifestyle Snapshot · 지역 생활 스펙</div>
+        <h4 id="ls-name">Daechi / Gangnam</h4>
+        <div class="ls-kr" id="ls-kr">서울 강남구 대치동 · 학원 1번지</div>
+        <p class="ls-tagline" id="ls-tagline">Highest expat infrastructure. Premium studio provided. Walkable subway &amp; gyms. Higher cost of living.</p>
+        <div class="ls-market">
+          <div class="ls-market-cell">
+            <div class="ls-market-label">💵 Average Salary</div>
+            <div class="ls-market-val" id="ls-salary">₩2.8M – ₩3.4M</div>
+          </div>
+          <div class="ls-market-cell">
+            <div class="ls-market-label">🏠 Housing / Rent</div>
+            <div class="ls-market-val" id="ls-rent">Deposit ₩10M / Rent ₩950K – ₩1.2M</div>
+          </div>
+        </div>
+        <div class="ls-specs" id="ls-specs">
+          <!-- specs injected by JS -->
+        </div>
+        <div class="ls-cost-index">
+          <div>
+            <span class="ci-label">Cost of living index</span>
+          </div>
+          <div class="ci-bar" id="ci-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    </div> <!-- /#savings-calculator -->
+
+    <!-- 2. ESL GAME KIT -->
+    <div class="gamekit-card" id="esl-games">
+      <div class="gamekit-head">
+        <div>
+          <div class="gk-eyebrow">🎮 Free ESL Game &amp; Warm-up Kit</div>
+          <h3>Classroom games that actually work.</h3>
+          <p>Battle-tested in Korean kindergartens and elementary classes. Download as PPT, instant-print PDFs, or both.</p>
+        </div>
+        <span class="gk-badge">★ Updated monthly</span>
+      </div>
+      <div class="gamekit-grid">
+        <div class="gk-card">
+          <div class="gk-thumb">🎯</div>
+          <h4>Phonics Bingo (Groups 1–7)</h4>
+          <div class="gk-meta">PPT + PDF · K2–K3 · 15 min</div>
+          <div class="gk-desc">42-sound Jolly Phonics bingo cards, auto-generated. Print 8 cards per page. Lifesaver for substitute days.</div>
+          <button class="gk-download" onclick="openMagnetModal('Phonics Bingo Kit (Groups 1–7)')">Download free →</button>
+        </div>
+        <div class="gk-card">
+          <div class="gk-thumb">🎲</div>
+          <h4>Roll &amp; Speak Warm-ups</h4>
+          <div class="gk-meta">PPT · G1–G6 · 5 min</div>
+          <div class="gk-desc">Dice-based question prompts. Kids roll, kids answer. 60 prompts across 6 grade levels. Zero teacher prep.</div>
+          <button class="gk-download" onclick="openMagnetModal('Roll &amp; Speak Warm-up Kit')">Download free →</button>
+        </div>
+        <div class="gk-card">
+          <div class="gk-thumb">🚦</div>
+          <h4>Stop &amp; Go Vocab Race</h4>
+          <div class="gk-meta">PPT · K1–G3 · 10 min</div>
+          <div class="gk-desc">Whole-class movement game with built-in vocabulary review. 24 themed sets — animals, food, weather, etc.</div>
+          <button class="gk-download" onclick="openMagnetModal('Stop &amp; Go Vocab Race')">Download free →</button>
+        </div>
+        <div class="gk-card">
+          <div class="gk-thumb">🃏</div>
+          <h4>Conversation Card Decks</h4>
+          <div class="gk-meta">PDF · G2–G6 · 15 min</div>
+          <div class="gk-desc">200+ prompt cards for 1:1 and pair speaking. Sorted by CEFR level. Print and laminate once, use all year.</div>
+          <button class="gk-download" onclick="openMagnetModal('Conversation Card Decks')">Download free →</button>
+        </div>
+        <div class="gk-card">
+          <div class="gk-thumb">🎭</div>
+          <h4>5-Min Role-play Scripts</h4>
+          <div class="gk-meta">PDF · G3–G6 · 5–10 min</div>
+          <div class="gk-desc">30 scripted skits — restaurant, doctor, airport, school. Each script is 8–12 lines, perfect for class openers.</div>
+          <button class="gk-download" onclick="openMagnetModal('5-Min Role-play Script Pack')">Download free →</button>
+        </div>
+        <div class="gk-card">
+          <div class="gk-thumb">🧩</div>
+          <h4>Open-Class Hit List</h4>
+          <div class="gk-meta">PPT · K1–G6 · 40 min</div>
+          <div class="gk-desc">Six full lesson decks specifically designed to wow Korean parents during 공개수업. Tested in real open classes.</div>
+          <button class="gk-download" onclick="openMagnetModal('Open-Class Hit List (6 decks)')">Download free →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PENSION REFUND ESTIMATOR -->
+    <div class="pension-card" id="pension-estimator">
+      <div class="pension-left">
+        <div class="pension-eyebrow">💰 Pension Refund Estimator · 국민연금 환급금</div>
+        <h3>Don't Leave Your Money in Korea!</h3>
+        <p class="pension-sub">Most US/UK/Canadian E-2 teachers walk away from <strong style="color: white; font-weight: 600;">$2,000–$8,000</strong> in pension contributions when they leave Korea — because they didn't know. Don't be one of them.<br>대다수 영미권 강사가 출국 시 수백만 원의 국민연금 환급금을 놓칩니다.</p>
+
+        <div class="pension-input-group">
+          <label>Months working in Korea</label>
+          <div class="pension-row">
+            <input type="range" id="pension-months" min="6" max="60" step="1" value="12">
+            <div class="pension-val" id="pension-months-val">12 months</div>
+          </div>
+        </div>
+
+        <div class="pension-input-group">
+          <label>Monthly base salary (KRW)</label>
+          <div class="pension-row">
+            <input type="range" id="pension-salary" min="2200000" max="4500000" step="100000" value="2800000">
+            <div class="pension-val" id="pension-salary-val">₩2,800,000</div>
+          </div>
+        </div>
+
+        <label class="pension-tax-row">
+          <input type="checkbox" id="pension-employer" checked="">
+          <span>Include employer 50% match (4.5%) — standard for E-2 holders</span>
+        </label>
+
+        <label class="pension-tax-row">
+          <input type="checkbox" id="pension-interest" checked="">
+          <span>Include ~2% annual interest accrual</span>
+        </label>
+      </div>
+
+      <div class="pension-right">
+        <div class="pension-result-label">Estimated lump-sum refund</div>
+        <div class="pension-result-usd" id="pension-result-usd">~ $2,300 USD</div>
+        <div class="pension-result-msg" id="pension-result-msg">Saved for your move home!</div>
+        <div class="pension-breakdown">
+          <div class="pb-row"><span>Your contributions (4.5%)</span><span id="pb-you">₩1,512,000</span></div>
+          <div class="pb-row"><span>Employer match (4.5%)</span><span id="pb-emp">₩1,512,000</span></div>
+          <div class="pb-row"><span>Interest accrued (~2%/yr)</span><span id="pb-interest">₩30,000</span></div>
+          <div class="pb-row total"><span>Total refund (KRW)</span><span id="pb-total">₩3,054,000</span></div>
+        </div>
+        <div class="pension-eligibility">
+          <strong>Eligible for lump-sum refund:</strong> 🇺🇸 USA, 🇨🇦 Canada, 🇿🇦 South Africa, 🇮🇳 India.<br>
+          <strong>Totalization agreement (transfer, not lump-sum):</strong> 🇬🇧 UK, 🇮🇪 Ireland, 🇦🇺 Australia, 🇳🇿 New Zealand — your contributions count toward your home pension instead of being refunded.<br>
+          <strong>Apply at:</strong> <a href="https://www.nps.or.kr" target="_blank" rel="noopener noreferrer" style="color: #fbbf24; font-weight: 700;">National Pension Service (NPS) →</a>
+        </div>
+        <div style="margin-top: 12px; padding: 14px 16px; background: rgba(220,38,38,0.18); border: 0.5px solid rgba(248,113,113,0.4); border-radius: 10px; font-size: 12px; color: #fecaca; line-height: 1.55;">
+          ⚠️ <strong style="color: #fef2f2; font-weight: 700;">Crucial Rule:</strong> You must claim your Lump-sum Pension Refund within <strong style="color: #fef2f2; font-weight: 700;">5 years</strong> of leaving Korea, or your accumulated money will expire and legally belong to the government!
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. E-2 VISA TRACKER -->
+    <div class="visa-tracker-card" id="visa-tracker-anchor">
+      <div class="visa-tracker-head">
+        <div class="vt-eyebrow">🛂 E-2 Visa 4-Step Timeline Tracker</div>
+        <h3>Where are you in the E-2 process?</h3>
+        <p>Click each step to mark it complete. Your progress saves to this device.<br><span style="color: var(--ink-4);">2026 process — covers US, Canada, UK, Ireland, Australia, NZ, South Africa.</span></p>
+      </div>
+
+      <div class="visa-progress"><div class="visa-progress-bar" id="visa-bar"></div></div>
+
+      <div class="visa-steps">
+        <div class="visa-step" data-step="1" onclick="toggleVisaStep(1)">
+          <div class="visa-step-num">STEP 01</div>
+          <h4>Document Prep</h4>
+          <p class="vs-desc">Degree, FBI/criminal check, photos, health form, signed contract.</p>
+          <div class="vs-check"><span class="vs-checkbox"></span> Mark done</div>
+          <div class="visa-substeps">
+            <strong>Timeline:</strong> 4–6 weeks. Start FBI check first — slowest piece. Sealed transcripts no longer required.
+          </div>
+        </div>
+
+        <div class="visa-step" data-step="2" onclick="toggleVisaStep(2)">
+          <div class="visa-step-num">STEP 02</div>
+          <h4>Apostille</h4>
+          <p class="vs-desc">Authenticate degree (state level) + FBI check (federal).</p>
+          <div class="vs-check"><span class="vs-checkbox"></span> Mark done</div>
+          <div class="visa-substeps">
+            <strong>Timeline:</strong> 1–3 weeks. Varies by state — check your Secretary of State website.
+          </div>
+        </div>
+
+        <div class="visa-step" data-step="3" onclick="toggleVisaStep(3)">
+          <div class="visa-step-num">STEP 03</div>
+          <h4>Embassy / Consulate</h4>
+          <p class="vs-desc">NOC from school + interview at Korean consulate. Visa issued.</p>
+          <div class="vs-check"><span class="vs-checkbox"></span> Mark done</div>
+          <div class="visa-substeps">
+            <strong>Timeline:</strong> 1–2 weeks.<br>
+            <span style="display: block; margin-top: 6px; padding: 8px 10px; background: rgba(217, 119, 6, 0.12); border-left: 2px solid #d97706; border-radius: 0 6px 6px 0; color: var(--ink); font-style: normal;">💡 <strong>2026 Update:</strong> E-2 Visa interviews are now running in a <strong>hybrid / mail-in format</strong> depending on the consulate. If you have a clean record or previous Korean visa history, you may qualify for a walk-in waiver via Mail-in service.</span>
+          </div>
+        </div>
+
+        <div class="visa-step" data-step="4" onclick="toggleVisaStep(4)">
+          <div class="visa-step-num">STEP 04</div>
+          <h4>Arrival in Korea</h4>
+          <p class="vs-desc">Fly in within 90 days. ARC registration in your first 90 days.</p>
+          <div class="vs-check"><span class="vs-checkbox"></span> Mark done</div>
+          <div class="visa-substeps">
+            <strong>ReadyKorea picks you up.</strong> ARC, banking, SIM card on Day 1.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PET TRAVEL KIT -->
+    <div class="pet-card" id="pet-travel-kit">
+      <div class="pet-head">
+        <div>
+          <div class="pet-eyebrow">🐾 Pet Travel Kit · 반려동물 동반 입국</div>
+          <h3>Moving to Korea with Your Furry Friend.</h3>
+          <p class="pet-sub">
+            Korea's pet import process has 3 strict gates. Miss one, your pet sits in quarantine — or gets denied at the airport. Here's the exact playbook for cats and dogs from the US, Canada, UK, AU, NZ, and IE.
+            <br><span style="color: var(--ink-4);">한국 반려동물 입국은 3단계 모두 통과해야 합니다.</span>
+          </p>
+        </div>
+        <span class="pet-badge">★ Cats &amp; Dogs · 6 weeks lead time</span>
+      </div>
+
+      <div class="pet-tabs" role="tablist">
+        <button class="pet-tab active" data-pettab="microchip">
+          <span class="pet-tab-num">Step 01</span>
+          <span class="pet-tab-name">🔖 Microchip</span>
+        </button>
+        <button class="pet-tab" data-pettab="rabies">
+          <span class="pet-tab-num">Step 02</span>
+          <span class="pet-tab-name">💉 Rabies + Vaccines</span>
+        </button>
+        <button class="pet-tab" data-pettab="airline">
+          <span class="pet-tab-num">Step 03</span>
+          <span class="pet-tab-name">✈️ Airline + Arrival</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Microchip -->
+      <div class="pet-panel active" data-pettab-panel="microchip">
+        <div class="pet-panel-head">
+          <div class="pet-panel-icon">🔖</div>
+          <div>
+            <h4>ISO-compliant microchip — non-negotiable</h4>
+            <p>Korean customs only accepts <strong>ISO 11784/11785 compliant 15-digit chips</strong>. Older 9 or 10-digit chips will be rejected at the border.</p>
+          </div>
+        </div>
+        <ul class="pet-checklist">
+          <li>
+            <span class="pc-num">1</span>
+            <div class="pc-content">
+              <strong>Confirm the chip type</strong>
+              Most US/UK chips made after 2020 are ISO-compliant — but verify with your vet. If your pet has an older AVID or HomeAgain chip, you may need a re-chip. The cost: $40–$80.
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">2</span>
+            <div class="pc-content">
+              <strong>Microchip BEFORE rabies vaccine</strong>
+              The chip must be implanted <em>before or on the same day</em> as the rabies vaccine — otherwise the vaccine doesn't count for Korean import. This is the #1 reason pets get rejected.
+              <div class="pc-meta">⚠ Order matters more than dates.</div>
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">3</span>
+            <div class="pc-content">
+              <strong>Record the chip number on every document</strong>
+              The chip number goes on the health certificate, rabies certificate, and APHIS endorsement. One mismatch = 6-week quarantine.
+            </div>
+          </li>
+        </ul>
+        <div class="pet-callout">
+          <strong>If your pet was chipped before the rabies vaccine:</strong> you're fine. <strong>If chipped after:</strong> get a booster shot AFTER the chip, then wait 30+ days before travel.
+        </div>
+      </div>
+
+      <!-- Tab 2: Rabies -->
+      <div class="pet-panel" data-pettab-panel="rabies">
+        <div class="pet-panel-head">
+          <div class="pet-panel-icon">💉</div>
+          <div>
+            <h4>Rabies vaccine + health certificate</h4>
+            <p>Korea requires <strong>at least 30 days between rabies vaccination and entry</strong>, and the vaccine must still be valid (typically 1 or 3 years from date of shot).</p>
+          </div>
+        </div>
+        <ul class="pet-checklist">
+          <li>
+            <span class="pc-num">1</span>
+            <div class="pc-content">
+              <strong>Get an inactivated (killed-virus) rabies vaccine</strong>
+              Live-virus vaccines aren't accepted. Most US/UK/CA vets use inactivated by default — but ask explicitly. The certificate must list "inactivated" or "killed."
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">2</span>
+            <div class="pc-content">
+              <strong>Wait 30 days minimum, 365 days maximum</strong>
+              Entry within 30 days of vaccination = denied. Entry after the vaccine has expired = denied. Sweet spot: 30 days to 1 year (or 3 years if 3-year vaccine).
+              <div class="pc-meta">Time the booster carefully if your flight is approaching.</div>
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">3</span>
+            <div class="pc-content">
+              <strong>Get the official health certificate</strong>
+              For the US: USDA/APHIS-endorsed certificate (form 7001 + endorsement). Cost: ~$38 federal + vet fee. Issued within 10 days of travel.
+              <div class="pc-meta">Other countries: equivalent national veterinary authority endorsement.</div>
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">4</span>
+            <div class="pc-content">
+              <strong>Optional but recommended: rabies antibody (titer) test</strong>
+              Not required for US/UK/CA/AU/NZ/IE → Korea. But if you're transiting through a "high-risk" country, you may need it. Adds 4–6 months to the timeline if required.
+            </div>
+          </li>
+        </ul>
+        <div class="pet-callout">
+          <strong>Pro tip:</strong> book a USDA-accredited vet specifically — not every vet can issue the endorsement. Search "USDA APHIS accredited veterinarian" by zip code on the USDA website.
+        </div>
+      </div>
+
+      <!-- Tab 3: Airline + Arrival -->
+      <div class="pet-panel" data-pettab-panel="airline">
+        <div class="pet-panel-head">
+          <div class="pet-panel-icon">✈️</div>
+          <div>
+            <h4>Airline booking + Incheon arrival</h4>
+            <p>Most major carriers (Korean Air, Asiana, Delta, United, Air Canada) allow pets — but rules vary wildly. Book the pet ticket <strong>before</strong> the human ticket.</p>
+          </div>
+        </div>
+        <ul class="pet-checklist">
+          <li>
+            <span class="pc-num">1</span>
+            <div class="pc-content">
+              <strong>Cabin vs. cargo decision</strong>
+              Under 7 kg (combined pet + carrier) = usually allowed in cabin. Over 7 kg = cargo hold (temperature-controlled, but stressful). Snub-nosed breeds (pugs, bulldogs, Persians) are often banned from cargo year-round.
+              <div class="pc-meta">Long-haul (US/EU → ICN) pet fees typically run $200–$500 cabin, $400–$800 cargo. Confirm directly with your airline — fees changed in 2024.</div>
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">2</span>
+            <div class="pc-content">
+              <strong>Book the pet's seat directly with the airline</strong>
+              You can't book a pet through third-party sites like Expedia. Call the airline pet desk 30+ days ahead. Most flights have a 2–4 pet limit per cabin.
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">3</span>
+            <div class="pc-content">
+              <strong>Land at Incheon (ICN), not Gimpo (GMP)</strong>
+              Gimpo doesn't have an animal quarantine office. You must fly into Incheon for pet inspection on arrival.
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">4</span>
+            <div class="pc-content">
+              <strong>Arrival inspection — 30 to 90 minutes</strong>
+              After deplaning, find the "Animal &amp; Plant Quarantine Agency" desk. Hand over all documents (health certificate, rabies, microchip number). If everything checks out: pet is released immediately. If anything's off: 6+ week quarantine at owner's expense.
+            </div>
+          </li>
+          <li>
+            <span class="pc-num">5</span>
+            <div class="pc-content">
+              <strong>First-week-in-Korea pet supplies</strong>
+              Costco Yangjae stocks Royal Canin, Hill's Science Diet, cat litter. For premium brands, the Petfriends online store ships nationwide.
+              <div class="pc-meta">Korean vets are competent but expensive — a standard exam runs ₩40K–₩80K.</div>
+            </div>
+          </li>
+        </ul>
+        <div class="pet-callout">
+          <strong>ReadyKorea has placed pets with 23 teachers since 2023.</strong> If you're moving with a pet, mention it on your application — we'll connect you with a vet-network sponsor who's done this before.
+          <br><em>반려동물 동반 강사 매칭 시 ReadyKorea가 검역·동물병원 네트워크를 연결합니다.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

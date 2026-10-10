@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { LoginForm } from '@/components/admin/login-form';
 import { SeoulClock } from '@/components/admin/seoul-clock';
@@ -24,13 +25,13 @@ export default async function LoginPage({
       {/* Brand side: a compact bar on phones, a full panel on wide screens. */}
       <aside className="relative flex items-center justify-between gap-4 overflow-hidden bg-slate-950 px-5 py-4 text-white lg:flex-col lg:items-stretch lg:px-12 lg:py-11">
         <div className="flex items-center justify-between gap-4">
-          <a
+          <Link
             href="/"
             aria-label="ReadyKorea home"
             className={`${display.className} rounded text-lg font-extrabold tracking-tight text-white hover:no-underline hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400 lg:text-xl`}
           >
             Ready<span className="text-amber-400">Korea</span>
-          </a>
+          </Link>
           <p className="hidden items-center gap-2 text-label text-slate-400 lg:flex">
             <span className="size-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
             Seoul <SeoulClock className="text-slate-200 tabular-nums" />
@@ -77,9 +78,9 @@ export default async function LoginPage({
             notice={error === 'forbidden' || user ? 'This account does not have admin access.' : ''}
           />
         </div>
-        <a href="/" className="mx-auto mt-10 w-full max-w-90 text-label text-slate-500 hover:text-slate-900">
+        <Link href="/" className="mx-auto mt-10 w-full max-w-90 text-label text-slate-500 hover:text-slate-900">
           ← Back to readykoreaesl.com
-        </a>
+        </Link>
       </main>
     </div>
   );

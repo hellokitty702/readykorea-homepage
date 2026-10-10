@@ -13,14 +13,7 @@ export function LessonShell({ crumbs, children }: { crumbs?: Crumb[]; children: 
           {crumbs.map((crumb, i) => (
             <span key={i}>
               {i > 0 && ' › '}
-              {/* Plain link home: the homepage needs a full load to run its scripts. */}
-              {!crumb.href ? (
-                crumb.label
-              ) : crumb.href === '/' ? (
-                <a href="/">{crumb.label}</a>
-              ) : (
-                <Link href={crumb.href}>{crumb.label}</Link>
-              )}
+              {crumb.href ? <Link href={crumb.href}>{crumb.label}</Link> : crumb.label}
             </span>
           ))}
         </nav>

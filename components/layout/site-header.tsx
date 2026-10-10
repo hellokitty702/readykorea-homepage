@@ -1,48 +1,43 @@
 import Link from 'next/link';
 import { categoryPath, getBlogCategories } from '@/lib/blog';
 
-// Site header shared by every page (originally the homepage header). Styles: styles/layout.css.
-// Menu entries point at homepage sections via `data-nav`: on the homepage public/js/home.js
-// switches panels in place; on other pages header-nav.tsx sends the visitor to `/#<target>`.
-// Entries with `href` (blog, categories) are plain links; both scripts leave those alone.
+// Site header shared by every page. Styles: styles/layout.css. Every entry is a link to its page;
+// dropdowns, the compact menu, search and the EN/KO switch are handled by header-nav.tsx.
 
-type FlyoutLink = { title: string; accent?: boolean } & ({ nav: string } | { href: string });
-type TopItem =
-  | { label: string; items: FlyoutLink[] } // dropdown
-  | { label: string; nav: string } // homepage section
-  | { label: string; href: string }; // separate page
-type MobileLink = { title: string; sub: string; accent?: boolean } & ({ nav: string } | { href: string });
+type FlyoutLink = { title: string; href: string; accent?: boolean };
+type TopItem = { label: string; items: FlyoutLink[] } | { label: string; href: string };
+type MobileLink = { title: string; sub: string; href: string; accent?: boolean };
 
 /** Desktop menu; the Blog entry is filled in with the blog's categories (see SiteHeader). */
 const EN_NAV: TopItem[] = [
   {
     label: 'Free Lesson Plans',
     items: [
-      { nav: 'lessons', title: 'All Plans' },
-      { nav: 'k1', title: 'Kindergarten K1–K3' },
-      { nav: 'g1', title: 'Elementary G1–G6' },
+      { href: '/lessons/', title: 'All Plans' },
+      { href: '/lessons/k1/', title: 'Kindergarten K1–K3' },
+      { href: '/lessons/g1/', title: 'Elementary G1–G6' },
     ],
   },
-  { label: 'Find a Job', nav: 'jobs' },
+  { label: 'Find a Job', href: '/jobs/' },
   { label: 'Blog', href: '/blog/' },
   {
     label: 'Life in Korea',
     items: [
-      { nav: 'why-korea', title: 'Why Korea' },
-      { nav: 'regions', title: 'Region Guides' },
-      { nav: 'for-teachers', title: 'For Teachers' },
-      { nav: 'e2-visa', title: 'E-2 Visa' },
-      { nav: 'while-in-korea', title: 'While in Korea' },
+      { href: '/why-korea/', title: 'Why Korea' },
+      { href: '/regions/', title: 'Region Guides' },
+      { href: '/for-teachers/', title: 'For Teachers' },
+      { href: '/for-teachers/e2-visa/', title: 'E-2 Visa' },
+      { href: '/for-teachers/while-in-korea/', title: 'While in Korea' },
     ],
   },
   {
     label: 'Teach in Korea',
     items: [
-      { nav: 'why-readykorea', title: 'About ReadyKorea' },
-      { nav: 'ailab', title: 'AI Lab' },
-      { nav: 'forum', title: 'Forum' },
-      { nav: 'tefl', title: 'TEFL' },
-      { nav: 'support', title: 'Support Center' },
+      { href: '/why-readykorea/', title: 'About ReadyKorea' },
+      { href: '/ai-lab/', title: 'AI Lab' },
+      { href: '/forum/', title: 'Forum' },
+      { href: '/tefl/', title: 'TEFL' },
+      { href: '/support/', title: 'Support Center' },
     ],
   },
 ];
@@ -51,98 +46,81 @@ const KO_NAV: TopItem[] = [
   {
     label: '교안 분석서',
     items: [
-      { nav: 'lessons', title: '전체 교안', accent: true },
-      { nav: 'k1', title: '유치부 K1–K3' },
-      { nav: 'g1', title: '초등부 G1–G6' },
+      { href: '/lessons/', title: '전체 교안', accent: true },
+      { href: '/lessons/k1/', title: '유치부 K1–K3' },
+      { href: '/lessons/g1/', title: '초등부 G1–G6' },
     ],
   },
-  { label: '왜 레디코리아', nav: 'why-readykorea' },
+  { label: '왜 레디코리아', href: '/why-readykorea/' },
   {
     label: '학원 서비스',
     items: [
-      { nav: 'school-posting', title: '구인 등록' },
-      { nav: 'curriculum-consulting', title: '커리큘럼 컨설팅' },
+      { href: '/school-posting/', title: '구인 등록' },
+      { href: '/curriculum-consulting/', title: '커리큘럼 컨설팅' },
     ],
   },
 ];
 
 // Compact menu shown below 1100px.
 const EN_MOBILE: MobileLink[] = [
-  { nav: 'lessons', title: 'Free Lesson Plans', sub: 'All · K1–K3 · G1–G6' },
-  { nav: 'jobs', title: 'Find a Job', sub: 'Verified positions' },
+  { href: '/lessons/', title: 'Free Lesson Plans', sub: 'All · K1–K3 · G1–G6' },
+  { href: '/jobs/', title: 'Find a Job', sub: 'Verified positions' },
   { href: '/blog/', title: 'Blog', sub: 'Tips for teachers in Korea' },
-  { nav: 'why-korea', title: 'Why Korea', sub: 'Safety · savings · culture' },
-  { nav: 'regions', title: 'Region Guides', sub: 'Seoul · Gyeonggi · Busan' },
-  { nav: 'for-teachers', title: 'For Teachers', sub: 'Visa · contracts · interview' },
-  { nav: 'e2-visa', title: 'E-2 Visa', sub: 'Application · consulates · forms' },
-  { nav: 'while-in-korea', title: 'While in Korea', sub: 'Medical check · ARC' },
-  { nav: 'ailab', title: 'AI Lab', sub: 'Teacher tools' },
-  { nav: 'forum', title: 'Forum', sub: 'Community' },
-  { nav: 'tefl', title: 'TEFL', sub: 'Certification guide' },
-  { nav: 'support', title: 'Support Center', sub: 'Immigration · life guides' },
+  { href: '/why-korea/', title: 'Why Korea', sub: 'Safety · savings · culture' },
+  { href: '/regions/', title: 'Region Guides', sub: 'Seoul · Gyeonggi · Busan' },
+  { href: '/for-teachers/', title: 'For Teachers', sub: 'Visa · contracts · interview' },
+  { href: '/for-teachers/e2-visa/', title: 'E-2 Visa', sub: 'Application · consulates · forms' },
+  { href: '/for-teachers/while-in-korea/', title: 'While in Korea', sub: 'Medical check · ARC' },
+  { href: '/ai-lab/', title: 'AI Lab', sub: 'Teacher tools' },
+  { href: '/forum/', title: 'Forum', sub: 'Community' },
+  { href: '/tefl/', title: 'TEFL', sub: 'Certification guide' },
+  { href: '/support/', title: 'Support Center', sub: 'Immigration · life guides' },
 ];
 
 const KO_MOBILE: MobileLink[] = [
-  { nav: 'lessons', title: '교안 분석서', sub: 'K1–G6 전체', accent: true },
-  { nav: 'why-readykorea', title: '왜 레디코리아', sub: '검증 · 매칭' },
-  { nav: 'school-posting', title: '구인 등록', sub: '셀프 구인' },
-  { nav: 'curriculum-consulting', title: '커리큘럼 컨설팅', sub: '맞춤 설계' },
+  { href: '/lessons/', title: '교안 분석서', sub: 'K1–G6 전체', accent: true },
+  { href: '/why-readykorea/', title: '왜 레디코리아', sub: '검증 · 매칭' },
+  { href: '/school-posting/', title: '구인 등록', sub: '셀프 구인' },
+  { href: '/curriculum-consulting/', title: '커리큘럼 컨설팅', sub: '맞춤 설계' },
 ];
 
 function NavRow({ items, label, lang }: { items: TopItem[]; label: string; lang: 'en' | 'ko' }) {
   return (
     <div className={`nav-center ${lang}-only`}>
       <nav className="nav-items-row" aria-label={label}>
-        {items.map((item) => {
-          if ('items' in item) {
-            return (
-              <div key={item.label} className="nav-item-dd main-nav-dd">
-                <button type="button" className="nav-top-trigger" aria-haspopup="true" aria-expanded="false">
-                  {item.label}{' '}
-                  <span className="caret" aria-hidden="true">
-                    ▾
-                  </span>
-                </button>
-                <div className="nav-flyout" role="menu">
-                  <div className="nav-flyout-inner">
-                    {item.items.map((link) => {
-                      const className = link.accent ? 'nav-flyout-link nav-flyout-link--accent' : 'nav-flyout-link';
-                      const content = (
-                        <>
-                          <span className="nav-flyout-title">{link.title}</span>
-                          <span className="nav-flyout-chevron" aria-hidden="true">
-                            ›
-                          </span>
-                        </>
-                      );
-                      return 'href' in link ? (
-                        <Link key={link.href} className={className} href={link.href} role="menuitem">
-                          {content}
-                        </Link>
-                      ) : (
-                        <button key={link.nav} type="button" className={className} data-nav={link.nav} role="menuitem">
-                          {content}
-                        </button>
-                      );
-                    })}
-                  </div>
+        {items.map((item) =>
+          'items' in item ? (
+            <div key={item.label} className="nav-item-dd main-nav-dd">
+              <button type="button" className="nav-top-trigger" aria-haspopup="true" aria-expanded="false">
+                {item.label}{' '}
+                <span className="caret" aria-hidden="true">
+                  ▾
+                </span>
+              </button>
+              <div className="nav-flyout" role="menu">
+                <div className="nav-flyout-inner">
+                  {item.items.map((link) => (
+                    <Link
+                      key={link.href}
+                      className={link.accent ? 'nav-flyout-link nav-flyout-link--accent' : 'nav-flyout-link'}
+                      href={link.href}
+                      role="menuitem"
+                    >
+                      <span className="nav-flyout-title">{link.title}</span>
+                      <span className="nav-flyout-chevron" aria-hidden="true">
+                        ›
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </div>
-            );
-          }
-          if ('nav' in item) {
-            return (
-              <button key={item.label} type="button" className="nav-top-link" data-nav={item.nav}>
-                {item.label}
-              </button>
-            );
-          }
-          return (
-            <Link key={item.label} className="nav-top-link" href={item.href} style={{ textDecoration: 'none' }}>
+            </div>
+          ) : (
+            <Link key={item.label} className="nav-top-link" href={item.href}>
               {item.label}
             </Link>
-          );
-        })}
+          ),
+        )}
       </nav>
     </div>
   );
@@ -151,38 +129,17 @@ function NavRow({ items, label, lang }: { items: TopItem[]; label: string; lang:
 function MobileLinks({ links, lang }: { links: MobileLink[]; lang: 'en' | 'ko' }) {
   return (
     <div className={`${lang}-only`}>
-      {links.map((link) => {
-        const content = (
-          <>
-            <span className="mnl-title">{link.title}</span>
-            <span className="mnl-sub">{link.sub}</span>
-          </>
-        );
-        if ('href' in link) {
-          return (
-            <Link
-              key={link.title}
-              className="main-nav-link"
-              href={link.href}
-              role="menuitem"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              {content}
-            </Link>
-          );
-        }
-        return (
-          <button
-            key={link.title}
-            type="button"
-            className={link.accent ? 'main-nav-link main-nav-link--accent' : 'main-nav-link'}
-            data-nav={link.nav}
-            role="menuitem"
-          >
-            {content}
-          </button>
-        );
-      })}
+      {links.map((link) => (
+        <Link
+          key={link.title}
+          className={link.accent ? 'main-nav-link main-nav-link--accent' : 'main-nav-link'}
+          href={link.href}
+          role="menuitem"
+        >
+          <span className="mnl-title">{link.title}</span>
+          <span className="mnl-sub">{link.sub}</span>
+        </Link>
+      ))}
     </div>
   );
 }
@@ -215,7 +172,7 @@ export async function SiteHeader() {
   return (
     <header className="site">
       <div className="wrap nav">
-        <a className="brand" href="/#home" data-nav="home">
+        <Link className="brand" href="/">
           <span className="logo">R</span>
           <span className="brand-word en-only">
             Ready<span className="brand-gold">Korea</span>
@@ -223,7 +180,7 @@ export async function SiteHeader() {
           <span className="brand-word ko-only">
             레디<span className="brand-gold">코리아</span>
           </span>
-        </a>
+        </Link>
         <NavRow items={enNav} label="Teacher navigation" lang="en" />
         <NavRow items={KO_NAV} label="School navigation" lang="ko" />
         <div className="nav-right">
@@ -253,12 +210,12 @@ export async function SiteHeader() {
               aria-label="Search site"
             />
           </label>
-          <button type="button" className="nav-action nav-action--primary en-only" id="nav-apply-btn">
+          <Link className="nav-action nav-action--primary en-only" href="/apply/">
             Apply
-          </button>
-          <button type="button" className="nav-action nav-action--primary ko-only" id="nav-inquire-btn">
+          </Link>
+          <Link className="nav-action nav-action--primary ko-only" href="/school-posting/">
             구인 등록
-          </button>
+          </Link>
           <div className="audience-switch" role="tablist" aria-label="Site audience">
             <button type="button" className="audience-pill active" data-lang="en" role="tab" aria-selected="true">
               EN

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { startTransition, useActionState, useEffect, useRef, type FormEvent } from 'react';
 import { submitApplication, type ApplyField, type ApplyState } from '@/lib/actions/apply';
 import { EXPERIENCE, PASSPORT_COUNTRIES, POSITIONS, REGIONS } from '@/lib/apply-options';
@@ -27,9 +28,9 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
       <div className="apply-done" ref={topRef} role="status">
         <h2>Thank you — your application is in.</h2>
         <p>We review every application and will reply by email.</p>
-        <a className="apply-done-link" href="/#jobs">
+        <Link className="apply-done-link" href="/jobs/">
           Back to the Job Board
-        </a>
+        </Link>
       </div>
     );
   }

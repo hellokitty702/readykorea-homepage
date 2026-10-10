@@ -1,20 +1,18 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const DESKTOP = '(min-width: 1101px)';
 
 /**
- * Header behaviour on pages other than the homepage. On the homepage public/js/home.js drives the
- * header (in-page navigation, dropdowns, EN/KO switch); elsewhere the same controls work the same
- * way, but menu entries open the homepage at `/#<target>` (home.js routes that hash on load).
+ * Header behaviour on every page: dropdowns (hover or click), the compact menu, the EN/KO switch and
+ * search. Menu entries are links (next/link); the open menu closes when one is followed.
  */
 export function HeaderNav() {
-  const isHome = usePathname() === '/';
+  const router = useRouter();
 
   useEffect(() => {
-    if (isHome) return;
     const header = document.querySelector<HTMLElement>('header.site');
     if (!header) return;
 
@@ -37,12 +35,7 @@ export function HeaderNav() {
       window.clearTimeout(closeTimer);
       dropdowns.forEach((other) => setOpen(other, other === dd));
     };
-    const go = (target: string) => {
-      closeAll();
-      window.location.href = target === 'home' ? '/' : `/#${target}`;
-    };
-
-    // EN / 한글 switch (same storage key as home.js).
+    // EN / 한글 switch. Page text is translated by public/js/site.js, which listens for `rk:lang`.
     const applyLang = (lang: string) => {
       document.documentElement.lang = lang;
       header.querySelectorAll<HTMLElement>('.audience-pill[data-lang]').forEach((pill) => {
@@ -66,6 +59,7 @@ export function HeaderNav() {
           try {
             localStorage.setItem('rk-lang', lang);
           } catch {}
+          window.dispatchEvent(new CustomEvent('rk:lang', { detail: lang }));
           closeAll();
         },
         { signal },
@@ -110,48 +104,44 @@ export function HeaderNav() {
       { signal },
     );
 
-    // Menu entries → homepage section. The logo is a real link to `/#home`.
+    // Links navigate without a page load (next/link), so close the menu they were in.
     header.addEventListener(
       'click',
       (e) => {
-        // Links navigate without a page load (next/link), so close the menu they were in.
         if ((e.target as Element).closest('a[href]')) closeAll();
-        const el = (e.target as Element).closest<HTMLElement>('[data-nav]');
-        if (!el || el.matches('a[href]')) return;
-        e.preventDefault();
-        go(el.dataset.nav!);
       },
       { signal },
     );
 
-    // Same rules as handleNavSearch() in home.js.
+    // "apply" and "blog" open those pages; anything else searches the Support Center guides
+    // (Korean visitors get the lesson library instead).
     search?.addEventListener(
       'keydown',
       (e) => {
         if (e.key !== 'Enter') return;
         e.preventDefault();
         closeAll();
-        const key = search.value.trim().toLowerCase();
+        const query = search.value.trim();
+        const key = query.toLowerCase();
         if (/^(apply|application|지원|지원하기)$/i.test(key) || key.includes('apply') || key.includes('지원')) {
-          window.location.href = '/apply/';
+          router.push('/apply/');
         } else if (key.includes('blog') || key.includes('블로그')) {
-          window.location.href = '/blog/';
+          router.push('/blog/');
+        } else if (document.documentElement.lang === 'ko') {
+          router.push('/lessons/');
+        } else if (window.location.pathname === '/support/') {
+          const input = document.querySelector<HTMLInputElement>('#support-search');
+          if (input) {
+            input.value = query;
+            input.dispatchEvent(new Event('input'));
+            input.focus();
+          }
         } else {
-          go(document.documentElement.lang === 'ko' ? 'lessons' : 'support');
+          router.push(query ? `/support/?q=${encodeURIComponent(query)}` : '/support/');
         }
       },
       { signal },
     );
-
-    header.querySelector('#nav-apply-btn')?.addEventListener(
-      'click',
-      () => {
-        closeAll();
-        window.location.href = '/apply/';
-      },
-      { signal },
-    );
-    header.querySelector('#nav-inquire-btn')?.addEventListener('click', () => go('school-posting'), { signal });
 
     document.addEventListener(
       'click',
@@ -166,7 +156,7 @@ export function HeaderNav() {
       controller.abort();
       window.clearTimeout(closeTimer);
     };
-  }, [isHome]);
+  }, [router]);
 
   return null;
 }

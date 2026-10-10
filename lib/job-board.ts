@@ -4,6 +4,7 @@ import { cache } from 'react';
 import { db } from '@/lib/db';
 import { jobs, type Job } from '@/lib/db/schema';
 import { formatStartDate, jobPath, localizedContent } from '@/lib/job-fields';
+import { SCHOOL_POST_JOB_FORM_URL } from '@/lib/site';
 
 /** Jobs on the public Job Board, newest first. */
 export function getPublishedJobs() {
@@ -30,7 +31,7 @@ function bilingual(en: string, ko: string) {
   return en === ko ? esc(en) : `<span class="en-only">${esc(en)}</span><span class="ko-only">${esc(ko)}</span>`;
 }
 
-/** Job Board cards for the homepage (same markup the hard-coded cards used). */
+/** Job Board cards (same markup the hard-coded cards used). */
 export function renderJobCards(list: Job[], postJobUrl: string): string {
   if (!list.length) {
     return (
@@ -71,4 +72,9 @@ export function renderJobCards(list: Job[], postJobUrl: string): string {
       );
     })
     .join('');
+}
+
+/** Fills the job cards into content/sections/jobs.html (the homepage and /jobs/). */
+export async function jobBoardCards() {
+  return { '<!--JOB_CARDS-->': renderJobCards(await getPublishedJobs(), SCHOOL_POST_JOB_FORM_URL) };
 }

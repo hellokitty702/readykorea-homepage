@@ -83,9 +83,10 @@ async function freeSlug(base: string, id: number | null) {
   return slug;
 }
 
-/** The homepage Job Board and every /jobs/<slug>/ page show published jobs (the sitemap is built per request). */
+/** The Job Board (homepage and /jobs/) and every /jobs/<slug>/ page show published jobs (the sitemap is built per request). */
 function revalidatePublicJobs() {
   revalidatePath('/');
+  revalidatePath('/jobs/');
   revalidatePath('/jobs/[slug]', 'page');
 }
 

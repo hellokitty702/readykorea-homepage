@@ -43,20 +43,6 @@
   margin-top: 4px;
 }
 
-.gradeCard {
-  composes: card;
-  padding: 24px;
-}
-.gradeCardTitle {
-  font-weight: 700;
-  font-size: 18px;
-}
-.gradeCardMeta {
-  color: var(--ink-3, #64748b);
-  font-size: 14px;
-  margin-top: 4px;
-}
-
 .pager {
   display: flex;
   justify-content: space-between;
