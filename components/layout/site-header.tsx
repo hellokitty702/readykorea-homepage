@@ -10,14 +10,6 @@ type MobileLink = { title: string; sub: string; href: string; accent?: boolean }
 
 /** Desktop menu; the Blog entry is filled in with the blog's categories (see SiteHeader). */
 const EN_NAV: TopItem[] = [
-  {
-    label: 'Free Lesson Plans',
-    items: [
-      { href: '/lessons/', title: 'All Plans' },
-      { href: '/lessons/k1/', title: 'Kindergarten K1–K3' },
-      { href: '/lessons/g1/', title: 'Elementary G1–G6' },
-    ],
-  },
   { label: 'Find a Job', href: '/jobs/' },
   { label: 'Blog', href: '/blog/' },
   {
@@ -28,6 +20,14 @@ const EN_NAV: TopItem[] = [
       { href: '/for-teachers/', title: 'For Teachers' },
       { href: '/for-teachers/e2-visa/', title: 'E-2 Visa' },
       { href: '/for-teachers/while-in-korea/', title: 'While in Korea' },
+    ],
+  },
+  {
+    label: 'Free Lesson Plans',
+    items: [
+      { href: '/lessons/', title: 'All Plans' },
+      { href: '/lessons/k1/', title: 'Kindergarten K1–K3' },
+      { href: '/lessons/g1/', title: 'Elementary G1–G6' },
     ],
   },
   {
@@ -63,7 +63,6 @@ const KO_NAV: TopItem[] = [
 
 // Compact menu shown below 1100px.
 const EN_MOBILE: MobileLink[] = [
-  { href: '/lessons/', title: 'Free Lesson Plans', sub: 'All · K1–K3 · G1–G6' },
   { href: '/jobs/', title: 'Find a Job', sub: 'Verified positions' },
   { href: '/blog/', title: 'Blog', sub: 'Tips for teachers in Korea' },
   { href: '/why-korea/', title: 'Why Korea', sub: 'Safety · savings · culture' },
@@ -71,6 +70,7 @@ const EN_MOBILE: MobileLink[] = [
   { href: '/for-teachers/', title: 'For Teachers', sub: 'Visa · contracts · interview' },
   { href: '/for-teachers/e2-visa/', title: 'E-2 Visa', sub: 'Application · consulates · forms' },
   { href: '/for-teachers/while-in-korea/', title: 'While in Korea', sub: 'Medical check · ARC' },
+  { href: '/lessons/', title: 'Free Lesson Plans', sub: 'All · K1–K3 · G1–G6' },
   { href: '/ai-lab/', title: 'AI Lab', sub: 'Teacher tools' },
   { href: '/forum/', title: 'Forum', sub: 'Community' },
   { href: '/tefl/', title: 'TEFL', sub: 'Certification guide' },
