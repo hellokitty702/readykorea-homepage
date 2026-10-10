@@ -5,6 +5,97 @@
     "school": "ABC English Kindergarten",
     "startDate": "2026-06-01",
     "rating": "4.7 · 32 reviews",
+    "applyFields": [
+      {
+        "id": "position",
+        "type": "select",
+        "label": "What is your preferred position?",
+        "help": "",
+        "required": true,
+        "options": [
+          "English Kindergarten",
+          "Elementary Hagwon",
+          "Adult Academy"
+        ]
+      },
+      {
+        "id": "regions",
+        "type": "checkboxes",
+        "label": "Which regions are you open to?",
+        "help": "",
+        "required": true,
+        "options": [
+          "Seoul",
+          "Gyeonggi",
+          "Busan",
+          "Other regions"
+        ]
+      },
+      {
+        "id": "experience",
+        "type": "select",
+        "label": "Years of teaching experience",
+        "help": "",
+        "required": true,
+        "options": [
+          "No experience",
+          "1-2 years",
+          "3-5 years",
+          "5+ years"
+        ]
+      },
+      {
+        "id": "passportCountry",
+        "type": "select",
+        "label": "Passport country",
+        "help": "",
+        "required": true,
+        "options": [
+          "USA",
+          "Canada",
+          "UK",
+          "Australia",
+          "New Zealand",
+          "Ireland",
+          "South Africa"
+        ]
+      },
+      {
+        "id": "kinderExperience",
+        "type": "radio",
+        "label": "Have you taught kindergarten (ages 4–6) before?",
+        "help": "",
+        "required": true,
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "id": "startDate",
+        "type": "date",
+        "label": "Earliest start date",
+        "help": "The school starts on 1 June 2026.",
+        "required": true,
+        "options": []
+      },
+      {
+        "id": "introVideo",
+        "type": "url",
+        "label": "Link to a short intro video",
+        "help": "1–2 minutes, e.g. YouTube (unlisted) or Google Drive.",
+        "required": false,
+        "options": []
+      },
+      {
+        "id": "introduction",
+        "type": "long_text",
+        "label": "Brief introduction",
+        "help": "",
+        "required": false,
+        "options": []
+      }
+    ],
     "en": {
       "title": "Kindergarten lead teacher (K2–K3)",
       "type": "English kindergarten",
@@ -82,6 +173,90 @@
     "school": "Little Stars Kindergarten",
     "startDate": "2026-07-01",
     "rating": "4.5 · 27 reviews",
+    "applyFields": [
+      {
+        "id": "position",
+        "type": "select",
+        "label": "What is your preferred position?",
+        "help": "",
+        "required": true,
+        "options": [
+          "English Kindergarten",
+          "Elementary Hagwon",
+          "Adult Academy"
+        ]
+      },
+      {
+        "id": "regions",
+        "type": "checkboxes",
+        "label": "Which regions are you open to?",
+        "help": "",
+        "required": true,
+        "options": [
+          "Seoul",
+          "Gyeonggi",
+          "Busan",
+          "Other regions"
+        ]
+      },
+      {
+        "id": "experience",
+        "type": "select",
+        "label": "Years of teaching experience",
+        "help": "",
+        "required": true,
+        "options": [
+          "No experience",
+          "1-2 years",
+          "3-5 years",
+          "5+ years"
+        ]
+      },
+      {
+        "id": "passportCountry",
+        "type": "select",
+        "label": "Passport country",
+        "help": "",
+        "required": true,
+        "options": [
+          "USA",
+          "Canada",
+          "UK",
+          "Australia",
+          "New Zealand",
+          "Ireland",
+          "South Africa"
+        ]
+      },
+      {
+        "id": "visaStatus",
+        "type": "select",
+        "label": "Current visa status",
+        "help": "",
+        "required": true,
+        "options": [
+          "Outside Korea (need an E-2 visa)",
+          "In Korea on an E-2 visa",
+          "In Korea on an F visa"
+        ]
+      },
+      {
+        "id": "startDate",
+        "type": "date",
+        "label": "When can you start?",
+        "help": "This is an urgent opening.",
+        "required": true,
+        "options": []
+      },
+      {
+        "id": "introduction",
+        "type": "long_text",
+        "label": "Brief introduction",
+        "help": "",
+        "required": false,
+        "options": []
+      }
+    ],
     "en": {
       "title": "Senior kindergarten teacher (K1–K2)",
       "type": "English kindergarten",

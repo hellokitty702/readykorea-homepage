@@ -1,6 +1,7 @@
 /*
- * Shared site header + footer (taken from the homepage). Every root layout loads this after its
- * own stylesheet, so it carries its own base styles and colour tokens. The base rules use :where()
+ * Shared site header + footer (taken from the homepage). Loaded by the public root layout for every
+ * page; the page stylesheets are scoped to their page wrappers, so this carries its own base styles
+ * and colour tokens. The base rules use :where()
  * to keep the same (low) specificity they have in the homepage stylesheet.
  */
 /* Width of the main content column, shared by the header, footer and homepage sections. */

@@ -1,5 +1,5 @@
-// Choices on the teacher application form (same as the Google Form it replaced).
-// Shared by the public form, its Server Action and the admin panel.
+// Choices of the default application questions (same as the Google Form the site used before).
+// New jobs and general applications start from these (lib/apply-forms.ts → DEFAULT_APPLY_FIELDS).
 
 export const POSITIONS = ['English Kindergarten', 'Elementary Hagwon', 'Adult Academy'] as const;
 export const REGIONS = ['Seoul', 'Gyeonggi', 'Busan', 'Other regions'] as const;

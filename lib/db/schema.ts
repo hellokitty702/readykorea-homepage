@@ -15,10 +15,12 @@ import {
 import {
   APPLICATION_EVENT_TYPES,
   APPLICATION_STATUSES,
+  APPLY_METHODS,
   JOB_BADGES,
   JOB_STATUSES,
   MEDIA_DISKS,
   POST_STATUSES,
+  type FormFieldType,
 } from './enums';
 
 export * from './enums';
@@ -92,6 +94,21 @@ export type JobContent = {
   faq: JobFaq[];
 };
 
+/** One question of a custom application form (built in the admin job form). */
+export type FormField = {
+  /** Stable key for the answer in the submitted form, e.g. "f3k9x2". */
+  id: string;
+  type: FormFieldType;
+  label: string;
+  help: string;
+  required: boolean;
+  /** Choices of `select`, `radio` and `checkboxes`. */
+  options: string[];
+};
+
+/** A custom-form answer, with the question as it was worded when the teacher applied. */
+export type FormAnswer = { label: string; type: FormFieldType; value: string | string[] };
+
 export const jobs = pgTable(
   'jobs',
   {
@@ -109,6 +126,11 @@ export const jobs = pgTable(
     en: jsonb('en').$type<JobContent>().notNull(),
     /** Korean text; any empty field falls back to English. */
     ko: jsonb('ko').$type<Partial<JobContent>>().notNull().default({}),
+    applyMethod: varchar('apply_method', { length: 20, enum: APPLY_METHODS }).notNull().default('standard'),
+    /** Link of the Google Form, Typeform or other embedded form (apply methods other than standard/custom). */
+    applyFormUrl: varchar('apply_form_url', { length: 1000 }).notNull().default(''),
+    /** Questions of the custom form, after the full name and email every custom form asks. */
+    applyFields: jsonb('apply_fields').$type<FormField[]>().notNull().default([]),
     publishedAt: timestamp('published_at', { withTimezone: true }),
     createdById: integer('created_by_id').references(() => users.id, { onDelete: 'set null' }),
     ...timestamps,
@@ -129,11 +151,14 @@ export const applications = pgTable(
     status: varchar('status', { length: 20, enum: APPLICATION_STATUSES }).notNull().default('new'),
     fullName: varchar('full_name', { length: 160 }).notNull(),
     email: varchar('email', { length: 255 }).notNull(),
-    passportCountry: varchar('passport_country', { length: 60 }).notNull(),
-    position: varchar('position', { length: 60 }).notNull(),
-    regions: text('regions').array().notNull(),
-    experience: varchar('experience', { length: 30 }).notNull(),
+    // The standard form's questions; empty for applications sent through a custom form.
+    passportCountry: varchar('passport_country', { length: 60 }).notNull().default(''),
+    position: varchar('position', { length: 60 }).notNull().default(''),
+    regions: text('regions').array().notNull().default([]),
+    experience: varchar('experience', { length: 30 }).notNull().default(''),
     introduction: text('introduction').notNull().default(''),
+    /** Answers to a custom form (the job's own questions); empty for the standard form. */
+    answers: jsonb('answers').$type<FormAnswer[]>().notNull().default([]),
     /** Site language when the form was sent. */
     lang: varchar('lang', { length: 2 }).notNull().default('en'),
     ...timestamps,

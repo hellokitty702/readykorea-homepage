@@ -1,5 +1,10 @@
+/*
+ * Scoped to the apply pages: every rule sits under :where(.page-apply) (the wrapper in
+ * app/(public)/(apply)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * shown (:where(:has(.page-apply))). :where() keeps the original specificity. Write new rules the same way.
+ */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
+  :root:where(:has(.page-apply)) {
     --ink: #0f172a;
     --ink-2: #334155;
     --ink-3: #64748b;
@@ -7,22 +12,22 @@
     --bg: #f8fafc;
     --gold: #fbbf24;
   }
-  body {
+  body:where(:has(.page-apply)) {
     font-family: "Montserrat", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     color: var(--ink);
     background: var(--bg);
     line-height: 1.6;
     min-height: 100vh;
   }
-  .wrap {
+  :where(.page-apply) .wrap {
     max-width: 880px;
     margin: 0 auto;
     padding: 36px 20px 64px;
   }
-  .intro {
+  :where(.page-apply) .intro {
     margin-bottom: 28px;
   }
-  .eyebrow {
+  :where(.page-apply) .eyebrow {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -30,18 +35,18 @@
     color: var(--ink-3);
     margin-bottom: 10px;
   }
-  h1 {
+  :where(.page-apply) h1 {
     font-size: clamp(28px, 4vw, 40px);
     letter-spacing: -0.03em;
     line-height: 1.15;
     margin-bottom: 12px;
   }
-  .lead {
+  :where(.page-apply) .lead {
     font-size: 16px;
     color: var(--ink-2);
     max-width: 560px;
   }
-  .panel {
+  :where(.page-apply) .panel {
     background: #fff;
     border: 0.5px solid var(--line);
     border-radius: 14px;
@@ -49,21 +54,19 @@
     box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
   }
   /* Application form */
-  .apply-form { padding: 28px; display: grid; gap: 20px; }
-  .scroll-anchor, .apply-done { scroll-margin-top: 88px; }
-  .field { display: grid; gap: 6px; border: 0; min-width: 0; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .field label, .field legend {
+  :where(.page-apply) .apply-form { padding: 28px; display: grid; gap: 20px; }
+  :where(.page-apply) .scroll-anchor, :where(.page-apply) .apply-done { scroll-margin-top: 88px; }
+  :where(.page-apply) .field { display: grid; gap: 6px; border: 0; min-width: 0; }
+  :where(.page-apply) .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  :where(.page-apply) .field label, :where(.page-apply) .field legend {
     font-size: 14px;
     font-weight: 600;
     color: var(--ink);
   }
-  .field legend { margin-bottom: 8px; }
-  .req { color: #b91c1c; }
-  .hint { font-weight: 400; color: var(--ink-3); font-size: 13px; margin-left: 4px; }
-  .apply-form input:not([type="checkbox"]),
-  .apply-form select,
-  .apply-form textarea {
+  :where(.page-apply) .field legend { margin-bottom: 8px; }
+  :where(.page-apply) .req { color: #b91c1c; }
+  :where(.page-apply) .hint { font-weight: 400; color: var(--ink-3); font-size: 13px; margin-left: 4px; }
+  :where(.page-apply) .apply-form input:not([type="checkbox"], [type="radio"]), :where(.page-apply) .apply-form select, :where(.page-apply) .apply-form textarea {
     width: 100%;
     font: inherit;
     font-size: 15px;
@@ -73,15 +76,15 @@
     border-radius: 10px;
     padding: 11px 12px;
   }
-  .apply-form textarea { resize: vertical; min-height: 120px; }
-  .apply-form :is(input, select, textarea):focus-visible {
+  :where(.page-apply) .apply-form textarea { resize: vertical; min-height: 120px; }
+  :where(.page-apply) .apply-form :is(input, select, textarea):focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 1px;
     border-color: var(--ink-3);
   }
-  .apply-form [aria-invalid="true"] { border-color: #b91c1c !important; }
-  .checks { display: flex; flex-wrap: wrap; gap: 10px; }
-  .check {
+  :where(.page-apply) .apply-form [aria-invalid="true"] { border-color: #b91c1c !important; }
+  :where(.page-apply) .checks { display: flex; flex-wrap: wrap; gap: 10px; }
+  :where(.page-apply) .check {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -91,10 +94,14 @@
     border-radius: 999px;
     cursor: pointer;
   }
-  .check:has(input:checked) { background: #fef3c7; border-color: var(--gold); }
-  .check input { accent-color: var(--ink); width: 16px; height: 16px; }
-  .field-error { font-size: 13px; color: #b91c1c; }
-  .form-alert {
+  :where(.page-apply) .check:has(input:checked) { background: #fef3c7; border-color: var(--gold); }
+  :where(.page-apply) .check input { accent-color: var(--ink); width: 16px; height: 16px; }
+  :where(.page-apply) .field-error { font-size: 13px; color: #b91c1c; }
+  :where(.page-apply) .field > .hint { margin: -2px 0 2px; }
+  /* A job's embedded application form (Google Form, Typeform…). */
+  :where(.page-apply) .apply-embed { display: block; width: 100%; border: 0; }
+  :where(.page-apply) .apply-embed-fallback { padding: 12px 28px 20px; font-size: 14px; color: var(--ink-3); }
+  :where(.page-apply) .form-alert {
     background: #fef2f2;
     color: #991b1b;
     border: 1px solid #fecaca;
@@ -102,8 +109,8 @@
     padding: 12px 14px;
     font-size: 14px;
   }
-  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-  .submit {
+  :where(.page-apply) .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  :where(.page-apply) .submit {
     justify-self: start;
     background: var(--gold);
     color: var(--ink);
@@ -115,12 +122,12 @@
     padding: 13px 22px;
     cursor: pointer;
   }
-  .submit:hover { background: #fcd34d; }
-  .submit:disabled { opacity: 0.6; cursor: progress; }
-  .apply-done { padding: 40px 28px; text-align: center; }
-  .apply-done h2 { font-size: 22px; letter-spacing: -0.02em; margin-bottom: 8px; }
-  .apply-done p { color: var(--ink-2); margin-bottom: 20px; }
-  .apply-done-link {
+  :where(.page-apply) .submit:hover { background: #fcd34d; }
+  :where(.page-apply) .submit:disabled { opacity: 0.6; cursor: progress; }
+  :where(.page-apply) .apply-done { padding: 40px 28px; text-align: center; }
+  :where(.page-apply) .apply-done h2 { font-size: 22px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  :where(.page-apply) .apply-done p { color: var(--ink-2); margin-bottom: 20px; }
+  :where(.page-apply) .apply-done-link {
     display: inline-block;
     background: var(--ink);
     color: #fff;
@@ -130,6 +137,6 @@
     border-radius: 10px;
   }
   @media (max-width: 640px) {
-    .apply-form { padding: 20px; }
-    .field-row { grid-template-columns: 1fr; }
+    :where(.page-apply) .apply-form { padding: 20px; }
+    :where(.page-apply) .field-row { grid-template-columns: 1fr; }
   }

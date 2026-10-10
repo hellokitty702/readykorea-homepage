@@ -2,9 +2,13 @@
  * Blog post page (/blog/<slug>/). Article styles follow the posts on www.readykoreaesl.com (the most
  * common of their per-page variants), including the boxes those posts use; lib/blog-html.ts lists
  * the classes that survive saving.
+ *
+ * Scoped to the blog-post pages: every rule sits under :where(.page-blog-post) (the wrapper in
+ * app/(public)/(blog-post)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * shown (:where(:has(.page-blog-post))). :where() keeps the original specificity. Write new rules the same way.
  */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
+  :root:where(:has(.page-blog-post)) {
     --ink: #0f172a;
     --ink-2: #334155;
     --ink-3: #64748b;
@@ -16,7 +20,7 @@
     --info: #0284c7;
     --gold: #fbbf24;
   }
-  body {
+  body:where(:has(.page-blog-post)) {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif;
     color: var(--ink);
     background: var(--bg);
@@ -24,20 +28,20 @@
     font-size: 16.5px;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 {
+  :where(.page-blog-post) h1, :where(.page-blog-post) h2, :where(.page-blog-post) h3 {
     font-family: "Montserrat", "Pretendard", sans-serif;
     letter-spacing: -0.03em;
     font-weight: 800;
     line-height: 1.3;
   }
-  a { color: var(--info); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .wrap {
+  :where(.page-blog-post) a { color: var(--info); text-decoration: none; }
+  :where(.page-blog-post) a:hover { text-decoration: underline; }
+  :where(.page-blog-post) .wrap {
     max-width: 760px;
     margin: 0 auto;
     padding: 36px 20px 72px;
   }
-  .eyebrow {
+  :where(.page-blog-post) .eyebrow {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -45,33 +49,33 @@
     color: var(--ink-3);
     margin-bottom: 12px;
   }
-  .eyebrow a { color: inherit; }
-  .eyebrow a:hover { color: var(--ink); }
-  h1 {
+  :where(.page-blog-post) .eyebrow a { color: inherit; }
+  :where(.page-blog-post) .eyebrow a:hover { color: var(--ink); }
+  :where(.page-blog-post) h1 {
     font-size: clamp(26px, 4.5vw, 38px);
     margin-bottom: 14px;
   }
-  .meta {
+  :where(.page-blog-post) .meta {
     font-size: 13px;
     color: var(--ink-4);
     margin-bottom: 32px;
   }
 
   /* Responsive YouTube embed */
-  .video-embed {
+  :where(.page-blog-post) .video-embed {
     margin: 0 0 32px;
     border-radius: 14px;
     overflow: hidden;
     border: 0.5px solid var(--line);
     background: #000;
   }
-  .video-embed__frame {
+  :where(.page-blog-post) .video-embed__frame {
     position: relative;
     width: 100%;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
   }
-  .video-embed iframe {
+  :where(.page-blog-post) .video-embed iframe {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -80,18 +84,18 @@
   }
 
   /* Article text */
-  .article p { color: var(--ink-2); margin-bottom: 22px; }
-  .article .intro { font-size: 17.5px; color: var(--ink); margin-bottom: 28px; }
-  .article h2 { font-size: 23px; margin: 44px 0 18px; padding-top: 8px; color: var(--ink); }
-  .article h3 { font-size: 18px; margin: 28px 0 12px; color: var(--ink); }
-  .article h4 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: var(--ink); }
-  .article > :first-child { margin-top: 0; }
-  .article strong, .article b { color: var(--ink); }
-  .article a { text-decoration: underline; text-underline-offset: 2px; }
-  .article a.cta-btn { text-decoration: none; }
+  :where(.page-blog-post) .article p { color: var(--ink-2); margin-bottom: 22px; }
+  :where(.page-blog-post) .article .intro { font-size: 17.5px; color: var(--ink); margin-bottom: 28px; }
+  :where(.page-blog-post) .article h2 { font-size: 23px; margin: 44px 0 18px; padding-top: 8px; color: var(--ink); }
+  :where(.page-blog-post) .article h3 { font-size: 18px; margin: 28px 0 12px; color: var(--ink); }
+  :where(.page-blog-post) .article h4 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: var(--ink); }
+  :where(.page-blog-post) .article > :first-child { margin-top: 0; }
+  :where(.page-blog-post) .article strong, :where(.page-blog-post) .article b { color: var(--ink); }
+  :where(.page-blog-post) .article a { text-decoration: underline; text-underline-offset: 2px; }
+  :where(.page-blog-post) .article a.cta-btn { text-decoration: none; }
   /* Bulleted lists are cards, numbered lists stay plain */
-  .article ul { margin: 8px 0 28px; padding: 0; list-style: none; }
-  .article ul > li {
+  :where(.page-blog-post) .article ul { margin: 8px 0 28px; padding: 0; list-style: none; }
+  :where(.page-blog-post) .article ul > li {
     margin-bottom: 16px;
     padding: 16px 18px;
     background: var(--bg-2);
@@ -99,29 +103,29 @@
     border-radius: 12px;
     color: var(--ink-2);
   }
-  .article ol { margin: 0 0 22px 1.3em; color: var(--ink-2); }
-  .article ol > li { margin-bottom: 10px; }
-  .article li > p:last-child { margin-bottom: 0; }
-  .article li a { font-weight: 600; }
-  .article blockquote {
+  :where(.page-blog-post) .article ol { margin: 0 0 22px 1.3em; color: var(--ink-2); }
+  :where(.page-blog-post) .article ol > li { margin-bottom: 10px; }
+  :where(.page-blog-post) .article li > p:last-child { margin-bottom: 0; }
+  :where(.page-blog-post) .article li a { font-weight: 600; }
+  :where(.page-blog-post) .article blockquote {
     margin: 0 0 22px;
     padding: 4px 0 4px 18px;
     border-left: 3px solid var(--gold);
     color: var(--ink-2);
     font-style: italic;
   }
-  .article blockquote p:last-child { margin-bottom: 0; }
-  .article img {
+  :where(.page-blog-post) .article blockquote p:last-child { margin-bottom: 0; }
+  :where(.page-blog-post) .article img {
     display: block;
     max-width: 100%;
     height: auto;
     margin: 20px 0;
     border-radius: 8px;
   }
-  .article > img:first-child { margin-top: 0; }
-  .article hr { border: 0; border-top: 0.5px solid var(--line); margin: 36px 0; }
-  .article code { padding: 1px 5px; border-radius: 4px; background: var(--bg-2); font-size: 0.9em; }
-  .article pre {
+  :where(.page-blog-post) .article > img:first-child { margin-top: 0; }
+  :where(.page-blog-post) .article hr { border: 0; border-top: 0.5px solid var(--line); margin: 36px 0; }
+  :where(.page-blog-post) .article code { padding: 1px 5px; border-radius: 4px; background: var(--bg-2); font-size: 0.9em; }
+  :where(.page-blog-post) .article pre {
     margin: 0 0 22px;
     padding: 14px 16px;
     border-radius: 10px;
@@ -130,10 +134,10 @@
     overflow-x: auto;
     font-size: 13px;
   }
-  .article pre code { padding: 0; background: none; font-size: inherit; }
+  :where(.page-blog-post) .article pre code { padding: 0; background: none; font-size: inherit; }
 
   /* Boxes */
-  .label {
+  :where(.page-blog-post) .label {
     display: block;
     font-size: 11px;
     font-weight: 700;
@@ -142,12 +146,12 @@
     color: var(--ink-3);
     margin-bottom: 8px;
   }
-  .article .highlight-box, .article .warning-box { margin: 24px 0 28px; padding: 22px; border-radius: 14px; }
-  .article .highlight-box { border: 0.5px solid rgba(251, 191, 36, 0.45); border-left: 4px solid var(--gold); background: #fffbeb; }
-  .article .warning-box { border: 0.5px solid rgba(239, 68, 68, 0.25); border-left: 4px solid #ef4444; background: #fef2f2; }
-  .article .warning-box .label { color: #b91c1c; }
-  .article .highlight-box p, .article .warning-box p { margin-bottom: 12px; color: var(--ink); }
-  .article .warn-box {
+  :where(.page-blog-post) .article .highlight-box, :where(.page-blog-post) .article .warning-box { margin: 24px 0 28px; padding: 22px; border-radius: 14px; }
+  :where(.page-blog-post) .article .highlight-box { border: 0.5px solid rgba(251, 191, 36, 0.45); border-left: 4px solid var(--gold); background: #fffbeb; }
+  :where(.page-blog-post) .article .warning-box { border: 0.5px solid rgba(239, 68, 68, 0.25); border-left: 4px solid #ef4444; background: #fef2f2; }
+  :where(.page-blog-post) .article .warning-box .label { color: #b91c1c; }
+  :where(.page-blog-post) .article .highlight-box p, :where(.page-blog-post) .article .warning-box p { margin-bottom: 12px; color: var(--ink); }
+  :where(.page-blog-post) .article .warn-box {
     margin: 22px 0;
     padding: 18px 20px;
     background: #fff7ed;
@@ -156,7 +160,7 @@
     border-radius: 12px;
     color: var(--ink-2);
   }
-  .article .quote-box {
+  :where(.page-blog-post) .article .quote-box {
     margin: 22px 0;
     padding: 20px 22px;
     background: #fffbeb;
@@ -166,7 +170,7 @@
     color: var(--ink);
     font-weight: 600;
   }
-  .article .note {
+  :where(.page-blog-post) .article .note {
     margin: 8px 0 28px;
     padding: 16px 18px;
     background: var(--bg-2);
@@ -174,41 +178,41 @@
     border-radius: 12px;
     color: var(--ink-2);
   }
-  .article .formula-box, .article .script-box, .article .intent-box, .article .action-box, .article .mindset-box {
+  :where(.page-blog-post) .article .formula-box, :where(.page-blog-post) .article .script-box, :where(.page-blog-post) .article .intent-box, :where(.page-blog-post) .article .action-box, :where(.page-blog-post) .article .mindset-box {
     margin: 16px 0 20px;
     padding: 18px 20px;
     border-radius: 12px;
     border: 0.5px solid var(--line);
     background: var(--bg-2);
   }
-  .article .intent-box { background: #eff6ff; border-color: rgba(2, 132, 199, 0.2); }
-  .article .script-box, .article .mindset-box { background: #fffbeb; border-color: rgba(251, 191, 36, 0.45); border-left: 4px solid var(--gold); }
-  .article .script-box .label, .article .mindset-box .label { color: #92400e; }
-  .article .closing, .article .next-step {
+  :where(.page-blog-post) .article .intent-box { background: #eff6ff; border-color: rgba(2, 132, 199, 0.2); }
+  :where(.page-blog-post) .article .script-box, :where(.page-blog-post) .article .mindset-box { background: #fffbeb; border-color: rgba(251, 191, 36, 0.45); border-left: 4px solid var(--gold); }
+  :where(.page-blog-post) .article .script-box .label, :where(.page-blog-post) .article .mindset-box .label { color: #92400e; }
+  :where(.page-blog-post) .article .closing, :where(.page-blog-post) .article .next-step {
     margin-top: 36px;
     padding: 22px 20px;
     border-left: 3px solid var(--gold);
     background: var(--bg-2);
     border-radius: 0 12px 12px 0;
   }
-  .article .closing p, .article .next-step p { color: var(--ink); margin-bottom: 12px; }
-  .article .next-step a { font-weight: 600; text-decoration: none; }
-  .article .disclaimer { margin-top: 28px; font-size: 14px; color: var(--ink-3); }
-  .article .skill-card {
+  :where(.page-blog-post) .article .closing p, :where(.page-blog-post) .article .next-step p { color: var(--ink); margin-bottom: 12px; }
+  :where(.page-blog-post) .article .next-step a { font-weight: 600; text-decoration: none; }
+  :where(.page-blog-post) .article .disclaimer { margin-top: 28px; font-size: 14px; color: var(--ink-3); }
+  :where(.page-blog-post) .article .skill-card {
     margin: 16px 0;
     padding: 20px;
     background: var(--bg-2);
     border: 0.5px solid var(--line);
     border-radius: 12px;
   }
-  .article .skill-card h3 { font-size: 17px; margin: 0 0 7px; }
-  .article .stat-grid { display: grid; gap: 14px; margin: 20px 0 28px; }
-  .article .stat-card { padding: 18px 20px; border-radius: 12px; border: 0.5px solid var(--line); background: var(--bg-2); }
-  .article .stat-card .label { font-size: 12px; letter-spacing: 0.06em; }
+  :where(.page-blog-post) .article .skill-card h3 { font-size: 17px; margin: 0 0 7px; }
+  :where(.page-blog-post) .article .stat-grid { display: grid; gap: 14px; margin: 20px 0 28px; }
+  :where(.page-blog-post) .article .stat-card { padding: 18px 20px; border-radius: 12px; border: 0.5px solid var(--line); background: var(--bg-2); }
+  :where(.page-blog-post) .article .stat-card .label { font-size: 12px; letter-spacing: 0.06em; }
   /* Every box: no gap under its last line */
-  .article :is(.highlight-box, .warning-box, .warn-box, .quote-box, .note, .formula-box, .script-box, .intent-box, .action-box, .mindset-box, .closing, .next-step, .skill-card, .stat-card) > :last-child { margin-bottom: 0; }
-  .article ol.steps { margin: 8px 0 28px; padding: 0; list-style: none; counter-reset: step; }
-  .article ol.steps > li {
+  :where(.page-blog-post) .article :is(.highlight-box, .warning-box, .warn-box, .quote-box, .note, .formula-box, .script-box, .intent-box, .action-box, .mindset-box, .closing, .next-step, .skill-card, .stat-card) > :last-child { margin-bottom: 0; }
+  :where(.page-blog-post) .article ol.steps { margin: 8px 0 28px; padding: 0; list-style: none; counter-reset: step; }
+  :where(.page-blog-post) .article ol.steps > li {
     counter-increment: step;
     margin-bottom: 16px;
     padding: 16px 18px;
@@ -216,29 +220,29 @@
     border: 0.5px solid var(--line);
     border-radius: 12px;
   }
-  .article ol.steps > li::before { content: counter(step) "."; font-weight: 800; color: var(--ink); margin-right: 8px; }
-  .article .md-table-wrap {
+  :where(.page-blog-post) .article ol.steps > li::before { content: counter(step) "."; font-weight: 800; color: var(--ink); margin-right: 8px; }
+  :where(.page-blog-post) .article .md-table-wrap {
     margin: 22px 0 32px;
     overflow-x: auto;
     border: 0.5px solid var(--line);
     border-radius: 12px;
     background: var(--bg-2);
   }
-  .article table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .article th, .article td { padding: 14px 16px; text-align: left; border-bottom: 0.5px solid var(--line); vertical-align: top; }
-  .article th { background: #eef2f7; color: var(--ink); font-weight: 700; white-space: nowrap; }
-  .article tr:last-child td { border-bottom: none; }
-  .article td { color: var(--ink-2); }
-  .article td > p:last-child, .article th > p:last-child { margin-bottom: 0; }
+  :where(.page-blog-post) .article table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  :where(.page-blog-post) .article th, :where(.page-blog-post) .article td { padding: 14px 16px; text-align: left; border-bottom: 0.5px solid var(--line); vertical-align: top; }
+  :where(.page-blog-post) .article th { background: #eef2f7; color: var(--ink); font-weight: 700; white-space: nowrap; }
+  :where(.page-blog-post) .article tr:last-child td { border-bottom: none; }
+  :where(.page-blog-post) .article td { color: var(--ink-2); }
+  :where(.page-blog-post) .article td > p:last-child, :where(.page-blog-post) .article th > p:last-child { margin-bottom: 0; }
 
-  .post-tags {
+  :where(.page-blog-post) .post-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 28px;
     list-style: none;
   }
-  .post-tags a {
+  :where(.page-blog-post) .post-tags a {
     display: inline-block;
     padding: 3px 10px;
     border-radius: 999px;
@@ -247,10 +251,10 @@
     font-size: 12px;
     color: var(--ink-3);
   }
-  .post-tags a:hover { color: var(--ink); border-color: rgba(15, 23, 42, 0.2); text-decoration: none; }
+  :where(.page-blog-post) .post-tags a:hover { color: var(--ink); border-color: rgba(15, 23, 42, 0.2); text-decoration: none; }
 
   /* Call to action: the page's own, or the one written into a post */
-  .cta-box {
+  :where(.page-blog-post) .cta-box {
     margin-top: 48px;
     padding: 28px 24px;
     background: var(--bg-2);
@@ -258,9 +262,9 @@
     border-radius: 14px;
     text-align: center;
   }
-  .cta-box h2 { font-size: 22px; margin: 0 0 10px; padding: 0; }
-  .cta-box p { color: var(--ink-2); font-size: 14px; margin-bottom: 18px; }
-  .cta-btn {
+  :where(.page-blog-post) .cta-box h2 { font-size: 22px; margin: 0 0 10px; padding: 0; }
+  :where(.page-blog-post) .cta-box p { color: var(--ink-2); font-size: 14px; margin-bottom: 18px; }
+  :where(.page-blog-post) .cta-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -272,8 +276,8 @@
     border-radius: 10px;
     text-decoration: none !important;
   }
-  .cta-btn:hover { background: #1e293b; }
-  .footer-note {
+  :where(.page-blog-post) .cta-btn:hover { background: #1e293b; }
+  :where(.page-blog-post) .footer-note {
     margin-top: 36px;
     padding-top: 18px;
     border-top: 0.5px solid var(--line);
@@ -284,10 +288,10 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  .footer-note a { color: var(--ink-3); }
+  :where(.page-blog-post) .footer-note a { color: var(--ink-3); }
 
   @media (max-width: 640px) {
-    .wrap { padding-top: 28px; }
-    .article h2 { margin-top: 36px; }
-    .article .skill-card { padding: 17px; }
+    :where(.page-blog-post) .wrap { padding-top: 28px; }
+    :where(.page-blog-post) .article h2 { margin-top: 36px; }
+    :where(.page-blog-post) .article .skill-card { padding: 17px; }
   }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SectionPage } from '@/components/sections/section-page';
-import { jobBoardCards } from '@/lib/job-board';
+import { JobBoard } from '@/components/sections/job-board';
 import { pageMetadata } from '@/lib/site-pages';
 
 export const metadata: Metadata = pageMetadata(
@@ -13,6 +13,6 @@ export const metadata: Metadata = pageMetadata(
 );
 
 // Prerendered; job changes in the admin panel revalidate it (lib/actions/jobs.ts).
-export default async function JobsPage() {
-  return <SectionPage id="jobs" src="sections/jobs.html" replace={await jobBoardCards()} />;
+export default function JobsPage() {
+  return <SectionPage id="jobs" src={[<JobBoard key="jobs" />]} />;
 }

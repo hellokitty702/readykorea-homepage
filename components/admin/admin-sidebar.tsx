@@ -1,6 +1,17 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
+import {
+  Briefcase,
+  ExternalLink,
+  Image,
+  Inbox,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  Newspaper,
+  UserRound,
+  X,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -9,16 +20,27 @@ import { Brand } from './brand';
 import { cx } from './styles';
 
 const LINKS = [
-  { href: '/admin/', label: 'Dashboard', match: (p: string) => p === '/admin/' || p === '/admin' },
-  { href: '/admin/jobs/', label: 'Jobs', match: (p: string) => p.startsWith('/admin/jobs') },
-  { href: '/admin/applications/', label: 'Applications', match: (p: string) => p.startsWith('/admin/applications') },
-  { href: '/admin/blog/', label: 'Blog', match: (p: string) => p.startsWith('/admin/blog') },
-  { href: '/admin/media/', label: 'Media', match: (p: string) => p.startsWith('/admin/media') },
-  { href: '/admin/account/', label: 'Account', match: (p: string) => p.startsWith('/admin/account') },
+  {
+    href: '/admin/',
+    label: 'Dashboard',
+    icon: LayoutDashboard,
+    match: (p: string) => p === '/admin/' || p === '/admin',
+  },
+  { href: '/admin/jobs/', label: 'Jobs', icon: Briefcase, match: (p: string) => p.startsWith('/admin/jobs') },
+  {
+    href: '/admin/applications/',
+    label: 'Applications',
+    icon: Inbox,
+    match: (p: string) => p.startsWith('/admin/applications'),
+  },
+  { href: '/admin/blog/', label: 'Blog', icon: Newspaper, match: (p: string) => p.startsWith('/admin/blog') },
+  { href: '/admin/media/', label: 'Media', icon: Image, match: (p: string) => p.startsWith('/admin/media') },
+  { href: '/admin/account/', label: 'Account', icon: UserRound, match: (p: string) => p.startsWith('/admin/account') },
 ];
 
 const sidebarLink =
-  'block w-full cursor-pointer rounded-lg px-2.5 py-1.5 text-left text-slate-300 hover:bg-white/5 hover:text-white hover:no-underline';
+  'flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-slate-300 hover:bg-white/5 hover:text-white hover:no-underline';
+const icon = 'size-4 shrink-0';
 
 /**
  * Below `lg`: a bar at the top of the page whose menu button opens the links underneath it.
@@ -68,9 +90,10 @@ export function AdminSidebar({ user }: { user: { name: string; email: string } }
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-2.5 py-2 font-medium text-slate-300 hover:bg-white/5 hover:text-white hover:no-underline aria-[current=page]:bg-amber-400/15 aria-[current=page]:text-amber-400"
+              className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 font-medium text-slate-300 hover:bg-white/5 hover:text-white hover:no-underline aria-[current=page]:bg-amber-400/15 aria-[current=page]:text-amber-400"
               aria-current={link.match(pathname) ? 'page' : undefined}
             >
+              <link.icon className={icon} aria-hidden="true" />
               {link.label}
             </Link>
           ))}
@@ -81,10 +104,14 @@ export function AdminSidebar({ user }: { user: { name: string; email: string } }
             <span className="truncate text-xs text-slate-400">{user.email}</span>
           </div>
           <a className={sidebarLink} href="/" target="_blank" rel="noopener">
-            View site ↗
+            <ExternalLink className={icon} aria-hidden="true" />
+            View site <span className="sr-only">(opens in a new tab)</span>
           </a>
           <form action={logout}>
-            <button className={sidebarLink}>Sign out</button>
+            <button className={sidebarLink}>
+              <LogOut className={icon} aria-hidden="true" />
+              Sign out
+            </button>
           </form>
         </div>
       </div>

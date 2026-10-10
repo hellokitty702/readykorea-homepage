@@ -29,3 +29,26 @@ export type PostStatus = (typeof POST_STATUSES)[number];
 /** Where an uploaded file lives: `local` (dev, served by app/uploads) or `r2` (Cloudflare R2). */
 export const MEDIA_DISKS = ['local', 'r2'] as const;
 export type MediaDisk = (typeof MEDIA_DISKS)[number];
+
+/**
+ * How teachers apply to a job: `standard` is the ReadyKorea form, with the questions set in the job's
+ * form builder (new jobs start with the default questions); the rest embed a form hosted elsewhere,
+ * whose answers never reach this site (lib/apply-forms.ts).
+ */
+export const APPLY_METHODS = ['standard', 'google_form', 'typeform', 'embed'] as const;
+export type ApplyMethod = (typeof APPLY_METHODS)[number];
+
+/** Question types of the ReadyKorea application form. */
+export const FORM_FIELD_TYPES = [
+  'short_text',
+  'long_text',
+  'email',
+  'phone',
+  'number',
+  'date',
+  'url',
+  'select',
+  'radio',
+  'checkboxes',
+] as const;
+export type FormFieldType = (typeof FORM_FIELD_TYPES)[number];

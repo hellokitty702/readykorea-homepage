@@ -3,7 +3,7 @@ import { LatestPosts } from '@/components/home/latest-posts';
 import { OldHashRedirect } from '@/components/home/old-hash-redirect';
 import { JsonLd } from '@/components/json-ld';
 import { SectionPage } from '@/components/sections/section-page';
-import { jobBoardCards } from '@/lib/job-board';
+import { JobBoard } from '@/components/sections/job-board';
 import { absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -54,15 +54,14 @@ const ORGANIZATION_LD = {
 };
 
 // Prerendered; job changes in the admin panel revalidate it (lib/actions/jobs.ts).
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <>
       <JsonLd data={ORGANIZATION_LD} />
       <OldHashRedirect />
       <SectionPage
         id="home"
-        src={['pages/home/hero.html', 'sections/jobs.html', 'sections/why-readykorea.html']}
-        replace={await jobBoardCards()}
+        src={['pages/home/hero.html', <JobBoard key="jobs" />, 'sections/why-readykorea.html']}
       >
         <LatestPosts />
       </SectionPage>

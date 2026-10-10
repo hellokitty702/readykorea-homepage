@@ -1,13 +1,16 @@
-// Adds the content the old site had: two Job Board listings, the blog categories (seed-categories.json;
-// they also make the header's Blog menu) and the blog posts copied from www.readykoreaesl.com
-// (seed-posts.json; their images are in public/images/).
-// Safe to re-run: skips jobs, posts and categories whose slug (or job ID) already exists.
+// Adds the content the old site had: two Job Board listings with their application questions
+// (seed-jobs.json), the blog categories (seed-categories.json; they also make the header's Blog menu)
+// and the blog posts copied from www.readykoreaesl.com (seed-posts.json; their images are in public/images/).
+// Safe to re-run: skips jobs, posts and categories whose slug (or job ID) already exists, but gives
+// existing seed jobs their application questions if they have none.
 // Usage: bun run db:seed
 import './env';
+import { and, eq, sql as q } from 'drizzle-orm';
+import { parseFormFields } from '@/lib/apply-forms';
 import { db, sql } from '@/lib/db';
 import { sanitizePostHtml } from '@/lib/blog-html';
 import { parseTagNames, setPostTags } from '@/lib/blog-tags';
-import { categories, jobs, posts, type JobBadge, type JobContent } from '@/lib/db/schema';
+import { categories, jobs, posts, type FormField, type JobBadge, type JobContent } from '@/lib/db/schema';
 import { slugify } from '@/lib/slug';
 import seedCategories from './seed-categories.json';
 import seedJobs from './seed-jobs.json';
@@ -19,12 +22,20 @@ type SeedJob = {
   school: string;
   startDate: string;
   rating: string;
+  /** Questions of the job's ReadyKorea application form (same shape as the admin form builder saves). */
+  applyFields: FormField[];
   en: JobContent;
   ko: JobContent;
 };
 
 // Listed newest first on the Job Board, so publish them in reverse to keep the original order.
 const list = [...(seedJobs as SeedJob[])].reverse();
+// Same checks as the admin job form, so a typo in seed-jobs.json fails here and not on the apply page.
+for (const job of list) {
+  const result = parseFormFields(JSON.stringify(job.applyFields));
+  if ('error' in result) throw new Error(`seed-jobs.json, ${job.code}: ${result.error}`);
+  job.applyFields = result.fields;
+}
 const now = Date.now();
 const rows = await db
   .insert(jobs)
@@ -40,6 +51,19 @@ const rows = await db
   .returning({ code: jobs.code });
 
 console.log(rows.length ? `Added jobs: ${rows.map((r) => r.code).join(', ')}` : 'Jobs already present, nothing added.');
+
+// Jobs seeded before jobs had application questions have none: give them the ones in seed-jobs.json.
+// Questions already set (e.g. edited in the admin panel) are left alone.
+const withQuestions: string[] = [];
+for (const job of list) {
+  const updated = await db
+    .update(jobs)
+    .set({ applyFields: job.applyFields })
+    .where(and(eq(jobs.code, job.code), q`${jobs.applyFields} = '[]'::jsonb`))
+    .returning({ code: jobs.code });
+  withQuestions.push(...updated.map((r) => r.code));
+}
+if (withQuestions.length) console.log(`Added application questions to: ${withQuestions.join(', ')}`);
 
 // Blog categories, in the order of the file (the old blog's order)
 const newCategories = await db

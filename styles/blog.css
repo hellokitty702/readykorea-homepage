@@ -1,5 +1,10 @@
+/*
+ * Scoped to the blog pages: every rule sits under :where(.page-blog) (the wrapper in
+ * app/(public)/(blog)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * shown (:where(:has(.page-blog))). :where() keeps the original specificity. Write new rules the same way.
+ */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
+  :root:where(:has(.page-blog)) {
     --ink: #0f172a;
     --ink-2: #334155;
     --ink-3: #64748b;
@@ -11,7 +16,7 @@
     --info: #0284c7;
     --gold: #fbbf24;
   }
-  body {
+  body:where(:has(.page-blog)) {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif;
     color: var(--ink);
     background: var(--bg);
@@ -19,18 +24,18 @@
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 {
+  :where(.page-blog) h1, :where(.page-blog) h2, :where(.page-blog) h3 {
     font-family: "Montserrat", "Pretendard", sans-serif;
     letter-spacing: -0.03em;
     font-weight: 800;
   }
-  a { color: inherit; text-decoration: none; }
-  .wrap {
+  :where(.page-blog) a { color: inherit; text-decoration: none; }
+  :where(.page-blog) .wrap {
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 20px 72px;
   }
-  .eyebrow {
+  :where(.page-blog) .eyebrow {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -38,19 +43,19 @@
     color: var(--ink-3);
     margin-bottom: 10px;
   }
-  h1 {
+  :where(.page-blog) h1 {
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.15;
     margin-bottom: 12px;
   }
-  .lead {
+  :where(.page-blog) .lead {
     color: var(--ink-2);
     max-width: 680px;
     margin-bottom: 32px;
   }
 
   /* Featured card */
-  .featured {
+  :where(.page-blog) .featured {
     display: block;
     margin-bottom: 28px;
     padding: 28px 28px 26px;
@@ -60,12 +65,12 @@
       linear-gradient(135deg, rgba(251, 191, 36, 0.18) 0%, rgba(248, 250, 252, 1) 42%, #fff 100%);
     transition: transform .15s, box-shadow .15s, border-color .15s;
   }
-  .featured:hover {
+  :where(.page-blog) .featured:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
     border-color: rgba(15, 23, 42, 0.18);
   }
-  .featured-badge {
+  :where(.page-blog) .featured-badge {
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
@@ -77,24 +82,24 @@
     border-radius: 999px;
     margin-bottom: 14px;
   }
-  .featured .post-meta {
+  :where(.page-blog) .featured .post-meta {
     font-size: 12px;
     color: var(--ink-3);
     margin-bottom: 10px;
   }
-  .featured h2 {
+  :where(.page-blog) .featured h2 {
     font-size: clamp(24px, 3.2vw, 32px);
     line-height: 1.25;
     margin-bottom: 12px;
     max-width: 18ch;
   }
-  .featured p {
+  :where(.page-blog) .featured p {
     font-size: 15px;
     color: var(--ink-2);
     line-height: 1.7;
     max-width: 62ch;
   }
-  .featured .read {
+  :where(.page-blog) .featured .read {
     display: inline-block;
     margin-top: 16px;
     font-size: 14px;
@@ -103,7 +108,7 @@
   }
 
   /* Category tabs */
-  .category-tabs {
+  :where(.page-blog) .category-tabs {
     display: flex;
     flex-wrap: nowrap;
     gap: 8px;
@@ -113,14 +118,14 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
-  .category-tabs::-webkit-scrollbar {
+  :where(.page-blog) .category-tabs::-webkit-scrollbar {
     height: 4px;
   }
-  .category-tabs::-webkit-scrollbar-thumb {
+  :where(.page-blog) .category-tabs::-webkit-scrollbar-thumb {
     background: rgba(15, 23, 42, 0.15);
     border-radius: 999px;
   }
-  .tab-btn {
+  :where(.page-blog) .tab-btn {
     flex: 0 0 auto;
     color: var(--ink-3);
     font-size: 14px;
@@ -130,21 +135,21 @@
     white-space: nowrap;
     transition: color .15s, border-color .15s;
   }
-  .tab-btn:hover {
+  :where(.page-blog) .tab-btn:hover {
     color: var(--ink);
   }
-  .tab-btn[aria-current='page'] {
+  :where(.page-blog) .tab-btn[aria-current='page'] {
     color: var(--ink);
     border-bottom-color: var(--gold);
   }
 
   /* Album-style grid */
-  .post-grid {
+  :where(.page-blog) .post-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
   }
-  .post-card {
+  :where(.page-blog) .post-card {
     display: flex;
     flex-direction: column;
     min-height: 220px;
@@ -154,12 +159,12 @@
     background: var(--bg);
     transition: border-color .15s, transform .15s, box-shadow .15s;
   }
-  .post-card:hover {
+  :where(.page-blog) .post-card:hover {
     border-color: rgba(15, 23, 42, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
   }
-  .cat-chip {
+  :where(.page-blog) .cat-chip {
     display: inline-block;
     align-self: flex-start;
     font-size: 11px;
@@ -172,32 +177,32 @@
     border-radius: 999px;
     margin-bottom: 12px;
   }
-  .post-meta {
+  :where(.page-blog) .post-meta {
     font-size: 12px;
     color: var(--ink-4);
     margin-bottom: 8px;
   }
-  .post-card h3 {
+  :where(.page-blog) .post-card h3 {
     font-size: 18px;
     line-height: 1.35;
     margin-bottom: 10px;
     color: var(--ink);
   }
-  .post-card p {
+  :where(.page-blog) .post-card p {
     font-size: 13.5px;
     color: var(--ink-2);
     line-height: 1.65;
     flex: 1;
   }
-  .post-card .read {
+  :where(.page-blog) .post-card .read {
     display: inline-block;
     margin-top: 14px;
     font-size: 13px;
     font-weight: 600;
     color: var(--info);
   }
-  .eyebrow a:hover { color: var(--ink); }
-  .post-empty {
+  :where(.page-blog) .eyebrow a:hover { color: var(--ink); }
+  :where(.page-blog) .post-empty {
     padding: 32px 20px;
     border: 0.5px dashed var(--line);
     border-radius: 14px;
@@ -206,11 +211,11 @@
   }
 
   @media (max-width: 960px) {
-    .post-grid { grid-template-columns: repeat(2, 1fr); }
-    .featured h2 { max-width: none; }
+    :where(.page-blog) .post-grid { grid-template-columns: repeat(2, 1fr); }
+    :where(.page-blog) .featured h2 { max-width: none; }
   }
   @media (max-width: 640px) {
-    .wrap { padding-top: 28px; }
-    .post-grid { grid-template-columns: 1fr; }
-    .featured { padding: 22px 18px; }
+    :where(.page-blog) .wrap { padding-top: 28px; }
+    :where(.page-blog) .post-grid { grid-template-columns: 1fr; }
+    :where(.page-blog) .featured { padding: 22px 18px; }
   }

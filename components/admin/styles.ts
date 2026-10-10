@@ -126,7 +126,7 @@ export const alertOk = 'rounded-lg border border-green-200 bg-green-50 px-3.5 py
 export const tabs =
   'flex gap-1 overflow-x-auto [scrollbar-width:none] shadow-[inset_0_-1px_0_var(--color-slate-200)] [&::-webkit-scrollbar]:hidden';
 export const tabLink =
-  'shrink-0 border-b-2 border-transparent px-3 py-2 whitespace-nowrap font-medium text-slate-500 hover:text-slate-900 hover:no-underline aria-[current=page]:border-amber-400 aria-[current=page]:text-slate-900';
+  'shrink-0 border-b-2 border-transparent px-3 py-2 whitespace-nowrap font-medium text-slate-500 hover:text-slate-900 hover:no-underline aria-[current=page]:border-amber-400 aria-[current=page]:text-slate-900 aria-selected:border-amber-400 aria-selected:text-slate-900';
 export const tabCount =
   'ml-1 inline-block min-w-5 rounded-full bg-slate-100 px-1.5 text-center text-2xs font-semibold text-slate-500';
 

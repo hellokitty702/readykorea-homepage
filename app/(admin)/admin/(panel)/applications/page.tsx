@@ -149,10 +149,16 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
                     )}
                   </td>
                   <td className={cx(small, 'max-lg:hidden')}>
-                    {a.position}
-                    <div className={muted}>
-                      {a.passportCountry} · {a.experience}
-                    </div>
+                    {a.position ? (
+                      <>
+                        {a.position}
+                        <div className={muted}>
+                          {a.passportCountry} · {a.experience}
+                        </div>
+                      </>
+                    ) : (
+                      <span className={muted}>—</span>
+                    )}
                   </td>
                   <td>
                     <StatusBadge status={a.status} />

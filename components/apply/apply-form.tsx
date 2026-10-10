@@ -2,18 +2,29 @@
 
 import Link from 'next/link';
 import { startTransition, useActionState, useEffect, useRef, type FormEvent } from 'react';
-import { submitApplication, type ApplyField, type ApplyState } from '@/lib/actions/apply';
-import { EXPERIENCE, PASSPORT_COUNTRIES, POSITIONS, REGIONS } from '@/lib/apply-options';
+import { submitApplication, type ApplyState } from '@/lib/actions/apply';
+import type { FormField } from '@/lib/db/schema';
 
-export type OpenJob = { code: string; label: string };
+const INPUT_TYPE: Partial<Record<FormField['type'], string>> = {
+  short_text: 'text',
+  email: 'email',
+  phone: 'tel',
+  number: 'number',
+  date: 'date',
+  url: 'url',
+};
 
-export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob: string }) {
+/**
+ * The ReadyKorea application form: name, email and the job's questions (set in the admin job form).
+ * `jobCode` is empty for a general application, which asks the default questions. Styles: apply.css.
+ */
+export function ApplyForm({ jobCode, fields }: { jobCode: string; fields: FormField[] }) {
   const [state, action, pending] = useActionState<ApplyState, FormData>(submitApplication, {});
   const langRef = useRef<HTMLInputElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
-  const v = state.values ?? { job: selectedJob };
-  const err = (field: ApplyField) => state.errors?.[field];
-  const str = (field: ApplyField) => (typeof v[field] === 'string' ? (v[field] as string) : '');
+  const v = state.values ?? {};
+  const err = (key: string) => state.errors?.[key];
+  const str = (key: string) => (typeof v[key] === 'string' ? (v[key] as string) : '');
 
   // Record the language the visitor is browsing in (set by the header's EN / 한글 switch).
   useEffect(() => {
@@ -42,9 +53,9 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
     startTransition(() => action(data));
   };
 
-  const fieldProps = (field: ApplyField) => ({
-    'aria-invalid': err(field) ? true : undefined,
-    'aria-describedby': err(field) ? `${field}-error` : undefined,
+  const a11y = (key: string, help?: string) => ({
+    'aria-invalid': err(key) ? true : undefined,
+    'aria-describedby': [err(key) && `${key}-error`, help && `${key}-help`].filter(Boolean).join(' ') || undefined,
   });
 
   return (
@@ -55,90 +66,12 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
           {state.message}
         </p>
       )}
+      <input type="hidden" name="job" value={jobCode} />
       <input ref={langRef} type="hidden" name="lang" defaultValue="en" />
       <div className="hp" aria-hidden="true">
         <label>
           Company <input name="company" tabIndex={-1} autoComplete="off" />
         </label>
-      </div>
-
-      <div className="field">
-        <label htmlFor="job">Position you are applying for</label>
-        <select id="job" name="job" defaultValue={str('job')} {...fieldProps('job')}>
-          <option value="">General application (any open position)</option>
-          {jobs.map((job) => (
-            <option key={job.code} value={job.code}>
-              {job.label}
-            </option>
-          ))}
-        </select>
-        <FieldError field="job" message={err('job')} />
-      </div>
-
-      <div className="field">
-        <label htmlFor="position">
-          What is your preferred position? <span className="req">*</span>
-        </label>
-        <select id="position" name="position" required defaultValue={str('position')} {...fieldProps('position')}>
-          <option value="" disabled>
-            Choose…
-          </option>
-          {POSITIONS.map((p) => (
-            <option key={p}>{p}</option>
-          ))}
-        </select>
-        <FieldError field="position" message={err('position')} />
-      </div>
-
-      <fieldset className="field" {...fieldProps('regions')}>
-        <legend>
-          Which regions are you open to? <span className="req">*</span>{' '}
-          <span className="hint">Select all that apply</span>
-        </legend>
-        <div className="checks">
-          {REGIONS.map((r) => (
-            <label key={r} className="check">
-              <input type="checkbox" name="regions" value={r} defaultChecked={(v.regions ?? []).includes(r)} /> {r}
-            </label>
-          ))}
-        </div>
-        <FieldError field="regions" message={err('regions')} />
-      </fieldset>
-
-      <div className="field">
-        <label htmlFor="experience">
-          Years of teaching experience <span className="req">*</span>
-        </label>
-        <select
-          id="experience"
-          name="experience"
-          required
-          defaultValue={str('experience')}
-          {...fieldProps('experience')}
-        >
-          <option value="" disabled>
-            Choose…
-          </option>
-          {EXPERIENCE.map((e) => (
-            <option key={e}>{e}</option>
-          ))}
-        </select>
-        <FieldError field="experience" message={err('experience')} />
-      </div>
-
-      <div className="field">
-        <label htmlFor="introduction">
-          Brief introduction <span className="hint">Optional</span>
-        </label>
-        <textarea
-          id="introduction"
-          name="introduction"
-          rows={5}
-          maxLength={3000}
-          defaultValue={str('introduction')}
-          {...fieldProps('introduction')}
-        />
-        <FieldError field="introduction" message={err('introduction')} />
       </div>
 
       <div className="field-row">
@@ -153,9 +86,9 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
             autoComplete="name"
             maxLength={160}
             defaultValue={str('fullName')}
-            {...fieldProps('fullName')}
+            {...a11y('fullName')}
           />
-          <FieldError field="fullName" message={err('fullName')} />
+          <FieldError id="fullName" message={err('fullName')} />
         </div>
         <div className="field">
           <label htmlFor="email">
@@ -169,32 +102,93 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
             autoComplete="email"
             maxLength={255}
             defaultValue={str('email')}
-            {...fieldProps('email')}
+            {...a11y('email')}
           />
-          <FieldError field="email" message={err('email')} />
+          <FieldError id="email" message={err('email')} />
         </div>
       </div>
 
-      <div className="field">
-        <label htmlFor="passportCountry">
-          Passport country <span className="req">*</span>
-        </label>
-        <select
-          id="passportCountry"
-          name="passportCountry"
-          required
-          defaultValue={str('passportCountry')}
-          {...fieldProps('passportCountry')}
-        >
-          <option value="" disabled>
-            Choose…
-          </option>
-          {PASSPORT_COUNTRIES.map((c) => (
-            <option key={c}>{c}</option>
-          ))}
-        </select>
-        <FieldError field="passportCountry" message={err('passportCountry')} />
-      </div>
+      {fields.map((field) => {
+        const name = `q.${field.id}`;
+        const id = `q-${field.id}`;
+        const required = field.required ? <span className="req">*</span> : <span className="hint">Optional</span>;
+        const help = field.help ? (
+          <p className="hint" id={`${field.id}-help`}>
+            {field.help}
+          </p>
+        ) : null;
+
+        if (field.type === 'radio' || field.type === 'checkboxes') {
+          const picked = v[field.id];
+          return (
+            <fieldset key={field.id} className="field" {...a11y(field.id, field.help)}>
+              <legend>
+                {field.label} {required}
+                {field.type === 'checkboxes' && <span className="hint">Select all that apply</span>}
+              </legend>
+              {help}
+              <div className="checks">
+                {field.options.map((option) => (
+                  <label key={option} className="check">
+                    <input
+                      type={field.type === 'radio' ? 'radio' : 'checkbox'}
+                      name={name}
+                      value={option}
+                      defaultChecked={Array.isArray(picked) ? picked.includes(option) : picked === option}
+                    />{' '}
+                    {option}
+                  </label>
+                ))}
+              </div>
+              <FieldError id={field.id} message={err(field.id)} />
+            </fieldset>
+          );
+        }
+
+        return (
+          <div key={field.id} className="field">
+            <label htmlFor={id}>
+              {field.label} {required}
+            </label>
+            {help}
+            {field.type === 'long_text' ? (
+              <textarea
+                id={id}
+                name={name}
+                rows={5}
+                maxLength={5000}
+                required={field.required}
+                defaultValue={str(field.id)}
+                {...a11y(field.id, field.help)}
+              />
+            ) : field.type === 'select' ? (
+              <select
+                id={id}
+                name={name}
+                required={field.required}
+                defaultValue={str(field.id)}
+                {...a11y(field.id, field.help)}
+              >
+                <option value="">Choose…</option>
+                {field.options.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                id={id}
+                name={name}
+                type={INPUT_TYPE[field.type] ?? 'text'}
+                maxLength={500}
+                required={field.required}
+                defaultValue={str(field.id)}
+                {...a11y(field.id, field.help)}
+              />
+            )}
+            <FieldError id={field.id} message={err(field.id)} />
+          </div>
+        );
+      })}
 
       <button className="submit" type="submit" disabled={pending}>
         {pending ? 'Sending…' : 'Submit application'}
@@ -203,10 +197,10 @@ export function ApplyForm({ jobs, selectedJob }: { jobs: OpenJob[]; selectedJob:
   );
 }
 
-function FieldError({ field, message }: { field: ApplyField; message?: string }) {
+function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p className="field-error" id={`${field}-error`}>
+    <p className="field-error" id={`${id}-error`}>
       {message}
     </p>
   );

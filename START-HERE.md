@@ -47,20 +47,20 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 | URL | 파일 |
 |-----|------|
-| `/` 메인 홈페이지 | `app/(site)/page.tsx` |
-| `/lessons/` 전체 레슨 | `app/(site)/lessons/page.tsx` |
-| `/lessons/k1/` 학년별 목록 | `app/(site)/lessons/[grade]/page.tsx` |
-| `/lessons/k1/greetings-hello-routine/` 개별 레슨 | `app/(site)/lessons/[grade]/[slug]/page.tsx` |
-| `/apply/` 지원하기 | `app/(apply)/apply/page.tsx` |
-| `/jobs/kindergarten-lead-teacher-k2-k3/` 공고 상세 | `app/(site)/jobs/[slug]/page.tsx` (`/jobs/` 는 `/#jobs` 로 이동) |
-| `/blog/` 블로그 (맨 위 추천 글 + 카테고리 탭 + 카드 목록, 카테고리 순서대로 묶음) | `app/(blog)/blog/page.tsx` (예전 `/blog/#visa-legal` 링크는 카테고리 페이지로 이동) |
-| `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(blog)/blog/category/[slug]/page.tsx`, `app/(blog)/blog/tag/[slug]/page.tsx` |
-| `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(blog-post)/blog/[slug]/page.tsx` |
+| `/` 메인 홈페이지 | `app/(public)/(site)/page.tsx` |
+| `/lessons/` 전체 레슨 | `app/(public)/(site)/lessons/page.tsx` |
+| `/lessons/k1/` 학년별 목록 | `app/(public)/(site)/lessons/[grade]/page.tsx` |
+| `/lessons/k1/greetings-hello-routine/` 개별 레슨 | `app/(public)/(site)/lessons/[grade]/[slug]/page.tsx` |
+| `/apply/` 지원하기 | `app/(public)/(apply)/apply/page.tsx` |
+| `/jobs/kindergarten-lead-teacher-k2-k3/` 공고 상세 | `app/(public)/(site)/jobs/[slug]/page.tsx` (`/jobs/` 는 `/#jobs` 로 이동) |
+| `/blog/` 블로그 (맨 위 추천 글 + 카테고리 탭 + 카드 목록, 카테고리 순서대로 묶음) | `app/(public)/(blog)/blog/page.tsx` (예전 `/blog/#visa-legal` 링크는 카테고리 페이지로 이동) |
+| `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(public)/(blog)/blog/category/[slug]/page.tsx`, `app/(public)/(blog)/blog/tag/[slug]/page.tsx` |
+| `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(public)/(blog-post)/blog/[slug]/page.tsx` |
 | `/uploads/…` 업로드한 이미지 (로컬 개발 전용) | `app/uploads/[...key]/route.ts` |
 | `/admin/` 관리자 (대시보드, 공고, 지원서, 블로그, 미디어, 계정) | `app/(admin)/admin/` (로그인: `/admin/login/`) |
 | `/sitemap.xml`, `/robots.txt` | `app/sitemap.ts` (요청할 때마다 DB 의 공고·블로그와 레슨 목록으로 생성), `app/robots.ts` |
 
-`(site)`, `(apply)`, `(blog)`, `(blog-post)`, `(admin)` 은 각각 별도의 루트 레이아웃입니다. 페이지마다 전역 CSS가 서로 달라서, 섞이지 않도록 나눠 두었습니다. 공개 페이지 네 레이아웃은 `components/layout/site-layout.tsx` 를 사용하므로 **모든 페이지에 같은 헤더와 푸터**가 나옵니다. 관리자 화면은 자체 레이아웃과 Tailwind 진입 파일 `styles/admin.css` 를 씁니다.
+루트 레이아웃은 두 개입니다: 공개 사이트 `app/(public)/layout.tsx` 와 관리자 `app/(admin)/layout.tsx`. 공개 페이지는 모두 같은 루트 레이아웃이라 페이지 이동이 새로고침 없이 이루어지고, **모든 페이지에 같은 헤더와 푸터**(`components/layout/site-layout.tsx`)가 나옵니다. 그 아래 `(site)`, `(apply)`, `(blog)`, `(blog-post)` 그룹은 각자의 스타일시트(`styles/site.css`, `apply.css`, `blog.css`, `blog-post.css`)를 불러오고 내용을 `.page-site` 같은 래퍼로 감쌉니다. 각 스타일시트의 규칙은 모두 자기 래퍼 안으로 한정(`:where(.page-blog) …`, `body:where(:has(.page-blog))`)되어 있어서, 여러 스타일시트가 함께 로드되어도 서로 섞이지 않습니다. 이 파일들에 규칙을 추가할 때도 같은 형식으로 쓰세요. 관리자 화면은 자체 레이아웃과 Tailwind 진입 파일 `styles/admin.css` 를 씁니다.
 
 ---
 
@@ -106,7 +106,11 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 - **로그인**: `/admin/login/` — 관리자 계정은 하나뿐입니다 (직원 계정 없음). 계정이 없을 때 이 페이지에서 처음 가입한 사람이 관리자가 되고, 그 뒤로는 로그인만 됩니다. 이름·이메일·비밀번호는 관리자 → Account 에서 바꿉니다. 비밀번호를 잊으면 `bun run admin:create` 로 재설정합니다. 세션은 DB(`sessions`)에 저장되고 7일간 유지됩니다.
 - **지원서**: `/apply/` 양식(기존 Google Form 과 같은 질문)과 Job Board 의 "Apply Now" 버튼이 DB(`applications`)에 저장합니다. 관리자 → Applications 에서 단계를 옮기고 메모를 남기면 모두 타임라인(`application_events`)에 기록됩니다.
-- **공고**: 관리자 → Jobs 에서 작성/수정/공개/마감합니다. 공개(Published)된 공고만 홈페이지 Job Board, 공고 상세 페이지(`/jobs/주소/`), 지원서 양식에 나옵니다. 지원서가 있는 공고는 삭제할 수 없고 마감만 가능합니다. 공고 주소는 한 번 정하면 바꾸지 않는 것이 좋습니다 (공유된 링크가 깨집니다).
+- **공고**: 관리자 → Jobs 에서 작성/수정/공개/마감합니다. 공개(Published)된 공고만 홈페이지 Job Board, 공고 상세 페이지(`/jobs/주소/`), 지원서 양식에 나옵니다. 지원서가 있는 공고는 삭제할 수 없고 마감(Close)만 가능합니다. 지원서가 없는 공고는 목록이나 공고 화면에서 확인 창을 거쳐 삭제합니다. 공고 주소는 한 번 정하면 바꾸지 않는 것이 좋습니다 (공유된 링크가 깨집니다).
+- **지원 양식**: 공고마다 지원 방법을 고릅니다 (공고 편집 → Application form).
+  - **ReadyKorea form**: 사이트 지원서 양식입니다. 새 공고는 기본 질문(희망 포지션, 지역, 경력, 여권 국가, 자기소개)이 들어간 상태로 시작하며, 질문을 추가·수정·삭제·순서 변경할 수 있습니다 (단답, 장문, 이메일, 전화, 숫자, 날짜, 링크, 드롭다운, 단일/복수 선택). "Reset to default questions" 로 기본 질문으로 되돌립니다. 이름과 이메일은 항상 묻습니다. 답변은 Applications 에 저장되어 단계·메모를 관리합니다. 기본 질문의 답(포지션, 여권 국가 등)은 대시보드 통계에도 쓰입니다.
+  - **Google Form / Typeform / 기타 임베드 양식**: 지원 페이지에 외부 양식을 넣습니다. 답변이 이 사이트로 오지 않으므로 지원자 목록, 단계, 메모, 대시보드 통계에 잡히지 않습니다 (관리자 화면에 경고가 표시됩니다). Google Form 은 보내기 → `<>`(삽입) 코드를 붙여 넣습니다.
+  - 지원 페이지(`/apply/?job=공고ID`)는 주소의 공고로 지원하며, 포지션 선택 칸은 없습니다. `/apply/` 만 열면 기본 질문으로 일반 지원을 받습니다.
 - **블로그**: 관리자 → Blog 에서 글을 쓰고, **Categories** 에서 카테고리를 관리합니다. 글마다 카테고리는 하나, 태그는 최대 12개입니다. 태그는 입력하면 만들어지고, 쓰는 글이 없어지면 자동으로 지워집니다. 카테고리 목록의 ↑/↓ 버튼으로 순서를 바꾸면 헤더 Blog 메뉴, 블로그 탭, `/blog/` 카드 순서가 함께 바뀝니다. 글 편집 화면의 **Featured** 를 체크하면 추천 글이 됩니다: `/blog/` 맨 위에는 가장 최근(공개일 기준) 추천 글이, 카테고리 페이지 맨 위에는 그 카테고리의 가장 최근 추천 글이 크게 나오고, 아래 카드 목록에서는 빠집니다.
 - **미디어**: 관리자 → Media 에서 이미지를 올리고, 주소 복사, 대체 텍스트(alt) 수정, 삭제를 합니다. 글에서 사용 중인 이미지는 어느 글에서 쓰는지 표시되고, 그 글에서 빼기 전에는 삭제할 수 없습니다.
 - 공고 상세의 한국어 입력은 선택입니다. 현재 사이트가 한국어 모드일 때는 Job Board 자체가 숨겨집니다 (기존 동작).

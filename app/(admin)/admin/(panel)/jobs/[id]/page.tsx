@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ConfirmButton } from '@/components/admin/confirm-button';
+import { DeleteJobButton } from '@/components/admin/delete-job-button';
 import {
   STATUS_COLORS,
   alertError,
@@ -23,9 +23,10 @@ import {
   twoColumnsWideLeft,
 } from '@/components/admin/styles';
 import { Empty, JobStatusBadge, PageHeader, PageSub, StatusBadge, fmtDate, fmtDateTime } from '@/components/admin/ui';
-import { deleteJob, setJobStatus } from '@/lib/actions/jobs';
+import { setJobStatus } from '@/lib/actions/jobs';
 import { applicationStatusCounts, getJob, listApplications, parseId } from '@/lib/admin/queries';
 import { ALL_STATUSES, STATUS_LABEL } from '@/lib/application-flow';
+import { APPLY_METHOD_LABEL, isExternalMethod, standaloneFormUrl } from '@/lib/apply-forms';
 import { requireAdmin } from '@/lib/auth/dal';
 import { JOB_FIELD_GROUPS, formatStartDate, jobPath } from '@/lib/job-fields';
 import { applyHref } from '@/lib/job-board';
@@ -78,10 +79,10 @@ export default async function JobPage({
         </PageSub>
       </PageHeader>
 
-      {saved && <p className={alertOk}>Saved. {job.status === 'published' && 'The Job Board shows the update.'}</p>}
       {error === 'has-applications' && (
-        <p className={alertError}>This job has applications, so it can't be deleted. Close it instead.</p>
+        <p className={alertError}>This job has applications, so it can&apos;t be deleted. Close it instead.</p>
       )}
+      {saved && <p className={alertOk}>Saved. {job.status === 'published' && 'The Job Board shows the update.'}</p>}
 
       <div className={twoColumnsWideLeft}>
         <section className={card}>
@@ -103,6 +104,17 @@ export default async function JobPage({
               </Link>
             ))}
           </div>
+          {isExternalMethod(job.applyMethod) && (
+            <p className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3.5 py-2.5 text-label text-amber-900">
+              Teachers apply through {APPLY_METHOD_LABEL[job.applyMethod]}, so new applicants don&apos;t appear
+              here.{' '}
+              {job.applyFormUrl && (
+                <a href={standaloneFormUrl(job.applyFormUrl)} target="_blank" rel="noopener">
+                  Open the form ↗
+                </a>
+              )}
+            </p>
+          )}
           {apps.rows.length ? (
             <table className={table(true)}>
               <tbody>
@@ -113,7 +125,7 @@ export default async function JobPage({
                         {a.fullName}
                       </Link>
                       <div className={cx(muted, small)}>
-                        {a.passportCountry} · {a.experience}
+                        {a.passportCountry ? `${a.passportCountry} · ${a.experience}` : a.email}
                       </div>
                     </td>
                     <td>
@@ -139,6 +151,16 @@ export default async function JobPage({
             <dt>Status</dt>
             <dd>
               <JobStatusBadge status={job.status} />
+            </dd>
+            <dt>Application form</dt>
+            <dd>
+              {APPLY_METHOD_LABEL[job.applyMethod]}
+              {job.applyMethod === 'standard' && (
+                <span className={muted}>
+                  {' '}
+                  · {job.applyFields.length + 2} questions
+                </span>
+              )}
             </dd>
             <dt>Badge</dt>
             <dd>{job.badge === 'urgent' ? 'Urgent' : job.badge === 'new' ? 'New' : '—'}</dd>
@@ -198,18 +220,14 @@ export default async function JobPage({
       <section className={dangerCard}>
         <h2 className={cardTitle}>Delete job</h2>
         <p className={cx(muted, small, 'mb-3')}>
-          Only jobs without applications can be deleted. To stop new applications, close the job instead.
+          {apps.total > 0
+            ? 'This job has applications, so it can’t be deleted. To stop new applications, close the job instead.'
+            : 'Only jobs without applications can be deleted. To stop new applications, close the job instead.'}
         </p>
-        <form action={deleteJob}>
-          <input type="hidden" name="id" value={job.id} />
-          <ConfirmButton
-            className={button('danger')}
-            message={`Delete ${job.code}? This can't be undone.`}
-            disabled={apps.total > 0}
-          >
-            Delete job
-          </ConfirmButton>
-        </form>
+        <DeleteJobButton
+          job={{ id: job.id, code: job.code, title: job.en.title, status: job.status }}
+          applications={apps.total}
+        />
       </section>
     </>
   );

@@ -6,7 +6,17 @@ import { redirect } from 'next/navigation';
 import * as z from 'zod';
 import { requireAdmin } from '@/lib/auth/dal';
 import { db } from '@/lib/db';
-import { JOB_BADGES, JOB_STATUSES, applications, jobs, type JobContent, type JobFaq } from '@/lib/db/schema';
+import { embedFormUrl, isExternalMethod, parseFormFields } from '@/lib/apply-forms';
+import {
+  APPLY_METHODS,
+  JOB_BADGES,
+  JOB_STATUSES,
+  applications,
+  jobs,
+  type FormField,
+  type JobContent,
+  type JobFaq,
+} from '@/lib/db/schema';
 import { JOB_TEXT_KEYS, REQUIRED_JOB_KEYS, type JobTextKey } from '@/lib/job-fields';
 import { SLUG_HINT, SLUG_MAX, SLUG_PATTERN, slugify } from '@/lib/slug';
 
@@ -36,7 +46,27 @@ const SettingsSchema = z.object({
     .refine((d) => d === '' || /^\d{4}-\d{2}-\d{2}$/.test(d), { error: 'Use a valid date.' })
     .transform((d) => d || null),
   rating: z.string().trim().max(60),
+  applyMethod: z.enum(APPLY_METHODS).catch('standard'),
 });
+
+/**
+ * The job's application form. The link and the questions are kept whichever method is chosen, so
+ * switching methods back and forth doesn't lose them; only the chosen method's data is checked.
+ */
+function readApplyForm(formData: FormData, method: (typeof APPLY_METHODS)[number]) {
+  const errors: Record<string, string> = {};
+  let applyFormUrl = String(formData.get('applyFormUrl') ?? '').trim().slice(0, 1000);
+  if (isExternalMethod(method)) {
+    const result = embedFormUrl(method, applyFormUrl);
+    if ('error' in result) errors.applyFormUrl = result.error;
+    else applyFormUrl = result.url;
+  }
+  let applyFields: FormField[] = [];
+  const parsed = parseFormFields(String(formData.get('applyFields') ?? '[]'));
+  if ('fields' in parsed) applyFields = parsed.fields;
+  else if (method === 'standard') errors.applyFields = parsed.error;
+  return { applyFormUrl, applyFields, errors };
+}
 
 function readFaq(formData: FormData, lang: 'en' | 'ko'): JobFaq[] {
   try {
@@ -103,6 +133,7 @@ export async function saveJob(_prev: JobFormState, formData: FormData): Promise<
     badge: formData.get('badge') ?? '',
     startDate: formData.get('startDate') ?? '',
     rating: formData.get('rating') ?? '',
+    applyMethod: formData.get('applyMethod') ?? 'standard',
   });
   const errors: Record<string, string> = {};
   if (!parsed.success) {
@@ -111,6 +142,8 @@ export async function saveJob(_prev: JobFormState, formData: FormData): Promise<
   const en = readContent(formData, 'en');
   const ko = readContent(formData, 'ko');
   for (const key of REQUIRED_JOB_KEYS) if (!en[key]) errors[`en.${key}`] = 'Required.';
+  const applyForm = readApplyForm(formData, parsed.success ? parsed.data.applyMethod : 'standard');
+  Object.assign(errors, applyForm.errors);
   if (!parsed.success || Object.keys(errors).length) {
     return { errors, message: 'Please fix the highlighted fields.' };
   }
@@ -131,7 +164,14 @@ export async function saveJob(_prev: JobFormState, formData: FormData): Promise<
     Object.entries(ko).filter(([, value]) => (Array.isArray(value) ? value.length : value)),
   );
   const slug = settings.slug || (await freeSlug(slugify(en.title) || settings.code.toLowerCase(), id));
-  const values = { ...settings, slug, en, ko: koFilled };
+  const values = {
+    ...settings,
+    slug,
+    en,
+    ko: koFilled,
+    applyFormUrl: applyForm.applyFormUrl,
+    applyFields: applyForm.applyFields,
+  };
 
   let jobId = id;
   if (id) {
@@ -171,6 +211,7 @@ export async function setJobStatus(formData: FormData) {
 export async function deleteJob(formData: FormData) {
   await requireAdmin();
   const id = Number(formData.get('id'));
+  if (!Number.isInteger(id) || id <= 0) return;
   const [{ value }] = await db.select({ value: count() }).from(applications).where(eq(applications.jobId, id));
   if (value > 0) redirect(`/admin/jobs/${id}/?error=has-applications`);
   await db.delete(jobs).where(eq(jobs.id, id));

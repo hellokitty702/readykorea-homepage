@@ -20,7 +20,7 @@ import { addApplicationNote, changeApplicationStatus } from '@/lib/actions/appli
 import { getApplication, parseId } from '@/lib/admin/queries';
 import { ACTION_LABEL, EXITS, PIPELINE, STATUS_LABEL, TRANSITIONS } from '@/lib/application-flow';
 import { requireAdmin } from '@/lib/auth/dal';
-import type { ApplicationStatus } from '@/lib/db/schema';
+import type { ApplicationStatus, FormFieldType } from '@/lib/db/schema';
 
 export const metadata: Metadata = { title: 'Application' };
 
@@ -37,6 +37,8 @@ export default async function ApplicationPage({
   const { application: a, job, events, others } = data;
   const { error } = await searchParams;
   const moves = TRANSITIONS[a.status];
+  // Applications from before the form builder have no `answers`: their questions are in the columns.
+  const standardForm = !a.answers.length && Boolean(a.position);
   const closed = EXITS.includes(a.status);
   // Furthest pipeline step reached, so a rejected application still shows how far it got.
   const reached = Math.max(
@@ -196,14 +198,18 @@ export default async function ApplicationPage({
             <dd>
               <a href={`mailto:${a.email}`}>{a.email}</a>
             </dd>
-            <dt>Passport</dt>
-            <dd>{a.passportCountry}</dd>
-            <dt>Position</dt>
-            <dd>{a.position}</dd>
-            <dt>Regions</dt>
-            <dd>{a.regions.join(', ')}</dd>
-            <dt>Experience</dt>
-            <dd>{a.experience}</dd>
+            {standardForm && (
+              <>
+                <dt>Passport</dt>
+                <dd>{a.passportCountry}</dd>
+                <dt>Position</dt>
+                <dd>{a.position}</dd>
+                <dt>Regions</dt>
+                <dd>{a.regions.join(', ')}</dd>
+                <dt>Experience</dt>
+                <dd>{a.experience}</dd>
+              </>
+            )}
             <dt>Site language</dt>
             <dd>{a.lang === 'ko' ? 'Korean' : 'English'}</dd>
             {job && (
@@ -216,11 +222,33 @@ export default async function ApplicationPage({
               </>
             )}
           </dl>
-          <h3 className={cx(sectionHeading, 'mt-4.5')}>Introduction</h3>
-          {a.introduction ? (
-            <p className="whitespace-pre-wrap text-slate-700">{a.introduction}</p>
+          {standardForm ? (
+            <>
+              <h3 className={cx(sectionHeading, 'mt-4.5')}>Introduction</h3>
+              {a.introduction ? (
+                <p className="whitespace-pre-wrap text-slate-700">{a.introduction}</p>
+              ) : (
+                <p className={muted}>Not provided.</p>
+              )}
+            </>
           ) : (
-            <p className={muted}>Not provided.</p>
+            <>
+              <h3 className={cx(sectionHeading, 'mt-4.5')}>Answers</h3>
+              {a.answers.length ? (
+                <dl className="grid gap-3">
+                  {a.answers.map((answer, i) => (
+                    <div key={i} className="grid gap-0.5">
+                      <dt className="font-semibold text-slate-700">{answer.label}</dt>
+                      <dd className="whitespace-pre-wrap text-slate-700 wrap-anywhere">
+                        <Answer value={answer.value} type={answer.type} />
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                <p className={muted}>The form only asked for name and email.</p>
+              )}
+            </>
           )}
 
           {others.length > 0 && (
@@ -272,4 +300,20 @@ function EventTitle({
       {from ? STATUS_LABEL[from] : '—'} → {to ? STATUS_LABEL[to] : '—'}
     </strong>
   );
+}
+
+function Answer({ value, type }: { value: string | string[]; type: FormFieldType }) {
+  const text = Array.isArray(value) ? value.join(', ') : value;
+  if (!text) return <span className={muted}>—</span>;
+  if (type === 'email') return <a href={`mailto:${text}`}>{text}</a>;
+  if (type === 'phone') return <a href={`tel:${text.replace(/[^+\d]/g, '')}`}>{text}</a>;
+  if (type === 'url' && /^https?:\/\//.test(text)) {
+    return (
+      <a href={text} target="_blank" rel="noopener noreferrer">
+        {text}
+      </a>
+    );
+  }
+  if (type === 'date') return <>{fmtDate(text)}</>;
+  return <>{text}</>;
 }

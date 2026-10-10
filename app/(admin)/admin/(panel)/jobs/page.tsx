@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Pencil } from 'lucide-react';
 import Link from 'next/link';
+import { DeleteJobButton } from '@/components/admin/delete-job-button';
 import {
   TAG_COLORS,
   alertOk,
@@ -19,6 +21,7 @@ import {
 import { Empty, JobStatusBadge, PageHeader, fmtDate } from '@/components/admin/ui';
 import { jobStatusCounts, listJobs } from '@/lib/admin/queries';
 import { requireAdmin } from '@/lib/auth/dal';
+import { APPLY_METHOD_LABEL, isExternalMethod } from '@/lib/apply-forms';
 import { JOB_STATUS_LABEL } from '@/lib/job-fields';
 
 export const metadata: Metadata = { title: 'Jobs' };
@@ -74,6 +77,9 @@ export default async function JobsPage({
                 <th className="max-md:hidden">Start</th>
                 <th className={num}>Applications</th>
                 <th className="max-sm:hidden">Updated</th>
+                <th>
+                  <span className="sr-only">Actions</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -98,11 +104,31 @@ export default async function JobsPage({
                   <td className="max-md:hidden">{fmtDate(job.startDate)}</td>
                   <td className={num}>
                     <Link href={`/admin/applications/?job=${job.id}`}>{job.applications}</Link>
+                    {isExternalMethod(job.applyMethod) && (
+                      <span className="block text-2xs text-slate-500">via {APPLY_METHOD_LABEL[job.applyMethod]}</span>
+                    )}
                     {job.newApplications > 0 && (
                       <span className="block text-2xs font-semibold text-amber-700">{job.newApplications} new</span>
                     )}
                   </td>
                   <td className={cx(muted, 'max-sm:hidden')}>{fmtDate(job.updatedAt)}</td>
+                  <td className="w-px whitespace-nowrap">
+                    <span className="flex justify-end gap-1">
+                      <Link
+                        className={button('default', 'sm')}
+                        href={`/admin/jobs/${job.id}/edit/`}
+                        aria-label={`Edit ${job.title}`}
+                        title="Edit"
+                      >
+                        <Pencil className="size-3.5" aria-hidden="true" />
+                      </Link>
+                      <DeleteJobButton
+                        job={{ id: job.id, code: job.code, title: job.title, status: job.status }}
+                        applications={job.applications}
+                        compact
+                      />
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

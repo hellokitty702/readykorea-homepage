@@ -1,5 +1,5 @@
 import 'server-only';
-import { and, asc, count, desc, eq, gte, ilike, inArray, isNull, or, sql, type SQL } from 'drizzle-orm';
+import { and, asc, count, desc, eq, gte, ilike, inArray, isNull, ne, or, sql, type SQL } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import {
   applicationEvents,
@@ -73,11 +73,14 @@ export async function getDashboardStats() {
     db
       .select({ label: applications.passportCountry, value: count() })
       .from(applications)
+      // Empty when the job's form leaves out the default question.
+      .where(ne(applications.passportCountry, ''))
       .groupBy(applications.passportCountry)
       .orderBy(desc(count())),
     db
       .select({ label: applications.position, value: count() })
       .from(applications)
+      .where(ne(applications.position, ''))
       .groupBy(applications.position)
       .orderBy(desc(count())),
     listApplications({ limit: 6 }),
@@ -125,6 +128,7 @@ export function listJobs(status?: 'draft' | 'published' | 'closed') {
       school: jobs.school,
       title: sql<string>`${jobs.en}->>'title'`,
       location: sql<string>`${jobs.en}->>'location'`,
+      applyMethod: jobs.applyMethod,
       startDate: jobs.startDate,
       updatedAt: jobs.updatedAt,
       applications: count(applications.id),

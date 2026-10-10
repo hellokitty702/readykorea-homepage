@@ -5,7 +5,7 @@ type HtmlBlockProps<T extends ElementType> = {
   as?: T;
   /** Path of the HTML fragment inside `content/`, or several fragments shown one after another. */
   src: string | string[];
-  /** Placeholders to fill, e.g. `{ '<!--JOB_CARDS-->': html }`. */
+  /** Placeholders to fill, e.g. `{ '<!--NAME-->': html }`. */
   replace?: Record<string, string>;
 } & Omit<ComponentPropsWithoutRef<T>, 'children' | 'dangerouslySetInnerHTML'>;
 
