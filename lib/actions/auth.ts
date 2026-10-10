@@ -29,7 +29,6 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
   const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
   const valid = await verifyPassword(password, user?.passwordHash ?? (await dummyHash));
   if (!user || !valid) return { error: 'Email or password is incorrect.', email };
-  if (user.role !== 'admin') return { error: 'This account does not have admin access.', email };
 
   await createSession(user.id);
   await db.update(users).set({ lastLoginAt: new Date() }).where(eq(users.id, user.id));
@@ -45,8 +44,8 @@ const SignupSchema = z.object({
 });
 
 /**
- * Creates the first admin and signs them in. Only works while no admin exists; once one does,
- * /admin/login/ shows the sign-in form and new users are added under Users.
+ * Creates the admin account and signs it in. Only works while no account exists; once one does,
+ * /admin/login/ only signs in. The panel has a single account (no staff accounts).
  */
 export async function signupFirstAdmin(_prev: SignupState, formData: FormData): Promise<SignupState> {
   const fields = { email: String(formData.get('email') ?? ''), name: String(formData.get('name') ?? '') };
@@ -58,21 +57,17 @@ export async function signupFirstAdmin(_prev: SignupState, formData: FormData): 
   const passwordHash = await hashPassword(password);
 
   const result = await db.transaction(async (tx) => {
-    // One signup at a time, so two people can't both become the first admin.
+    // One signup at a time, so two people can't both become the admin.
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext('first-admin-signup'))`);
-    const [admin] = await tx.select({ id: users.id }).from(users).where(eq(users.role, 'admin')).limit(1);
-    if (admin) return 'closed' as const;
+    const [existing] = await tx.select({ id: users.id }).from(users).limit(1);
+    if (existing) return 'closed' as const;
     const [user] = await tx
       .insert(users)
-      .values({ email, name, passwordHash, role: 'admin', lastLoginAt: new Date() })
-      .onConflictDoNothing({ target: users.email })
+      .values({ email, name, passwordHash, lastLoginAt: new Date() })
       .returning({ id: users.id });
-    // No row: the email belongs to an existing, non-admin user.
-    if (!user) return 'taken' as const;
     return user;
   });
 
-  if (result === 'taken') return { error: 'This email belongs to an existing user. Use another email.', ...fields };
   if (result === 'closed') redirect('/admin/login/?error=setup-closed');
   else await createSession(result.id);
   redirect('/admin/');

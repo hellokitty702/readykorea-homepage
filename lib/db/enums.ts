@@ -2,9 +2,6 @@
 // (no Postgres enum types), so adding a value is a code change only: list it here, no migration.
 // No imports, so client components can use these too.
 
-export const USER_ROLES = ['user', 'admin'] as const;
-export type UserRole = (typeof USER_ROLES)[number];
-
 export const JOB_STATUSES = ['draft', 'published', 'closed'] as const;
 export type JobStatus = (typeof JOB_STATUSES)[number];
 

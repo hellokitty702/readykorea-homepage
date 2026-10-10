@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
-import { CategoryRowActions, NewCategoryForm } from '@/components/admin/category-forms';
-import { button, card, cardFlush, cardTitle, code, cx, muted, num, small, strong, table } from '@/components/admin/styles';
+import { AddCategoryButton, CategoryRowActions } from '@/components/admin/category-forms';
+import { button, cardFlush, code, cx, muted, num, small, strong, table } from '@/components/admin/styles';
 import { Empty, PageHeader, PageSub } from '@/components/admin/ui';
 import { moveCategory } from '@/lib/actions/posts';
 import { listCategories } from '@/lib/admin/queries';
@@ -17,7 +17,11 @@ export default async function CategoriesPage() {
 
   return (
     <>
-      <PageHeader title="Categories" crumbs={[{ href: '/admin/blog/', label: 'Blog' }]}>
+      <PageHeader
+        title="Categories"
+        crumbs={[{ href: '/admin/blog/', label: 'Blog' }]}
+        actions={<AddCategoryButton />}
+      >
         <PageSub>
           Each post can have one category. The header's Blog menu and the blog list the categories that have published
           posts, in this order.
@@ -31,8 +35,8 @@ export default async function CategoriesPage() {
               <tr>
                 <th>Order</th>
                 <th>Category</th>
-                <th>Page</th>
-                <th className={num}>Posts</th>
+                <th className="max-md:hidden">Page</th>
+                <th className={cx(num, 'max-sm:hidden')}>Posts</th>
                 <th>
                   <span className="sr-only">Actions</span>
                 </th>
@@ -69,8 +73,12 @@ export default async function CategoriesPage() {
                   <td>
                     <span className={strong}>{c.name}</span>
                     {c.description && <div className={cx(muted, small, 'max-w-md')}>{c.description}</div>}
+                    {/* The Posts column is hidden on phones. */}
+                    <div className={cx(muted, small, 'sm:hidden')}>
+                      {c.posts} {c.posts === 1 ? 'post' : 'posts'}
+                    </div>
                   </td>
-                  <td>
+                  <td className="max-md:hidden">
                     {c.published > 0 ? (
                       <a href={categoryPath(c.slug)} target="_blank" rel="noopener">
                         <code className={code}>{categoryPath(c.slug)}</code>
@@ -79,7 +87,7 @@ export default async function CategoriesPage() {
                       <code className={code}>{categoryPath(c.slug)}</code>
                     )}
                   </td>
-                  <td className={num}>
+                  <td className={cx(num, 'max-sm:hidden')}>
                     <Link href="/admin/blog/">{c.posts}</Link>
                     {c.posts > c.published && (
                       <span className="block text-2xs text-slate-500">{c.posts - c.published} draft</span>
@@ -93,13 +101,8 @@ export default async function CategoriesPage() {
             </tbody>
           </table>
         ) : (
-          <Empty>No categories yet.</Empty>
+          <Empty>No categories yet. Add the first one with “Add category”.</Empty>
         )}
-      </section>
-
-      <section className={cx(card, 'max-w-3xl')}>
-        <h2 className={cardTitle}>Add a category</h2>
-        <NewCategoryForm />
       </section>
     </>
   );

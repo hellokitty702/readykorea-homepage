@@ -42,7 +42,7 @@ export default async function DashboardPage() {
         }
       />
 
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5 [&>:last-child]:max-sm:col-span-2">
         <Kpi label="Published jobs" value={s.jobCount.published ?? 0} href="/admin/jobs/?status=published">
           {(s.jobCount.draft ?? 0) > 0 && `${s.jobCount.draft} draft`}
         </Kpi>
@@ -107,8 +107,8 @@ export default async function DashboardPage() {
                   <th>Job</th>
                   <th>Status</th>
                   <th className={num}>Applications</th>
-                  <th className={num}>In progress</th>
-                  <th className={num}>Hired</th>
+                  <th className={cx(num, 'max-sm:hidden')}>In progress</th>
+                  <th className={cx(num, 'max-sm:hidden')}>Hired</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,8 +126,8 @@ export default async function DashboardPage() {
                     <td className={num}>
                       <Link href={`/admin/applications/?job=${j.id}`}>{j.total}</Link>
                     </td>
-                    <td className={num}>{j.open}</td>
-                    <td className={num}>{j.hired}</td>
+                    <td className={cx(num, 'max-sm:hidden')}>{j.open}</td>
+                    <td className={cx(num, 'max-sm:hidden')}>{j.hired}</td>
                   </tr>
                 ))}
               </tbody>
@@ -144,7 +144,7 @@ export default async function DashboardPage() {
       </div>
 
       <section className={card}>
-        <div className={cardHead}>
+        <div className={cx(cardHead, 'flex-wrap')}>
           <h2 className="text-md font-bold">Latest applications</h2>
           <Link href="/admin/applications/">All applications →</Link>
         </div>
@@ -160,7 +160,7 @@ export default async function DashboardPage() {
                   <td>
                     <StatusBadge status={a.status} />
                   </td>
-                  <td className={cx(num, muted)}>{fmtDate(a.createdAt)}</td>
+                  <td className={cx(num, muted, 'whitespace-nowrap max-sm:hidden')}>{fmtDate(a.createdAt)}</td>
                 </tr>
               ))}
             </tbody>

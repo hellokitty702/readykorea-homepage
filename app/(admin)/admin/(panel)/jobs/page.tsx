@@ -71,9 +71,9 @@ export default async function JobsPage({
               <tr>
                 <th>Job</th>
                 <th>Status</th>
-                <th>Start</th>
+                <th className="max-md:hidden">Start</th>
                 <th className={num}>Applications</th>
-                <th>Updated</th>
+                <th className="max-sm:hidden">Updated</th>
               </tr>
             </thead>
             <tbody>
@@ -95,14 +95,14 @@ export default async function JobsPage({
                   <td>
                     <JobStatusBadge status={job.status} />
                   </td>
-                  <td>{fmtDate(job.startDate)}</td>
+                  <td className="max-md:hidden">{fmtDate(job.startDate)}</td>
                   <td className={num}>
                     <Link href={`/admin/applications/?job=${job.id}`}>{job.applications}</Link>
                     {job.newApplications > 0 && (
                       <span className="block text-2xs font-semibold text-amber-700">{job.newApplications} new</span>
                     )}
                   </td>
-                  <td className={muted}>{fmtDate(job.updatedAt)}</td>
+                  <td className={cx(muted, 'max-sm:hidden')}>{fmtDate(job.updatedAt)}</td>
                 </tr>
               ))}
             </tbody>

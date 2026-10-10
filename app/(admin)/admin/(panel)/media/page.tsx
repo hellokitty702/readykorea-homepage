@@ -34,9 +34,9 @@ export default async function MediaPage({ searchParams }: { searchParams: Promis
           {total} {total === 1 ? 'image' : 'images'}
           {search && ` matching “${search}”`}
         </p>
-        <form className="flex gap-1.5" role="search">
+        <form className="flex flex-1 gap-1.5 sm:flex-none" role="search">
           <input
-            className={cx(input, 'w-64')}
+            className={cx(input, 'min-w-0 flex-1 sm:w-64')}
             type="search"
             name="q"
             defaultValue={search}
@@ -48,7 +48,7 @@ export default async function MediaPage({ searchParams }: { searchParams: Promis
       </div>
 
       {items.length ? (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3.5" aria-label="Images">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] gap-3.5" aria-label="Images">
           {items.map((item) => (
             <MediaCard key={item.id} item={item} />
           ))}

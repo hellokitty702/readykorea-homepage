@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { startTransition, useActionState, useState, type FormEvent } from 'react';
+import { startTransition, useActionState, useState, type FormEvent, type ReactNode } from 'react';
 import { savePost, type PostFormState } from '@/lib/actions/posts';
 import type { Post } from '@/lib/db/schema';
 import { SLUG_MAX, slugify } from '@/lib/slug';
@@ -13,10 +13,19 @@ type EditablePost = Post & { tags: string };
 
 export function PostForm({
   post,
+  viewHref,
+  asideEnd,
   categories,
   tagSuggestions,
 }: {
   post?: EditablePost;
+  /** Public address of a published post, linked next to the Publishing heading. */
+  viewHref?: string;
+  /**
+   * Last card of the right column (the Delete card). It sits inside this form, so its buttons must
+   * submit their own form through the `form` attribute.
+   */
+  asideEnd?: ReactNode;
   categories: { id: number; name: string }[];
   tagSuggestions: string[];
 }) {
@@ -117,7 +126,15 @@ export function PostForm({
 
         <aside className="grid min-w-0 gap-4.5">
           <section className={cx(card, 'grid gap-4')}>
-            <h2 className={cardTitle}>Publishing</h2>
+            {/* Same spacing as the other card titles (cardTitle). */}
+            <div className="mb-3.5 flex items-center justify-between gap-3">
+              <h2 className="text-md font-bold">Publishing</h2>
+              {viewHref && (
+                <a className={button('default', 'sm')} href={viewHref} target="_blank" rel="noopener">
+                  View ↗
+                </a>
+              )}
+            </div>
             <Field label="Status" htmlFor="status">
               <select className={input} id="status" name="status" defaultValue={post?.status ?? 'draft'}>
                 <option value="draft">Draft (hidden)</option>
@@ -253,6 +270,7 @@ export function PostForm({
               />
             </Field>
           </section>
+          {asideEnd}
         </aside>
       </div>
 

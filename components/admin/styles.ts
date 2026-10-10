@@ -46,8 +46,8 @@ export const formGrid = 'grid grid-cols-1 gap-x-4.5 gap-y-3.5 md:grid-cols-2';
 // Layout
 // ---------------------------------------------------------------------------
 
-export const card = 'min-w-0 rounded-xl border border-slate-200 bg-white p-5';
-export const dangerCard = 'min-w-0 rounded-xl border border-red-200 bg-white p-5';
+export const card = 'min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-5';
+export const dangerCard = 'min-w-0 rounded-xl border border-red-200 bg-white p-4 sm:p-5';
 /** Card holding a full-bleed table. */
 export const cardFlush = 'relative min-w-0 overflow-x-auto rounded-xl border border-slate-200 bg-white';
 export const cardTitle = 'mb-3.5 text-md font-bold';
@@ -122,9 +122,11 @@ export const alertOk = 'rounded-lg border border-green-200 bg-green-50 px-3.5 py
 // Tabs (status filters)
 // ---------------------------------------------------------------------------
 
-export const tabs = 'flex flex-wrap gap-1 border-b border-slate-200';
+/** One row that scrolls sideways on narrow screens; the inset shadow is the bottom rule under the tabs. */
+export const tabs =
+  'flex gap-1 overflow-x-auto [scrollbar-width:none] shadow-[inset_0_-1px_0_var(--color-slate-200)] [&::-webkit-scrollbar]:hidden';
 export const tabLink =
-  '-mb-px border-b-2 border-transparent px-3 py-2 font-medium text-slate-500 hover:text-slate-900 hover:no-underline aria-[current=page]:border-amber-400 aria-[current=page]:text-slate-900';
+  'shrink-0 border-b-2 border-transparent px-3 py-2 whitespace-nowrap font-medium text-slate-500 hover:text-slate-900 hover:no-underline aria-[current=page]:border-amber-400 aria-[current=page]:text-slate-900';
 export const tabCount =
   'ml-1 inline-block min-w-5 rounded-full bg-slate-100 px-1.5 text-center text-2xs font-semibold text-slate-500';
 

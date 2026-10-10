@@ -71,7 +71,7 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
           aria-label="Search"
         />
         <select
-          className={cx(input, 'flex-[0_1_320px]')}
+          className={cx(input, 'min-w-0 flex-[1_1_220px] sm:flex-[0_1_320px]')}
           name="job"
           defaultValue={filters.job ? String(filters.job) : ''}
           aria-label="Job"
@@ -121,10 +121,10 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
             <thead>
               <tr>
                 <th>Applicant</th>
-                <th>Job</th>
-                <th>Details</th>
+                <th className="max-md:hidden">Job</th>
+                <th className="max-lg:hidden">Details</th>
                 <th>Status</th>
-                <th>Applied</th>
+                <th className="max-sm:hidden">Applied</th>
               </tr>
             </thead>
             <tbody>
@@ -134,16 +134,21 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
                     <Link className={strong} href={`/admin/applications/${a.id}/`}>
                       {a.fullName}
                     </Link>
-                    <div className={cx(muted, small)}>{a.email}</div>
+                    <div className={cx(muted, small, 'wrap-anywhere')}>{a.email}</div>
+                    {/* The Job and Applied columns are hidden on narrow screens. */}
+                    <div className={cx(small, 'md:hidden')}>
+                      {a.jobTitle ?? <span className={muted}>General</span>}
+                      <span className={cx(muted, 'sm:hidden')}> · {fmtDate(a.createdAt)}</span>
+                    </div>
                   </td>
-                  <td>
+                  <td className="max-md:hidden">
                     {a.jobId ? (
                       <Link href={`/admin/jobs/${a.jobId}/`}>{a.jobTitle}</Link>
                     ) : (
                       <span className={muted}>General</span>
                     )}
                   </td>
-                  <td className={small}>
+                  <td className={cx(small, 'max-lg:hidden')}>
                     {a.position}
                     <div className={muted}>
                       {a.passportCountry} · {a.experience}
@@ -152,7 +157,7 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
                   <td>
                     <StatusBadge status={a.status} />
                   </td>
-                  <td className={muted}>{fmtDate(a.createdAt)}</td>
+                  <td className={cx(muted, 'max-sm:hidden')}>{fmtDate(a.createdAt)}</td>
                 </tr>
               ))}
             </tbody>
@@ -163,7 +168,7 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
       </section>
 
       {pages > 1 && (
-        <nav className="flex items-center justify-center gap-4.5" aria-label="Pages">
+        <nav className="flex flex-wrap items-center justify-center gap-x-4.5 gap-y-2" aria-label="Pages">
           {page > 1 && <Link href={href({ page: String(page - 1) })}>← Newer</Link>}
           <span className={muted}>
             Page {page} of {pages} · {total} applications

@@ -15,7 +15,7 @@ bun run typecheck  # 타입 검사
 
 bun run db:migrate     # DB 테이블 생성/업데이트 (drizzle/ 의 마이그레이션 적용)
 bun run db:seed        # 기존 Job Board 공고 2개, 블로그 카테고리 4개(scripts/seed-categories.json), 블로그 글 17개 추가 (이미 있으면 건너뜀)
-bun run admin:create admin@example.com "이름"   # 관리자 계정 생성 (비밀번호는 한 번만 출력)
+bun run admin:create admin@example.com "이름"   # 관리자 계정 생성 또는 재설정 (비밀번호는 한 번만 출력)
 bun run db:generate    # lib/db/schema.ts 수정 후 새 마이그레이션 파일 생성
 bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 ```
@@ -57,7 +57,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 | `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(blog)/blog/category/[slug]/page.tsx`, `app/(blog)/blog/tag/[slug]/page.tsx` |
 | `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(blog-post)/blog/[slug]/page.tsx` |
 | `/uploads/…` 업로드한 이미지 (로컬 개발 전용) | `app/uploads/[...key]/route.ts` |
-| `/admin/` 관리자 (대시보드, 공고, 지원서, 블로그, 미디어, 사용자) | `app/(admin)/admin/` (로그인: `/admin/login/`) |
+| `/admin/` 관리자 (대시보드, 공고, 지원서, 블로그, 미디어, 계정) | `app/(admin)/admin/` (로그인: `/admin/login/`) |
 | `/sitemap.xml`, `/robots.txt` | `app/sitemap.ts` (요청할 때마다 DB 의 공고·블로그와 레슨 목록으로 생성), `app/robots.ts` |
 
 `(site)`, `(apply)`, `(blog)`, `(blog-post)`, `(admin)` 은 각각 별도의 루트 레이아웃입니다. 페이지마다 전역 CSS가 서로 달라서, 섞이지 않도록 나눠 두었습니다. 공개 페이지 네 레이아웃은 `components/layout/site-layout.tsx` 를 사용하므로 **모든 페이지에 같은 헤더와 푸터**가 나옵니다. 관리자 화면은 자체 레이아웃과 Tailwind 진입 파일 `styles/admin.css` 를 씁니다.
@@ -104,7 +104,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 ## 관리자 / 지원서
 
-- **로그인**: `/admin/login/` — `admin` 역할만 로그인할 수 있습니다 (`user` 역할은 불가). 세션은 DB(`sessions`)에 저장되고 7일간 유지됩니다.
+- **로그인**: `/admin/login/` — 관리자 계정은 하나뿐입니다 (직원 계정 없음). 계정이 없을 때 이 페이지에서 처음 가입한 사람이 관리자가 되고, 그 뒤로는 로그인만 됩니다. 이름·이메일·비밀번호는 관리자 → Account 에서 바꿉니다. 비밀번호를 잊으면 `bun run admin:create` 로 재설정합니다. 세션은 DB(`sessions`)에 저장되고 7일간 유지됩니다.
 - **지원서**: `/apply/` 양식(기존 Google Form 과 같은 질문)과 Job Board 의 "Apply Now" 버튼이 DB(`applications`)에 저장합니다. 관리자 → Applications 에서 단계를 옮기고 메모를 남기면 모두 타임라인(`application_events`)에 기록됩니다.
 - **공고**: 관리자 → Jobs 에서 작성/수정/공개/마감합니다. 공개(Published)된 공고만 홈페이지 Job Board, 공고 상세 페이지(`/jobs/주소/`), 지원서 양식에 나옵니다. 지원서가 있는 공고는 삭제할 수 없고 마감만 가능합니다. 공고 주소는 한 번 정하면 바꾸지 않는 것이 좋습니다 (공유된 링크가 깨집니다).
 - **블로그**: 관리자 → Blog 에서 글을 쓰고, **Categories** 에서 카테고리를 관리합니다. 글마다 카테고리는 하나, 태그는 최대 12개입니다. 태그는 입력하면 만들어지고, 쓰는 글이 없어지면 자동으로 지워집니다. 카테고리 목록의 ↑/↓ 버튼으로 순서를 바꾸면 헤더 Blog 메뉴, 블로그 탭, `/blog/` 카드 순서가 함께 바뀝니다. 글 편집 화면의 **Featured** 를 체크하면 추천 글이 됩니다: `/blog/` 맨 위에는 가장 최근(공개일 기준) 추천 글이, 카테고리 페이지 맨 위에는 그 카테고리의 가장 최근 추천 글이 크게 나오고, 아래 카드 목록에서는 빠집니다.

@@ -248,7 +248,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 
   return (
     <div
-      className="sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b border-slate-200 bg-slate-50 px-1.5 py-1"
+      className="sticky top-14 z-10 flex flex-wrap lg:top-0 items-center gap-0.5 border-b border-slate-200 bg-slate-50 px-1.5 py-1"
       role="toolbar"
       aria-label="Formatting"
     >

@@ -48,8 +48,8 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="flex flex-wrap items-end justify-between gap-4">
-      <div>
+    <header className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+      <div className="min-w-0">
         {crumbs && (
           <nav className="mb-1 text-label text-slate-500" aria-label="Breadcrumb">
             {crumbs.map((c) => (
@@ -59,7 +59,7 @@ export function PageHeader({
             ))}
           </nav>
         )}
-        <h1 className="text-2xl leading-tight font-bold tracking-tight">{title}</h1>
+        <h1 className="text-2xl leading-tight font-bold tracking-tight wrap-break-word">{title}</h1>
         {children}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}

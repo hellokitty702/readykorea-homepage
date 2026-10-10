@@ -19,7 +19,6 @@ import {
   JOB_STATUSES,
   MEDIA_DISKS,
   POST_STATUSES,
-  USER_ROLES,
 } from './enums';
 
 export * from './enums';
@@ -33,7 +32,7 @@ const timestamps = {
 };
 
 // ---------------------------------------------------------------------------
-// Users + sessions
+// Users + sessions (the panel has one account, the admin; no staff accounts or roles)
 // ---------------------------------------------------------------------------
 
 export const users = pgTable('users', {
@@ -41,7 +40,6 @@ export const users = pgTable('users', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   name: varchar('name', { length: 120 }).notNull(),
   passwordHash: text('password_hash').notNull(),
-  role: varchar('role', { length: 20, enum: USER_ROLES }).notNull().default('user'),
   lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
   ...timestamps,
 });

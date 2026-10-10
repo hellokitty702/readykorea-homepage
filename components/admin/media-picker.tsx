@@ -85,7 +85,7 @@ export function MediaPicker({
       className="m-auto w-[min(960px,calc(100vw-24px))] max-w-none rounded-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/50"
     >
       <div className="flex max-h-[calc(100dvh-24px)] flex-col">
-        <header className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-3.5">
+        <header className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3.5 sm:px-5">
           <h2 id="media-picker-title" className="text-md font-bold">
             Insert an image
           </h2>
@@ -94,7 +94,7 @@ export function MediaPicker({
           </button>
         </header>
 
-        <div className="grid min-h-0 flex-1 gap-4 overflow-y-auto px-5 py-4">
+        <div className="grid min-h-0 flex-1 gap-4 overflow-y-auto px-4 py-4 sm:px-5">
           <MediaDropzone
             compact
             onUploaded={(item) => {
@@ -105,10 +105,10 @@ export function MediaPicker({
 
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-label font-bold tracking-wide text-slate-700 uppercase">Media library</h3>
-            <div role="search" className="flex gap-1.5">
+            <div role="search" className="flex flex-1 gap-1.5 sm:flex-none">
               <input
                 type="search"
-                className={cx(input, 'w-56 py-1.5 text-label')}
+                className={cx(input, 'min-w-0 flex-1 py-1.5 text-label sm:w-56')}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => {
@@ -193,7 +193,7 @@ export function MediaPicker({
           </label>
         </div>
 
-        <footer className="grid gap-3 border-t border-slate-200 bg-slate-50 px-5 py-3.5 sm:grid-cols-[auto_1fr_auto] sm:items-end">
+        <footer className="grid gap-3 border-t border-slate-200 bg-slate-50 px-4 py-3.5 sm:grid-cols-[auto_1fr_auto] sm:items-end sm:px-5">
           <div className="hidden size-14 overflow-hidden rounded-lg border border-slate-200 bg-white sm:block">
             {src && <img src={src} alt="" className="size-full object-cover" />}
           </div>

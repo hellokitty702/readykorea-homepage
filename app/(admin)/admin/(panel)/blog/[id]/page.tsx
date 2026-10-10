@@ -26,17 +26,7 @@ export default async function EditPostPage({
 
   return (
     <>
-      <PageHeader
-        title={post.title}
-        crumbs={[{ href: '/admin/blog/', label: 'Blog' }]}
-        actions={
-          post.status === 'published' && (
-            <a className={button()} href={postPath(post.slug)} target="_blank" rel="noopener">
-              View post ↗
-            </a>
-          )
-        }
-      >
+      <PageHeader title={post.title} crumbs={[{ href: '/admin/blog/', label: 'Blog' }]}>
         <PageSub>
           <PostStatusBadge status={post.status} />
           {post.publishedAt ? `Published ${fmtDateTime(post.publishedAt)}` : 'Not published yet'} · Updated{' '}
@@ -51,20 +41,32 @@ export default async function EditPostPage({
       )}
 
       {/* Remount after each save so the form shows what was stored (e.g. a generated slug). */}
-      <PostForm key={post.updatedAt.getTime()} post={post} categories={categories} tagSuggestions={tagSuggestions} />
-
-      <section className={dangerCard}>
-        <h2 className={cardTitle}>Delete post</h2>
-        <p className={cx(muted, small, 'mb-3')}>
-          The post disappears from the blog and its link stops working. To hide it for now, set it back to Draft.
-        </p>
-        <form action={deletePost}>
-          <input type="hidden" name="id" value={post.id} />
-          <ConfirmButton className={button('danger')} message={`Delete “${post.title}”? This can't be undone.`}>
-            Delete post
-          </ConfirmButton>
-        </form>
-      </section>
+      <PostForm
+        key={post.updatedAt.getTime()}
+        post={post}
+        viewHref={post.status === 'published' ? postPath(post.slug) : undefined}
+        categories={categories}
+        tagSuggestions={tagSuggestions}
+        asideEnd={
+          <section className={dangerCard}>
+            <h2 className={cardTitle}>Delete post</h2>
+            <p className={cx(muted, small, 'mb-3')}>
+              The post disappears from the blog and its link stops working. To hide it for now, set it back to Draft.
+            </p>
+            {/* Submits the form below: forms can't be nested inside the post form. */}
+            <ConfirmButton
+              form="delete-post"
+              className={button('danger')}
+              message={`Delete “${post.title}”? This can't be undone.`}
+            >
+              Delete post
+            </ConfirmButton>
+          </section>
+        }
+      />
+      <form id="delete-post" action={deletePost} hidden>
+        <input type="hidden" name="id" value={post.id} />
+      </form>
     </>
   );
 }

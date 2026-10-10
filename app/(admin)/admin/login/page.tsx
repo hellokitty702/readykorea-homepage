@@ -19,8 +19,8 @@ export default async function LoginPage({
 }) {
   const { next, error } = await searchParams;
   const user = await getCurrentUser();
-  if (user?.role === 'admin') redirect('/admin/');
-  // Until the first admin exists, this page creates that account instead of signing in.
+  if (user) redirect('/admin/');
+  // Until the admin account exists, this page creates it instead of signing in.
   const setup = !(await adminExists());
 
   return (
@@ -78,22 +78,18 @@ export default async function LoginPage({
           {setup ? (
             <>
               <p className="mt-2 mb-7 text-slate-500">
-                No admin account exists yet. The account you create here becomes the admin; after that, this page
-                only signs in.
+                No admin account exists yet. Create it here; after that, this page only signs in. The panel has a
+                single account.
               </p>
               <SignupForm />
             </>
           ) : (
             <>
-              <p className="mt-2 mb-7 text-slate-500">Staff accounts only. An existing admin can add you under Users.</p>
+              <p className="mt-2 mb-7 text-slate-500">Sign in with the admin account.</p>
               <LoginForm
                 next={next ?? ''}
                 notice={
-                  error === 'setup-closed'
-                    ? 'An admin account already exists. Sign in instead.'
-                    : error === 'forbidden' || user
-                      ? 'This account does not have admin access.'
-                      : ''
+                  error === 'setup-closed' ? 'An admin account already exists. Sign in instead.' : ''
                 }
               />
             </>

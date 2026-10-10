@@ -85,7 +85,7 @@ export default async function JobPage({
 
       <div className={twoColumnsWideLeft}>
         <section className={card}>
-          <div className={cardHead}>
+          <div className={cx(cardHead, 'flex-wrap')}>
             <h2 className="text-md font-bold">Applications ({apps.total})</h2>
             <Link href={`/admin/applications/?job=${job.id}`}>Open in Applications →</Link>
           </div>
@@ -119,7 +119,7 @@ export default async function JobPage({
                     <td>
                       <StatusBadge status={a.status} />
                     </td>
-                    <td className={cx(num, muted)}>{fmtDate(a.createdAt)}</td>
+                    <td className={cx(num, muted, 'whitespace-nowrap max-sm:hidden')}>{fmtDate(a.createdAt)}</td>
                   </tr>
                 ))}
               </tbody>

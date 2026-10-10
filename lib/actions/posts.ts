@@ -1,6 +1,6 @@
 'use server';
 
-import { and, asc, eq, like, max, ne, or } from 'drizzle-orm';
+import { and, asc, eq, inArray, like, max, ne, or, sql } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import * as z from 'zod';
@@ -13,6 +13,7 @@ import { SLUG_HINT, SLUG_MAX, SLUG_PATTERN, slugify } from '@/lib/slug';
 
 export type PostFormState = { message?: string; errors?: Record<string, string> };
 export type CategoryFormState = { error?: string; ok?: string };
+export type BulkPostState = { error?: string; ok?: string };
 
 const FIX = 'Please fix the highlighted fields.';
 /** /blog/category/… and /blog/tag/… are archive pages. */
@@ -152,6 +153,56 @@ export async function savePost(_prev: PostFormState, formData: FormData): Promis
 
   revalidateBlog();
   redirect(`/admin/blog/${postId}/?saved=1`);
+}
+
+const plural = (n: number) => `${n} ${n === 1 ? 'post' : 'posts'}`;
+
+/** Publishes the selected posts (`ids`), or moves them to drafts, from the post list. */
+export async function setPostsStatus(_prev: BulkPostState, formData: FormData): Promise<BulkPostState> {
+  await requireAdmin();
+  const ids = formData
+    .getAll('ids')
+    .map(Number)
+    .filter((n) => Number.isInteger(n) && n > 0);
+  const status = z.enum(POST_STATUSES).safeParse(formData.get('status'));
+  if (!status.success) return { error: 'Choose Publish or Move to draft.' };
+  if (!ids.length) return { error: 'Select at least one post.' };
+
+  if (status.data === 'draft') {
+    // Drafts keep their first publish date, so republishing doesn't move them to the top of the blog.
+    const moved = await db
+      .update(posts)
+      .set({ status: 'draft' })
+      .where(and(inArray(posts.id, ids), eq(posts.status, 'published')))
+      .returning({ id: posts.id });
+    if (moved.length) revalidateBlog();
+    return { ok: moved.length ? `Moved ${plural(moved.length)} to drafts.` : 'Those posts were already drafts.' };
+  }
+
+  // Same rule as the post form: a post needs an article before it can go live.
+  const drafts = await db
+    .select({ id: posts.id, title: posts.title, body: posts.body })
+    .from(posts)
+    .where(and(inArray(posts.id, ids), eq(posts.status, 'draft')));
+  const ready = drafts.filter((p) => postText(p.body) || p.body.includes('<img'));
+  const empty = drafts.filter((p) => !ready.includes(p));
+  if (ready.length) {
+    await db
+      .update(posts)
+      .set({ status: 'published', publishedAt: sql`coalesce(${posts.publishedAt}, now())` })
+      .where(
+        inArray(
+          posts.id,
+          ready.map((p) => p.id),
+        ),
+      );
+    revalidateBlog();
+  }
+  const skipped = empty.length
+    ? ` Skipped ${plural(empty.length)} with no article yet: ${empty.map((p) => `“${p.title}”`).join(', ')}.`
+    : '';
+  if (!ready.length) return empty.length ? { error: skipped.trim() } : { ok: 'Those posts were already published.' };
+  return { ok: `Published ${plural(ready.length)}.${skipped}` };
 }
 
 export async function deletePost(formData: FormData) {

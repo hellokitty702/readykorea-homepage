@@ -36,6 +36,18 @@
   }
 }
 
+/*
+ * iOS zooms the page into any form control under 16px when it gets focus, so touch screens get 16px
+ * controls. Outside the layers on purpose: it has to win over the text-size utilities.
+ */
+@media (pointer: coarse) {
+  input:not([type='checkbox'], [type='radio']),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Blog editor content (components/admin/rich-text-editor.tsx): close to the public article styles. */
 @layer components {
   .rich-text {

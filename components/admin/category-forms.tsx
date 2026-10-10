@@ -1,6 +1,7 @@
 'use client';
 
-import { startTransition, useActionState, useEffect, useRef, type FormEvent } from 'react';
+import { Plus, X } from 'lucide-react';
+import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from 'react';
 import { deleteCategory, saveCategory, type CategoryFormState } from '@/lib/actions/posts';
 import { SLUG_MAX } from '@/lib/slug';
 import { Field } from './field';
@@ -59,22 +60,60 @@ function useCategoryAction() {
   return { state, action, pending, onSubmit };
 }
 
-export function NewCategoryForm() {
-  const { state, action, pending, onSubmit } = useCategoryAction();
-  const form = useRef<HTMLFormElement>(null);
-  useEffect(() => {
-    if (state.ok) form.current?.reset();
-  }, [state]);
+/** "Add a category" button on the categories page; the form opens in a dialog. */
+export function AddCategoryButton() {
+  const dialog = useRef<HTMLDialogElement>(null);
+  // A new form (and so a fresh message state) each time the dialog opens.
+  const [opened, setOpened] = useState(0);
+  const open = () => {
+    setOpened((n) => n + 1);
+    dialog.current?.showModal();
+  };
+  const close = () => dialog.current?.close();
 
   return (
-    <form ref={form} action={action} onSubmit={onSubmit} className="grid gap-3.5">
-      <Message state={state} />
+    <>
+      <button type="button" className={button('primary')} onClick={open}>
+        <Plus className="size-4" aria-hidden="true" /> Add category
+      </button>
+      <dialog
+        ref={dialog}
+        onClick={(e) => e.target === dialog.current && close()}
+        aria-labelledby="new-category-title"
+        className="m-auto w-[min(640px,calc(100vw-24px))] max-w-none rounded-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/50"
+      >
+        <header className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3.5 sm:px-5">
+          <h2 id="new-category-title" className="text-md font-bold">
+            Add a category
+          </h2>
+          <button type="button" className={button('ghost', 'sm')} onClick={close} aria-label="Close">
+            <X className="size-4" aria-hidden="true" />
+          </button>
+        </header>
+        {opened > 0 && <NewCategoryForm key={opened} onAdded={close} onCancel={close} />}
+      </dialog>
+    </>
+  );
+}
+
+function NewCategoryForm({ onAdded, onCancel }: { onAdded: () => void; onCancel: () => void }) {
+  const { state, action, pending, onSubmit } = useCategoryAction();
+  useEffect(() => {
+    if (state.ok) onAdded();
+  }, [state, onAdded]);
+
+  return (
+    <form action={action} onSubmit={onSubmit} className="grid gap-3.5 px-4 py-4 sm:px-5">
+      {state.error && <Message state={state} />}
       <div className={formGrid}>
         <Fields />
       </div>
-      <div>
+      <div className="flex gap-2">
         <button className={button('primary')} disabled={pending}>
           {pending ? 'Adding…' : 'Add category'}
+        </button>
+        <button type="button" className={button('ghost')} onClick={onCancel}>
+          Cancel
         </button>
       </div>
     </form>

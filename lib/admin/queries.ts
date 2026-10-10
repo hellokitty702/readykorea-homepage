@@ -284,24 +284,6 @@ export async function getApplication(id: number | null) {
 }
 
 // ---------------------------------------------------------------------------
-// Users
-// ---------------------------------------------------------------------------
-
-export function listUsers() {
-  return db
-    .select({
-      id: users.id,
-      email: users.email,
-      name: users.name,
-      role: users.role,
-      lastLoginAt: users.lastLoginAt,
-      createdAt: users.createdAt,
-    })
-    .from(users)
-    .orderBy(desc(users.role), asc(users.name));
-}
-
-// ---------------------------------------------------------------------------
 // Blog
 // ---------------------------------------------------------------------------
 

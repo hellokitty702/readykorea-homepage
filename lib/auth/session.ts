@@ -1,6 +1,6 @@
 import 'server-only';
 import { createHash, randomBytes } from 'node:crypto';
-import { and, eq, gt, lt } from 'drizzle-orm';
+import { and, eq, gt, lt, ne } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 import { db } from '@/lib/db';
 import { sessions, users } from '@/lib/db/schema';
@@ -32,12 +32,19 @@ export async function readSessionUser() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
   const [row] = await db
-    .select({ id: users.id, email: users.email, name: users.name, role: users.role })
+    .select({ id: users.id, email: users.email, name: users.name })
     .from(sessions)
     .innerJoin(users, eq(users.id, sessions.userId))
     .where(and(eq(sessions.id, hashToken(token)), gt(sessions.expiresAt, new Date())))
     .limit(1);
   return row ?? null;
+}
+
+/** Ends the user's sessions on other devices, keeping the current one. Server Actions only. */
+export async function deleteOtherSessions(userId: number) {
+  const token = (await cookies()).get(SESSION_COOKIE)?.value;
+  const mine = eq(sessions.userId, userId);
+  await db.delete(sessions).where(token ? and(mine, ne(sessions.id, hashToken(token))) : mine);
 }
 
 /** Ends the current session and clears the cookie. Server Actions / Route Handlers only. */
