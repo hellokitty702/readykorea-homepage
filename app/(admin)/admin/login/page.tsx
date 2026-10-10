@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { LoginForm } from '@/components/admin/login-form';
 import { SeoulClock } from '@/components/admin/seoul-clock';
-import { getCurrentUser } from '@/lib/auth/dal';
+import { SignupForm } from '@/components/admin/signup-form';
+import { adminExists, getCurrentUser } from '@/lib/auth/dal';
 
 export const metadata: Metadata = { title: 'Sign in' };
 
@@ -19,6 +20,8 @@ export default async function LoginPage({
   const { next, error } = await searchParams;
   const user = await getCurrentUser();
   if (user?.role === 'admin') redirect('/admin/');
+  // Until the first admin exists, this page creates that account instead of signing in.
+  const setup = !(await adminExists());
 
   return (
     <div className="grid min-h-dvh grid-rows-[auto_1fr] bg-white lg:grid-cols-[minmax(0,1fr)_minmax(460px,40%)] lg:grid-rows-none">
@@ -70,13 +73,31 @@ export default async function LoginPage({
         <div className="mx-auto my-auto w-full max-w-90">
           <p className="text-xs font-semibold tracking-[0.14em] text-amber-700 uppercase">Admin</p>
           <h1 className={`${display.className} mt-2 text-[30px] leading-tight font-extrabold tracking-[-0.025em]`}>
-            Sign in
+            {setup ? 'Create the admin account' : 'Sign in'}
           </h1>
-          <p className="mt-2 mb-7 text-slate-500">Staff accounts only. An existing admin can add you under Users.</p>
-          <LoginForm
-            next={next ?? ''}
-            notice={error === 'forbidden' || user ? 'This account does not have admin access.' : ''}
-          />
+          {setup ? (
+            <>
+              <p className="mt-2 mb-7 text-slate-500">
+                No admin account exists yet. The account you create here becomes the admin; after that, this page
+                only signs in.
+              </p>
+              <SignupForm />
+            </>
+          ) : (
+            <>
+              <p className="mt-2 mb-7 text-slate-500">Staff accounts only. An existing admin can add you under Users.</p>
+              <LoginForm
+                next={next ?? ''}
+                notice={
+                  error === 'setup-closed'
+                    ? 'An admin account already exists. Sign in instead.'
+                    : error === 'forbidden' || user
+                      ? 'This account does not have admin access.'
+                      : ''
+                }
+              />
+            </>
+          )}
         </div>
         <Link href="/" className="mx-auto mt-10 w-full max-w-90 text-label text-slate-500 hover:text-slate-900">
           ← Back to readykoreaesl.com

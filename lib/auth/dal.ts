@@ -1,6 +1,9 @@
 import 'server-only';
+import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
+import { db } from '@/lib/db';
+import { users } from '@/lib/db/schema';
 import { readSessionUser } from './session';
 
 export type SessionUser = NonNullable<Awaited<ReturnType<typeof readSessionUser>>>;
@@ -17,4 +20,10 @@ export async function requireAdmin(): Promise<SessionUser> {
   if (!user) redirect('/admin/login/');
   if (user.role !== 'admin') redirect('/admin/login/?error=forbidden');
   return user;
+}
+
+/** False until the first admin signs up on /admin/login/; after that the page only signs in. */
+export async function adminExists(): Promise<boolean> {
+  const [row] = await db.select({ id: users.id }).from(users).where(eq(users.role, 'admin')).limit(1);
+  return Boolean(row);
 }
