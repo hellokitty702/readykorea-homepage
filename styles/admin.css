@@ -1,0 +1,139 @@
+/*
+ * Admin panel (/admin): Tailwind CSS with Preflight. Separate root layout, so nothing here reaches
+ * the public site (which uses styles/tailwind.css without Preflight). Styling lives in the
+ * components as utility classes; shared class lists are in components/admin/styles.ts.
+ */
+@import 'tailwindcss' source(none);
+
+@source '../app/(admin)';
+@source '../components/admin';
+
+@theme {
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Pretendard', sans-serif;
+
+  /* Dense type scale for a 14px UI; small sizes keep the body's 1.5 line height. */
+  --text-2xs: 11px;
+  --text-2xs--line-height: 1.5;
+  --text-xs: 12px;
+  --text-xs--line-height: 1.5;
+  --text-label: 13px;
+  --text-label--line-height: 1.5;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.5;
+  --text-md: 15px;
+  --text-md--line-height: 1.5;
+  --text-base: 16px;
+  --text-base--line-height: 1.5;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  a {
+    @apply text-blue-700 hover:underline;
+  }
+}
+
+/* Blog editor content (components/admin/rich-text-editor.tsx): close to the public article styles. */
+@layer components {
+  .rich-text {
+    @apply text-md leading-relaxed text-slate-800;
+    & > * + * {
+      @apply mt-3;
+    }
+    & h2 {
+      @apply mt-6 text-xl font-bold text-slate-900;
+    }
+    & h3 {
+      @apply mt-5 text-lg font-bold text-slate-900;
+    }
+    & h4 {
+      @apply mt-4 text-md font-bold text-slate-900;
+    }
+    & ul {
+      @apply list-disc pl-6;
+    }
+    & ol {
+      @apply list-decimal pl-6;
+    }
+    & li > p {
+      @apply my-1;
+    }
+    & a {
+      @apply text-blue-700 underline;
+    }
+    & blockquote {
+      @apply border-l-3 border-amber-400 pl-4 text-slate-600 italic;
+    }
+    & code {
+      @apply rounded bg-slate-100 px-1 py-px font-mono text-[0.9em];
+    }
+    & hr {
+      @apply my-6 border-slate-200;
+    }
+    & img {
+      @apply mx-auto h-auto max-h-96 w-auto rounded-lg;
+    }
+    & img.ProseMirror-selectednode {
+      @apply outline-2 outline-blue-500;
+    }
+    & p.is-editor-empty:first-child::before {
+      @apply pointer-events-none float-left h-0 text-slate-400 content-[attr(data-placeholder)];
+    }
+
+    /* Boxes (lib/post-markup.ts), named in a corner so it's clear which one the cursor is in.
+       .tableWrapper is the editor's own wrapper around tables. */
+    & div:not(.tableWrapper) {
+      @apply relative rounded-lg border border-slate-200 bg-slate-50 px-4 pt-5 pb-3;
+      & > * + * {
+        @apply mt-2;
+      }
+      &::before {
+        @apply pointer-events-none absolute top-1 right-2 font-mono text-2xs text-slate-400 content-[attr(class)];
+      }
+    }
+    & div:is(.highlight-box, .quote-box, .script-box, .mindset-box, .closing, .next-step) {
+      @apply border-amber-300 border-l-4 bg-amber-50;
+    }
+    & div:is(.warning-box, .warn-box) {
+      @apply border-red-200 border-l-4 border-l-red-500 bg-red-50;
+    }
+    & div.intent-box {
+      @apply border-sky-200 bg-sky-50;
+    }
+    & div.cta-box {
+      @apply text-center;
+    }
+    & div.md-table-wrap {
+      @apply border-0 bg-transparent p-0 pt-4;
+    }
+    & span.label {
+      @apply block text-2xs font-bold tracking-wider text-slate-500 uppercase;
+    }
+    & p.intro {
+      @apply text-[1.05em] text-slate-900;
+    }
+    & p.disclaimer {
+      @apply text-label text-slate-500;
+    }
+
+    /* Tables */
+    & table {
+      @apply w-full border-collapse text-label;
+    }
+    & :is(th, td) {
+      @apply relative border border-slate-200 px-2.5 py-1.5 text-left align-top;
+      & > p {
+        @apply m-0;
+      }
+    }
+    & th {
+      @apply bg-slate-100 font-semibold;
+    }
+    & .selectedCell::after {
+      @apply pointer-events-none absolute inset-0 bg-blue-200/40 content-[''];
+    }
+  }
+}

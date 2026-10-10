@@ -1,0 +1,18 @@
+/*
+ * Tailwind CSS for the public site (every root layout except the admin panel's).
+ *
+ * - No Preflight (Tailwind's reset): it would restyle the existing pages, e.g. remove list bullets
+ *   and heading sizes in lesson content. Each stylesheet keeps its own base styles.
+ * - Only app/ and components/ are scanned for class names. content/ and public/js/ hold the legacy
+ *   HTML, where class names like `hidden`, `grid` or `container` would otherwise turn into utilities.
+ * - Tailwind's rules live in CSS layers, so the existing (unlayered) styles win any conflict.
+ */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+
+@source '../app';
+@source '../components';
+/* The admin panel has its own Tailwind build (styles/admin.css). */
+@source not '../app/(admin)';
+@source not '../components/admin';

@@ -18,3 +18,13 @@ _zip_inspect/
 _zip_staging/
 lessons_from_zip/
 lessons_old_backup/
+
+# Local environment (see .env.example)
+.env
+.env*.local
+
+# Local database backups
+backup/
+
+# Media uploaded in development (STORAGE_DRIVER=local)
+/storage/

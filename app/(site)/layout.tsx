@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { SiteLayout } from '@/components/layout/SiteLayout';
+import { SiteLayout } from '@/components/layout/site-layout';
 import { baseMetadata } from '@/lib/metadata';
 import '@/styles/site.css';
 import '@/styles/layout.css';
+import '@/styles/tailwind.css';
 
 // Homepage + lesson pages share the main site stylesheet. Apply and blog pages have their
 // own root layouts so their (conflicting) global styles never load together with this one.

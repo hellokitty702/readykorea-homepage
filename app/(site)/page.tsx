@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { HtmlBlock } from '@/components/HtmlBlock';
-import { JsonLd } from '@/components/JsonLd';
-import { LegacyScripts } from '@/components/LegacyScripts';
-import { LatestPosts } from '@/components/home/LatestPosts';
-import { Overlays } from '@/components/home/Overlays';
-import { PlatformPerformance } from '@/components/home/PlatformPerformance';
+import { HtmlBlock } from '@/components/html-block';
+import { JsonLd } from '@/components/json-ld';
+import { LegacyScripts } from '@/components/legacy-scripts';
+import { LatestPosts } from '@/components/home/latest-posts';
+import { Overlays } from '@/components/home/overlays';
+import { PlatformPerformance } from '@/components/home/platform-performance';
+import { getPublishedJobs, renderJobCards } from '@/lib/job-board';
+import { SCHOOL_POST_JOB_FORM_URL, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'ReadyKorea - 원어민 영어강사 매칭 전문',
@@ -39,7 +41,7 @@ const ORGANIZATION_LD = {
   '@type': 'Organization',
   name: 'ReadyKorea',
   alternateName: '래디코리아',
-  url: 'https://readykoreaesl.com/',
+  url: absoluteUrl('/'),
   description:
     'Premium edutech matching platform for native English teachers in Korea — 162 lesson plans, AI Lab, E-2 Visa support, verified hagwon jobs.',
   sameAs: [],
@@ -65,20 +67,37 @@ const PANELS: { id: string; className?: string }[] = [
   { id: 'why-korea', className: 'guide-mode' },
   { id: 'regions' },
 ];
-const REGIONS = ['seoul', 'busan', 'daegu', 'songdo', 'jeju', 'gyeonggi', 'bundang', 'suwon', 'yongin', 'ilsan', 'daechi'];
+const REGIONS = [
+  'seoul',
+  'busan',
+  'daegu',
+  'songdo',
+  'jeju',
+  'gyeonggi',
+  'bundang',
+  'suwon',
+  'yongin',
+  'ilsan',
+  'daechi',
+];
 const LESSON_LEVELS = ['k1', 'k2', 'k3', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6'];
 
-function Panel({ id, className }: { id: string; className?: string }) {
+function Panel({ id, className, replace }: { id: string; className?: string; replace?: Record<string, string> }) {
   return (
     <HtmlBlock
       id={`level-${id}`}
       className={className ? `level-content ${className}` : 'level-content'}
       src={`home/levels/${id}.html`}
+      replace={replace}
     />
   );
 }
 
-export default function HomePage() {
+// Prerendered; job changes in the admin panel call revalidatePath('/') to rebuild it.
+export default async function HomePage() {
+  const jobs = await getPublishedJobs();
+  const jobCards = { '<!--JOB_CARDS-->': renderJobCards(jobs, SCHOOL_POST_JOB_FORM_URL) };
+
   return (
     <>
       <JsonLd data={ORGANIZATION_LD} />
@@ -87,7 +106,7 @@ export default function HomePage() {
       <HtmlBlock className="level-tab-bar" aria-hidden="true" src="home/level-tab-bar.html" />
 
       {PANELS.map((panel) => (
-        <Panel key={panel.id} {...panel} />
+        <Panel key={panel.id} {...panel} replace={panel.id === 'home' ? jobCards : undefined} />
       ))}
       {REGIONS.map((region) => (
         <HtmlBlock

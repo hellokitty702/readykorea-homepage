@@ -1,0 +1,156 @@
+[
+  {
+    "code": "RK-2026-GN-001",
+    "badge": "new",
+    "school": "ABC English Kindergarten",
+    "startDate": "2026-06-01",
+    "rating": "4.7 · 32 reviews",
+    "en": {
+      "title": "Kindergarten lead teacher (K2–K3)",
+      "type": "English kindergarten",
+      "location": "Gangnam · Sinnonhyeon Stn. (Line 9)",
+      "salary": "₩2.7–3.0M / month",
+      "housing": "Provided",
+      "response": "~6 hours",
+      "workingHours": "9:00 AM – 6:00 PM (1-hr lunch)",
+      "monthlySalary": "₩2.7–3.0M / month",
+      "housingType": "Provided (studio near school)",
+      "studentAge": "Ages 4–5 · K2–K3 English immersion",
+      "workingDays": "Mon–Fri",
+      "openings": "1 position",
+      "salaryDetails": "Paid on the 10th each month · 3.3% tax withheld · overtime rare",
+      "housingPolicy": "Furnished studio within 10-min walk · utilities included · deposit covered by school",
+      "vacation": "10 days paid vacation + national holidays · 3 sick days/year",
+      "severance": "Standard Korean severance (퇴직금) after 12+ months",
+      "insurance": "National Health Insurance + National Pension (50/50 split)",
+      "airfare": "One-way reimbursement up to ₩800K after contract completion",
+      "distinctive": "ABC runs a play-based immersion model with small classes (max 12). Lead teachers co-plan with Korean homeroom staff and use ReadyKorea K2–K3 curriculum vault from Day 1. Strong parent communication culture — weekly photo updates and monthly parent letters.",
+      "faq": [
+        {
+          "q": "What are the hours?",
+          "a": "9:00 AM – 6:00 PM, Monday–Friday. One-hour lunch break. Occasional Saturday events (paid separately)."
+        },
+        {
+          "q": "Who can apply?",
+          "a": "Native English speakers from E-2 visa countries with a bachelor's degree and clean criminal record check. TEFL 120+ preferred; kindergarten experience a plus."
+        },
+        {
+          "q": "What is the interview process?",
+          "a": "1) Resume review · 2) 20-min video interview · 3) Sample circle-time demo (optional) · 4) Director call · Offer within ~6 hours of final step."
+        }
+      ]
+    },
+    "ko": {
+      "title": "유치원 주임 강사 (K2–K3)",
+      "type": "영어유치원",
+      "location": "강남구 · 9호선 신논현역",
+      "salary": "월 270–300만원",
+      "housing": "제공",
+      "response": "~6시간",
+      "workingHours": "09:00–18:00 (점심 1시간)",
+      "monthlySalary": "월 270–300만원",
+      "housingType": "제공 (학원 인근 원룸)",
+      "studentAge": "만 4–5세 · K2–K3 영어 몰입",
+      "workingDays": "월–금",
+      "openings": "1명",
+      "salaryDetails": "매월 10일 지급 · 3.3% 원천징수 · 연장근무 거의 없음",
+      "housingPolicy": "학교 도보 10분 이내 풀옵션 원룸 · 공과금 포함 · 보증금 학원 부담",
+      "vacation": "유급 휴가 10일 + 공휴일 · 병가 3일/년",
+      "severance": "12개월 이상 근무 시 법정 퇴직금(퇴직금) 지급",
+      "insurance": "국민건강보험 + 국민연금 (본인/학원 각 50%)",
+      "airfare": "계약 완료 후 편도 항공권 최대 80만원 지원",
+      "distinctive": "ABC는 소규모(최대 12명) 놀이 중심 몰입 수업을 운영합니다. 주임 강사는 한국인 담임과 공동 수업 설계를 하며, 입사 첫날부터 ReadyKorea K2–K3 커리큘럼을 사용합니다. 학부모 소통 문화가 강해 주간 사진 업데이트와 월간 안내문을 제공합니다.",
+      "faq": [
+        {
+          "q": "근무 시간은?",
+          "a": "월–금 09:00–18:00, 점심 1시간. 가끔 토요일 행사(별도 수당)."
+        },
+        {
+          "q": "지원 자격은?",
+          "a": "E-2 비자 7개국 원어민, 학사 학위, 범죄경력조회서. TEFL 120시간 이상 우대, 유치원 경력 플러스."
+        },
+        {
+          "q": "면접 절차는?",
+          "a": "1) 서류 검토 · 2) 20분 화상 면접 · 3) 서클타임 시범(선택) · 4) 원장 통화 · 최종 후 약 6시간 내 오퍼."
+        }
+      ]
+    }
+  },
+  {
+    "code": "RK-2026-SP-002",
+    "badge": "urgent",
+    "school": "Little Stars Kindergarten",
+    "startDate": "2026-07-01",
+    "rating": "4.5 · 27 reviews",
+    "en": {
+      "title": "Senior kindergarten teacher (K1–K2)",
+      "type": "English kindergarten",
+      "location": "Songpa · Jamsil Stn. (Line 2)",
+      "salary": "₩2.8–3.2M / month",
+      "housing": "₩500K allowance",
+      "response": "~4 hours",
+      "workingHours": "8:30 AM – 5:30 PM (1-hr lunch)",
+      "monthlySalary": "₩2.8–3.2M / month",
+      "housingType": "₩500K housing allowance",
+      "studentAge": "Ages 3–5 · K1–K2 phonics & TPR",
+      "workingDays": "Mon–Fri",
+      "openings": "2 positions",
+      "salaryDetails": "Paid on the 25th · performance bonus up to ₩200K/quarter · tax 3.3%",
+      "housingPolicy": "₩500K/month housing allowance — school helps with lease signing and address registration",
+      "vacation": "12 days paid vacation + national holidays · 5 sick days/year",
+      "severance": "Full severance per Korean Labor Standards Act",
+      "insurance": "NHIS + NPS enrolled from first month · school handles ARC support",
+      "airfare": "Not included · relocation bonus ₩300K for overseas hires",
+      "distinctive": "Little Stars is known for structured phonics mornings and creative afternoons. Teachers rotate between K1 and K2 rooms with dedicated Korean co-teachers. Jamsil location = excellent subway access and expat-friendly neighborhood.",
+      "faq": [
+        {
+          "q": "What are the hours?",
+          "a": "8:30 AM – 5:30 PM weekdays. Phonics block 9–11 AM; activity block after lunch. Rare evening parent events."
+        },
+        {
+          "q": "Who can apply?",
+          "a": "E-2-eligible native speakers. Prior kindergarten or early-childhood experience strongly preferred. F-visa holders with work rights considered case-by-case."
+        },
+        {
+          "q": "What is the interview process?",
+          "a": "Fast-track for urgent hire: resume → phone screen → in-person or video demo lesson → contract draft within 48 hours."
+        }
+      ]
+    },
+    "ko": {
+      "title": "시니어 유치원 강사 (K1–K2)",
+      "type": "영어유치원",
+      "location": "송파구 · 2호선 잠실역",
+      "salary": "월 280–320만원",
+      "housing": "수당 50만",
+      "response": "~4시간",
+      "workingHours": "08:30–17:30 (점심 1시간)",
+      "monthlySalary": "월 280–320만원",
+      "housingType": "주거 수당 50만원",
+      "studentAge": "만 3–5세 · K1–K2 파닉스 & TPR",
+      "workingDays": "월–금",
+      "openings": "2명",
+      "salaryDetails": "매월 25일 지급 · 분기 성과보너스 최대 20만원 · 세금 3.3%",
+      "housingPolicy": "월 50만원 주거 수당 — 학원이 임대차 계약·주소 등록 지원",
+      "vacation": "유급 휴가 12일 + 공휴일 · 병가 5일/년",
+      "severance": "근로기준법에 따른 퇴직금 전액 지급",
+      "insurance": "건강보험·국민연금 첫 달 가입 · 외국인등록증 지원",
+      "airfare": "항공권 미포함 · 해외 채용 시 이전비 30만원",
+      "distinctive": "Little Stars는 오전 파닉스·오후 창의 활동 구조로 유명합니다. K1·K2 교실을 로테이션하며 전담 한국인 코티처와 협업합니다. 잠실역 인근이라 교통·외국인 생활 인프라가 좋습니다.",
+      "faq": [
+        {
+          "q": "근무 시간은?",
+          "a": "평일 08:30–17:30. 오전 파닉스(9–11시), 점심 후 활동 수업. 학부모 행사는 가끔."
+        },
+        {
+          "q": "지원 자격은?",
+          "a": "E-2 비자 가능 원어민. 유치원·유아 영어 경력 우대. F비자 근무 가능자는 개별 검토."
+        },
+        {
+          "q": "면접 절차는?",
+          "a": "긴급 채용: 서류 → 전화 스크리닝 → 대면/화상 시범 수업 → 48시간 내 계약서 초안."
+        }
+      ]
+    }
+  }
+]

@@ -2153,6 +2153,7 @@
     display: grid; gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+  .job-card-empty { grid-column: 1 / -1; text-align: center; padding: 32px 20px; }
   .job-card {
     border: 0.5px solid var(--line);
     border-radius: 10px;
@@ -2194,10 +2195,10 @@
   }
   .post-job-btn:hover { background: #fcd34d; }
 
-  /* Job detail page */
-  .job-detail-view { display: none; padding-top: 4px; }
-  .job-detail-view.is-open { display: block; }
-  .jobs-board.is-detail-open .jobs-grid { display: none; }
+  /* Job detail page: /jobs/<slug>/ (app/(site)/jobs/[slug]/page.tsx) */
+  .job-page { padding: 28px 0 56px; }
+  .job-page .wrap { max-width: calc(920px + 48px); } /* card width + side padding: back link lines up with it */
+  .job-page .job-detail-back { text-decoration: none; }
   .job-detail-back {
     display: inline-flex;
     align-items: center;
@@ -2473,6 +2474,8 @@
     text-transform: uppercase;
   }
   .job-card .view-detail-btn {
+    display: block;
+    box-sizing: border-box;
     margin-top: 10px;
     width: 100%;
     padding: 8px;
@@ -2482,6 +2485,8 @@
     color: #0f172a;
     font-size: 12px;
     font-weight: 600;
+    text-align: center;
+    text-decoration: none;
     font-family: inherit;
     cursor: pointer;
     transition: background 0.12s, border-color 0.12s;

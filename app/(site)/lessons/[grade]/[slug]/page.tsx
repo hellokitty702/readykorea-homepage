@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { JsonLd } from '@/components/JsonLd';
-import { LessonShell } from '@/components/lessons/LessonShell';
+import { JsonLd } from '@/components/json-ld';
+import { LessonShell } from '@/components/lessons/lesson-shell';
 import styles from '@/components/lessons/lessons.module.css';
 import { getLesson, getLessonBody, gradePath, grades, lessonPath, lessonsPath, type Lesson } from '@/lib/lessons';
-import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { SITE_NAME, absoluteUrl } from '@/lib/site';
 
 type Props = { params: Promise<{ grade: string; slug: string }> };
 
@@ -55,9 +55,9 @@ export default async function LessonPage({ params }: Props) {
           name: lesson.title,
           description: lesson.description,
           educationalLevel: grade.label,
-          url: `${SITE_URL}${lessonPath(grade.id, lesson.slug)}`,
+          url: absoluteUrl(lessonPath(grade.id, lesson.slug)),
           isAccessibleForFree: true,
-          provider: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+          provider: { '@type': 'Organization', name: SITE_NAME, url: absoluteUrl('/') },
         }}
       />
       <div dangerouslySetInnerHTML={{ __html: getLessonBody(grade.id, lesson.slug) }} />

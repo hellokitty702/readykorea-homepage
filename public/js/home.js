@@ -47,27 +47,6 @@ const I18N = {
     'jobs.apply': 'Apply Now',
     'jobs.post': 'Post a Job',
     'jobs.viewDetail': 'View job details →',
-    'jobs.detail.back': '← Back to Job Board',
-    'jobs.detail.highlights': 'Key Highlights',
-    'jobs.detail.benefits': 'Compensation & Benefits',
-    'jobs.detail.distinctive': 'Why This School is Distinctive?',
-    'jobs.detail.faq': 'Quick Answers',
-    'jobs.detail.apply': 'Apply Now',
-    'jobs.detail.jobId': 'JOB ID',
-    'jobs.detail.lbl.start': 'Start Date',
-    'jobs.detail.lbl.hours': 'Working Hours',
-    'jobs.detail.lbl.salary': 'Monthly Salary',
-    'jobs.detail.lbl.housing': 'Housing Type',
-    'jobs.detail.lbl.students': 'Student Age/Type',
-    'jobs.detail.lbl.location': 'Location',
-    'jobs.detail.lbl.days': 'Working Days',
-    'jobs.detail.lbl.openings': 'Number of Openings',
-    'jobs.detail.lbl.salaryDetails': 'Salary Details',
-    'jobs.detail.lbl.housingPolicy': 'Housing Policy',
-    'jobs.detail.lbl.vacation': 'Vacation / Sick Leave',
-    'jobs.detail.lbl.severance': 'Severance',
-    'jobs.detail.lbl.insurance': 'Insurance / Pension',
-    'jobs.detail.lbl.airfare': 'Airfare',
     'whyrk.eyebrow': 'About ReadyKorea',
     'whyrk.title': 'Why ReadyKorea?',
     'whyrk.lead': 'Industry expertise built for teachers who want to succeed — not just survive — in Korea.',
@@ -151,27 +130,6 @@ const I18N = {
     'jobs.apply': '지원하기',
     'jobs.post': '구인등록',
     'jobs.viewDetail': '상세 공고 보기 →',
-    'jobs.detail.back': '← Job Board로 돌아가기',
-    'jobs.detail.highlights': '핵심 정보',
-    'jobs.detail.benefits': '급여 및 복리후생',
-    'jobs.detail.distinctive': '이 학원의 특징은?',
-    'jobs.detail.faq': '빠른 답변',
-    'jobs.detail.apply': '지원하기',
-    'jobs.detail.jobId': '공고 ID',
-    'jobs.detail.lbl.start': '시작일',
-    'jobs.detail.lbl.hours': '근무 시간',
-    'jobs.detail.lbl.salary': '월급',
-    'jobs.detail.lbl.housing': '주거 유형',
-    'jobs.detail.lbl.students': '학생 연령/유형',
-    'jobs.detail.lbl.location': '위치',
-    'jobs.detail.lbl.days': '근무 요일',
-    'jobs.detail.lbl.openings': '모집 인원',
-    'jobs.detail.lbl.salaryDetails': '급여 상세',
-    'jobs.detail.lbl.housingPolicy': '주거 정책',
-    'jobs.detail.lbl.vacation': '휴가 / 병가',
-    'jobs.detail.lbl.severance': '퇴직금',
-    'jobs.detail.lbl.insurance': '보험 / 연금',
-    'jobs.detail.lbl.airfare': '항공권',
     'whyrk.eyebrow': '레디코리아 소개',
     'whyrk.title': '왜 레디코리아인가?',
     'whyrk.lead': '한국에서 살아남는 것이 아니라 성공하는 강사를 위한 업계 전문 플랫폼.',
@@ -212,235 +170,9 @@ const I18N = {
 
 let currentLang = 'en';
 
+// Teacher application Google Form: still used by the free-access popup (openTeacherApplyForm).
+// Job Board "Apply Now" buttons go to the on-site form at /apply/.
 const TEACHER_APPLY_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSf7MvPqQfioWQ0BugCat9gvgdYpLfhp8CSaB3R-Q2u3gy8zUw/viewform';
-
-let activeJobDetailId = null;
-
-const JOB_LISTINGS = {
-  'rk-2026-gn-001': {
-    jobId: 'RK-2026-GN-001',
-    badge: 'new',
-    en: {
-      school: 'ABC English Kindergarten',
-      title: 'Kindergarten lead teacher (K2–K3)',
-      location: 'Gangnam · Sinnonhyeon Stn. (Line 9)',
-      salary: '₩2.7–3.0M / month',
-      startDate: '2026.06.01',
-      workingHours: '9:00 AM – 6:00 PM (1-hr lunch)',
-      monthlySalary: '₩2.7–3.0M / month',
-      housingType: 'Provided (studio near school)',
-      studentAge: 'Ages 4–5 · K2–K3 English immersion',
-      workingDays: 'Mon–Fri',
-      openings: '1 position',
-      salaryDetails: 'Paid on the 10th each month · 3.3% tax withheld · overtime rare',
-      housingPolicy: 'Furnished studio within 10-min walk · utilities included · deposit covered by school',
-      vacation: '10 days paid vacation + national holidays · 3 sick days/year',
-      severance: 'Standard Korean severance (퇴직금) after 12+ months',
-      insurance: 'National Health Insurance + National Pension (50/50 split)',
-      airfare: 'One-way reimbursement up to ₩800K after contract completion',
-      distinctive: 'ABC runs a play-based immersion model with small classes (max 12). Lead teachers co-plan with Korean homeroom staff and use ReadyKorea K2–K3 curriculum vault from Day 1. Strong parent communication culture — weekly photo updates and monthly parent letters.',
-      faq: [
-        { q: 'What are the hours?', a: '9:00 AM – 6:00 PM, Monday–Friday. One-hour lunch break. Occasional Saturday events (paid separately).' },
-        { q: 'Who can apply?', a: 'Native English speakers from E-2 visa countries with a bachelor\'s degree and clean criminal record check. TEFL 120+ preferred; kindergarten experience a plus.' },
-        { q: 'What is the interview process?', a: '1) Resume review · 2) 20-min video interview · 3) Sample circle-time demo (optional) · 4) Director call · Offer within ~6 hours of final step.' },
-      ],
-    },
-    ko: {
-      school: 'ABC English Kindergarten',
-      title: '유치원 주임 강사 (K2–K3)',
-      location: '강남구 · 9호선 신논현역',
-      salary: '월 270–300만원',
-      startDate: '2026.06.01',
-      workingHours: '09:00–18:00 (점심 1시간)',
-      monthlySalary: '월 270–300만원',
-      housingType: '제공 (학원 인근 원룸)',
-      studentAge: '만 4–5세 · K2–K3 영어 몰입',
-      workingDays: '월–금',
-      openings: '1명',
-      salaryDetails: '매월 10일 지급 · 3.3% 원천징수 · 연장근무 거의 없음',
-      housingPolicy: '학교 도보 10분 이내 풀옵션 원룸 · 공과금 포함 · 보증금 학원 부담',
-      vacation: '유급 휴가 10일 + 공휴일 · 병가 3일/년',
-      severance: '12개월 이상 근무 시 법정 퇴직금(퇴직금) 지급',
-      insurance: '국민건강보험 + 국민연금 (본인/학원 각 50%)',
-      airfare: '계약 완료 후 편도 항공권 최대 80만원 지원',
-      distinctive: 'ABC는 소규모(최대 12명) 놀이 중심 몰입 수업을 운영합니다. 주임 강사는 한국인 담임과 공동 수업 설계를 하며, 입사 첫날부터 ReadyKorea K2–K3 커리큘럼을 사용합니다. 학부모 소통 문화가 강해 주간 사진 업데이트와 월간 안내문을 제공합니다.',
-      faq: [
-        { q: '근무 시간은?', a: '월–금 09:00–18:00, 점심 1시간. 가끔 토요일 행사(별도 수당).' },
-        { q: '지원 자격은?', a: 'E-2 비자 7개국 원어민, 학사 학위, 범죄경력조회서. TEFL 120시간 이상 우대, 유치원 경력 플러스.' },
-        { q: '면접 절차는?', a: '1) 서류 검토 · 2) 20분 화상 면접 · 3) 서클타임 시범(선택) · 4) 원장 통화 · 최종 후 약 6시간 내 오퍼.' },
-      ],
-    },
-  },
-  'rk-2026-sp-002': {
-    jobId: 'RK-2026-SP-002',
-    badge: 'urgent',
-    en: {
-      school: 'Little Stars Kindergarten',
-      title: 'Senior kindergarten teacher (K1–K2)',
-      location: 'Songpa · Jamsil Stn. (Line 2)',
-      salary: '₩2.8–3.2M / month',
-      startDate: '2026.07.01',
-      workingHours: '8:30 AM – 5:30 PM (1-hr lunch)',
-      monthlySalary: '₩2.8–3.2M / month',
-      housingType: '₩500K housing allowance',
-      studentAge: 'Ages 3–5 · K1–K2 phonics & TPR',
-      workingDays: 'Mon–Fri',
-      openings: '2 positions',
-      salaryDetails: 'Paid on the 25th · performance bonus up to ₩200K/quarter · tax 3.3%',
-      housingPolicy: '₩500K/month housing allowance — school helps with lease signing and address registration',
-      vacation: '12 days paid vacation + national holidays · 5 sick days/year',
-      severance: 'Full severance per Korean Labor Standards Act',
-      insurance: 'NHIS + NPS enrolled from first month · school handles ARC support',
-      airfare: 'Not included · relocation bonus ₩300K for overseas hires',
-      distinctive: 'Little Stars is known for structured phonics mornings and creative afternoons. Teachers rotate between K1 and K2 rooms with dedicated Korean co-teachers. Jamsil location = excellent subway access and expat-friendly neighborhood.',
-      faq: [
-        { q: 'What are the hours?', a: '8:30 AM – 5:30 PM weekdays. Phonics block 9–11 AM; activity block after lunch. Rare evening parent events.' },
-        { q: 'Who can apply?', a: 'E-2-eligible native speakers. Prior kindergarten or early-childhood experience strongly preferred. F-visa holders with work rights considered case-by-case.' },
-        { q: 'What is the interview process?', a: 'Fast-track for urgent hire: resume → phone screen → in-person or video demo lesson → contract draft within 48 hours.' },
-      ],
-    },
-    ko: {
-      school: 'Little Stars Kindergarten',
-      title: '시니어 유치원 강사 (K1–K2)',
-      location: '송파구 · 2호선 잠실역',
-      salary: '월 280–320만원',
-      startDate: '2026.07.01',
-      workingHours: '08:30–17:30 (점심 1시간)',
-      monthlySalary: '월 280–320만원',
-      housingType: '주거 수당 50만원',
-      studentAge: '만 3–5세 · K1–K2 파닉스 & TPR',
-      workingDays: '월–금',
-      openings: '2명',
-      salaryDetails: '매월 25일 지급 · 분기 성과보너스 최대 20만원 · 세금 3.3%',
-      housingPolicy: '월 50만원 주거 수당 — 학원이 임대차 계약·주소 등록 지원',
-      vacation: '유급 휴가 12일 + 공휴일 · 병가 5일/년',
-      severance: '근로기준법에 따른 퇴직금 전액 지급',
-      insurance: '건강보험·국민연금 첫 달 가입 · 외국인등록증 지원',
-      airfare: '항공권 미포함 · 해외 채용 시 이전비 30만원',
-      distinctive: 'Little Stars는 오전 파닉스·오후 창의 활동 구조로 유명합니다. K1·K2 교실을 로테이션하며 전담 한국인 코티처와 협업합니다. 잠실역 인근이라 교통·외국인 생활 인프라가 좋습니다.',
-      faq: [
-        { q: '근무 시간은?', a: '평일 08:30–17:30. 오전 파닉스(9–11시), 점심 후 활동 수업. 학부모 행사는 가끔.' },
-        { q: '지원 자격은?', a: 'E-2 비자 가능 원어민. 유치원·유아 영어 경력 우대. F비자 근무 가능자는 개별 검토.' },
-        { q: '면접 절차는?', a: '긴급 채용: 서류 → 전화 스크리닝 → 대면/화상 시범 수업 → 48시간 내 계약서 초안.' },
-      ],
-    },
-  },
-};
-
-function jobDetailLabel(key) {
-  const dict = I18N[currentLang] || I18N.en;
-  return dict[key] || I18N.en[key] || key;
-}
-
-function renderSpecRow(labelKey, value) {
-  return '<div class="jd-spec-row"><dt>' + jobDetailLabel(labelKey) + '</dt><dd>' + value + '</dd></div>';
-}
-
-function renderJobDetail(jobId) {
-  const job = JOB_LISTINGS[jobId];
-  const root = document.getElementById('job-detail-root');
-  if (!job || !root) return;
-  const d = job[currentLang] || job.en;
-  const badgeClass = job.badge === 'urgent' ? 'is-urgent' : 'is-new';
-  const badgeText = job.badge === 'urgent' ? jobDetailLabel('jobs.badge.urgent') : jobDetailLabel('jobs.badge.new');
-
-  root.innerHTML =
-    '<article class="job-detail-page">' +
-      '<header class="job-detail-header">' +
-        '<span class="job-detail-badge ' + badgeClass + '">' + badgeText + '</span>' +
-        '<p class="job-detail-school">' + d.school + '</p>' +
-        '<h1 class="job-detail-title">' + d.title + '</h1>' +
-        '<div class="job-detail-header-meta">' +
-          '<span class="job-detail-meta-chip">' + d.location + '</span>' +
-          '<span class="job-detail-meta-chip is-salary">' + d.salary + '</span>' +
-        '</div>' +
-      '</header>' +
-      '<div class="job-detail-body">' +
-        '<div class="job-detail-grid">' +
-          '<div class="job-detail-col job-detail-highlights">' +
-            '<h2>' + jobDetailLabel('jobs.detail.highlights') + '</h2>' +
-            '<dl class="jd-spec-list">' +
-              renderSpecRow('jobs.detail.lbl.start', d.startDate) +
-              renderSpecRow('jobs.detail.lbl.hours', d.workingHours) +
-              renderSpecRow('jobs.detail.lbl.salary', d.monthlySalary) +
-              renderSpecRow('jobs.detail.lbl.housing', d.housingType) +
-              renderSpecRow('jobs.detail.lbl.students', d.studentAge) +
-              renderSpecRow('jobs.detail.lbl.location', d.location) +
-              renderSpecRow('jobs.detail.lbl.days', d.workingDays) +
-              renderSpecRow('jobs.detail.lbl.openings', d.openings) +
-            '</dl>' +
-          '</div>' +
-          '<div class="job-detail-col job-detail-benefits">' +
-            '<h2>' + jobDetailLabel('jobs.detail.benefits') + '</h2>' +
-            '<dl class="jd-spec-list">' +
-              renderSpecRow('jobs.detail.lbl.salaryDetails', d.salaryDetails) +
-              renderSpecRow('jobs.detail.lbl.housingPolicy', d.housingPolicy) +
-              renderSpecRow('jobs.detail.lbl.vacation', d.vacation) +
-              renderSpecRow('jobs.detail.lbl.severance', d.severance) +
-              renderSpecRow('jobs.detail.lbl.insurance', d.insurance) +
-              renderSpecRow('jobs.detail.lbl.airfare', d.airfare) +
-            '</dl>' +
-          '</div>' +
-        '</div>' +
-        '<div class="job-detail-distinctive">' +
-          '<h2>' + jobDetailLabel('jobs.detail.distinctive') + '</h2>' +
-          '<p>' + d.distinctive + '</p>' +
-        '</div>' +
-        '<div class="job-detail-faq">' +
-          '<h2>' + jobDetailLabel('jobs.detail.faq') + '</h2>' +
-          '<div class="job-detail-faq-list">' +
-            d.faq.map(function(item) {
-              return '<details class="job-detail-faq-item"><summary>' + item.q + '</summary><p>' + item.a + '</p></details>';
-            }).join('') +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="job-detail-apply-wrap">' +
-        '<a class="job-detail-apply" href="' + TEACHER_APPLY_FORM + '" target="_blank" rel="noopener noreferrer">' +
-          '<span>' + jobDetailLabel('jobs.detail.apply') + '</span>' +
-          '<span class="job-id">' + jobDetailLabel('jobs.detail.jobId') + ': ' + job.jobId + '</span>' +
-        '</a>' +
-      '</div>' +
-    '</article>';
-}
-
-function openJobDetail(jobId) {
-  const board = document.getElementById('jobs-board');
-  const view = document.getElementById('job-detail-view');
-  if (!JOB_LISTINGS[jobId] || !board || !view) return;
-  activeJobDetailId = jobId;
-  renderJobDetail(jobId);
-  board.classList.add('is-detail-open');
-  view.hidden = false;
-  view.classList.add('is-open');
-  view.setAttribute('aria-hidden', 'false');
-  const jobsSection = document.getElementById('jobs');
-  if (jobsSection) jobsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function closeJobDetail() {
-  const board = document.getElementById('jobs-board');
-  const view = document.getElementById('job-detail-view');
-  activeJobDetailId = null;
-  if (board) board.classList.remove('is-detail-open');
-  if (view) {
-    view.hidden = true;
-    view.classList.remove('is-open');
-    view.setAttribute('aria-hidden', 'true');
-  }
-}
-
-function initJobBoard() {
-  document.querySelectorAll('.view-detail-btn[data-job-id]').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openJobDetail(btn.getAttribute('data-job-id'));
-    });
-  });
-  document.getElementById('job-detail-back')?.addEventListener('click', closeJobDetail);
-}
-
-initJobBoard();
 
 function openTeacherApplyForm() {
   window.open(TEACHER_APPLY_FORM, '_blank', 'noopener,noreferrer');
@@ -478,7 +210,6 @@ function applyLanguage(lang) {
   });
   const navSearchInput = document.getElementById('nav-search-input');
   if (navSearchInput) navSearchInput.placeholder = currentLang === 'ko' ? '검색' : 'Search';
-  if (activeJobDetailId) renderJobDetail(activeJobDetailId);
   try { localStorage.setItem('rk-lang', currentLang); } catch (e) {}
 }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { LessonShell } from '@/components/lessons/LessonShell';
+import { LessonShell } from '@/components/lessons/lesson-shell';
 import styles from '@/components/lessons/lessons.module.css';
 import { getGrade, gradePath, grades, lessonPath, lessonsPath } from '@/lib/lessons';
 
@@ -30,7 +30,9 @@ export default async function GradePage({ params }: Props) {
   if (!grade) notFound();
 
   return (
-    <LessonShell crumbs={[{ label: 'Home', href: '/' }, { label: 'Lessons', href: lessonsPath() }, { label: grade.label }]}>
+    <LessonShell
+      crumbs={[{ label: 'Home', href: '/' }, { label: 'Lessons', href: lessonsPath() }, { label: grade.label }]}
+    >
       <h1 className={styles.title}>{grade.label} Lesson Plans</h1>
       <p className={styles.intro}>
         {grade.lessons.length} free, ready-to-teach ESL lessons for {grade.label}.

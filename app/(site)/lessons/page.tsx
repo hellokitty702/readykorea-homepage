@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { LessonShell } from '@/components/lessons/LessonShell';
+import { LessonShell } from '@/components/lessons/lesson-shell';
 import styles from '@/components/lessons/lessons.module.css';
 import { gradePath, grades, lessonsPath, totalLessons } from '@/lib/lessons';
 
