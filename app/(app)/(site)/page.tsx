@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { LatestPosts } from '@/components/home/latest-posts';
-import { OldHashRedirect } from '@/components/home/old-hash-redirect';
 import { JsonLd } from '@/components/json-ld';
 import { SectionPage } from '@/components/sections/section-page';
 import { JobBoard } from '@/components/sections/job-board';
@@ -58,7 +57,6 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={ORGANIZATION_LD} />
-      <OldHashRedirect />
       <SectionPage
         id="home"
         src={['pages/home/hero.html', <JobBoard key="jobs" />, 'sections/why-readykorea.html']}

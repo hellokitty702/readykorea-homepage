@@ -20,12 +20,14 @@ export function HeaderNav() {
     const { signal } = controller;
     const isDesktop = () => window.matchMedia(DESKTOP).matches;
     const dropdowns = [...header.querySelectorAll<HTMLElement>('.main-nav-dd')];
-    const search = header.querySelector<HTMLInputElement>('#nav-search-input');
+    const searches = [...header.querySelectorAll<HTMLInputElement>('.nav-search-field input')];
     let closeTimer: number | undefined;
 
     const setOpen = (dd: HTMLElement, open: boolean) => {
       dd.classList.toggle('open', open);
       dd.querySelectorAll('[aria-haspopup]').forEach((t) => t.setAttribute('aria-expanded', String(open)));
+      // On phones the compact menu covers the page; layout.css stops the page scrolling behind it.
+      if (dd.id === 'nav-menu-mobile') document.documentElement.classList.toggle('nav-menu-open', open);
     };
     const closeAll = () => {
       window.clearTimeout(closeTimer);
@@ -43,7 +45,7 @@ export function HeaderNav() {
         pill.classList.toggle('active', active);
         pill.setAttribute('aria-selected', String(active));
       });
-      if (search) search.placeholder = lang === 'ko' ? '검색' : 'Search';
+      searches.forEach((input) => (input.placeholder = lang === 'ko' ? '검색' : 'Search'));
     };
     try {
       const saved = localStorage.getItem('rk-lang');
@@ -115,7 +117,8 @@ export function HeaderNav() {
 
     // "apply" and "blog" open those pages; anything else searches the Support Center guides
     // (Korean visitors get the lesson library instead).
-    search?.addEventListener(
+    searches.forEach((search) =>
+      search.addEventListener(
       'keydown',
       (e) => {
         if (e.key !== 'Enter') return;
@@ -141,6 +144,7 @@ export function HeaderNav() {
         }
       },
       { signal },
+      ),
     );
 
     document.addEventListener(
@@ -154,6 +158,7 @@ export function HeaderNav() {
 
     return () => {
       controller.abort();
+      document.documentElement.classList.remove('nav-menu-open');
       window.clearTimeout(closeTimer);
     };
   }, [router]);

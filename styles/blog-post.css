@@ -4,7 +4,7 @@
  * the classes that survive saving.
  *
  * Scoped to the blog-post pages: every rule sits under :where(.page-blog-post) (the wrapper in
- * app/(public)/(blog-post)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * app/(app)/(blog-post)/layout.tsx), and html / body / :root rules apply only while such a page is
  * shown (:where(:has(.page-blog-post))). :where() keeps the original specificity. Write new rules the same way.
  */
   * { box-sizing: border-box; margin: 0; padding: 0; }

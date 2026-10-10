@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { GuideSubpage } from '@/components/sections/guide-subpage';
 import { SectionPage } from '@/components/sections/section-page';
-import { FOR_TEACHERS_GUIDES, pageMetadata } from '@/lib/site-pages';
+import { FOR_TEACHERS_GUIDES, GUIDE_SUBPAGES, pageMetadata } from '@/lib/site-pages';
 
 type Props = { params: Promise<{ guide: string }> };
 
@@ -25,5 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GuidePage({ params }: Props) {
   const guide = findGuide((await params).guide);
   if (!guide) notFound();
+  // Guides with sub-pages show their first one here; the others are at [guide]/[subpage]/.
+  if (GUIDE_SUBPAGES[guide.slug]) {
+    return <SectionPage id="for-teachers" src={[<GuideSubpage key="guide" guide={guide.slug} slug="" />]} />;
+  }
   return <SectionPage id="for-teachers" src={`pages/for-teachers/${guide.slug}.html`} />;
 }

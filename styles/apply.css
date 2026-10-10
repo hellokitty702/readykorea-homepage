@@ -1,6 +1,6 @@
 /*
  * Scoped to the apply pages: every rule sits under :where(.page-apply) (the wrapper in
- * app/(public)/(apply)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * app/(app)/(apply)/layout.tsx), and html / body / :root rules apply only while such a page is
  * shown (:where(:has(.page-apply))). :where() keeps the original specificity. Write new rules the same way.
  */
   * { box-sizing: border-box; margin: 0; padding: 0; }

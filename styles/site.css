@@ -1,6 +1,6 @@
 /*
  * Scoped to the site pages: every rule sits under :where(.page-site) (the wrapper in
- * app/(public)/(site)/layout.tsx), and html / body / :root rules apply only while such a page is
+ * app/(app)/(site)/layout.tsx), and html / body / :root rules apply only while such a page is
  * shown (:where(:has(.page-site))). :where() keeps the original specificity. Write new rules the same way.
  */
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -986,11 +986,6 @@
   }
   :where(.page-site) .e2-visa-nav-btn--jump:hover { color: #1d4ed8; }
   :where(.page-site) .e2-visa-main { padding: 28px 32px 36px; min-width: 0; }
-  /* Sub-panels show one at a time; the hub's buttons that open them (also data-e2-panel) always show. */
-  :where(.page-site) .e2-visa-main [data-e2-panel]:not(button) { display: none; }
-  :where(.page-site) .e2-visa-main [data-e2-panel]:not(button).e2-panel-visible { display: block; }
-  :where(.page-site) #while-in-korea .e2-visa-main [data-wik-panel] { display: none; }
-  :where(.page-site) #while-in-korea .e2-visa-main [data-wik-panel].wik-panel-visible { display: block; }
   @media (max-width: 900px) {
     :where(.page-site) .e2-visa-hub { grid-template-columns: 1fr; }
     :where(.page-site) .e2-visa-nav {
@@ -2138,7 +2133,7 @@
   }
   :where(.page-site) .post-job-btn:hover { background: #fcd34d; }
 
-  /* Job detail page: /jobs/<slug>/ (app/(public)/(site)/jobs/[slug]/page.tsx) */
+  /* Job detail page: /jobs/<slug>/ (app/(app)/(site)/jobs/[slug]/page.tsx) */
   :where(.page-site) .job-page { padding: 28px 0 56px; }
   :where(.page-site) .job-page .wrap { max-width: calc(920px + 48px); } /* card width + side padding: back link lines up with it */
   :where(.page-site) .job-page .job-detail-back { text-decoration: none; }

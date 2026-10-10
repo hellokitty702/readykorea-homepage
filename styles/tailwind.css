@@ -1,5 +1,5 @@
 /*
- * Tailwind CSS for the public site (app/(public)/layout.tsx; the admin panel has its own build).
+ * Tailwind CSS for the public site (app/(app)/layout.tsx; the admin panel has its own build).
  *
  * - No Preflight (Tailwind's reset): it would restyle the existing pages, e.g. remove list bullets
  *   and heading sizes in lesson content. Each stylesheet keeps its own base styles.

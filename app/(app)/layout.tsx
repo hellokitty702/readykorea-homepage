@@ -10,6 +10,6 @@ import '@/styles/tailwind.css';
 // scoped to its `.page-*` wrapper, so the stylesheets never affect each other's pages.
 export const metadata: Metadata = baseMetadata;
 
-export default function PublicLayout({ children }: { children: ReactNode }) {
+export default function AppLayout({ children }: { children: ReactNode }) {
   return <SiteLayout>{children}</SiteLayout>;
 }

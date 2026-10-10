@@ -47,20 +47,20 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 | URL | 파일 |
 |-----|------|
-| `/` 메인 홈페이지 | `app/(public)/(site)/page.tsx` |
-| `/lessons/` 전체 레슨 | `app/(public)/(site)/lessons/page.tsx` |
-| `/lessons/k1/` 학년별 목록 | `app/(public)/(site)/lessons/[grade]/page.tsx` |
-| `/lessons/k1/greetings-hello-routine/` 개별 레슨 | `app/(public)/(site)/lessons/[grade]/[slug]/page.tsx` |
-| `/apply/` 지원하기 | `app/(public)/(apply)/apply/page.tsx` |
-| `/jobs/kindergarten-lead-teacher-k2-k3/` 공고 상세 | `app/(public)/(site)/jobs/[slug]/page.tsx` (`/jobs/` 는 `/#jobs` 로 이동) |
-| `/blog/` 블로그 (맨 위 추천 글 + 카테고리 탭 + 카드 목록, 카테고리 순서대로 묶음) | `app/(public)/(blog)/blog/page.tsx` (예전 `/blog/#visa-legal` 링크는 카테고리 페이지로 이동) |
-| `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(public)/(blog)/blog/category/[slug]/page.tsx`, `app/(public)/(blog)/blog/tag/[slug]/page.tsx` |
-| `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(public)/(blog-post)/blog/[slug]/page.tsx` |
+| `/` 메인 홈페이지 | `app/(app)/(site)/page.tsx` |
+| `/lessons/` 전체 레슨 | `app/(app)/(site)/lessons/page.tsx` |
+| `/lessons/k1/` 학년별 목록 | `app/(app)/(site)/lessons/[grade]/page.tsx` |
+| `/lessons/k1/greetings-hello-routine/` 개별 레슨 | `app/(app)/(site)/lessons/[grade]/[slug]/page.tsx` |
+| `/apply/` 지원하기 | `app/(app)/(apply)/apply/page.tsx` |
+| `/jobs/kindergarten-lead-teacher-k2-k3/` 공고 상세 | `app/(app)/(site)/jobs/[slug]/page.tsx` (`/jobs/` 는 `/#jobs` 로 이동) |
+| `/blog/` 블로그 (맨 위 추천 글 + 카테고리 탭 + 카드 목록, 카테고리 순서대로 묶음) | `app/(app)/(blog)/blog/page.tsx` (예전 `/blog/#visa-legal` 링크는 카테고리 페이지로 이동) |
+| `/blog/category/visa-legal/`, `/blog/tag/…/` 카테고리 / 태그 | `app/(app)/(blog)/blog/category/[slug]/page.tsx`, `app/(app)/(blog)/blog/tag/[slug]/page.tsx` |
+| `/blog/hagwon-interview-success-guide/` 블로그 글 | `app/(app)/(blog-post)/blog/[slug]/page.tsx` |
 | `/uploads/…` 업로드한 이미지 (로컬 개발 전용) | `app/uploads/[...key]/route.ts` |
 | `/admin/` 관리자 (대시보드, 공고, 지원서, 블로그, 미디어, 계정) | `app/(admin)/admin/` (로그인: `/admin/login/`) |
 | `/sitemap.xml`, `/robots.txt` | `app/sitemap.ts` (요청할 때마다 DB 의 공고·블로그와 레슨 목록으로 생성), `app/robots.ts` |
 
-루트 레이아웃은 두 개입니다: 공개 사이트 `app/(public)/layout.tsx` 와 관리자 `app/(admin)/layout.tsx`. 공개 페이지는 모두 같은 루트 레이아웃이라 페이지 이동이 새로고침 없이 이루어지고, **모든 페이지에 같은 헤더와 푸터**(`components/layout/site-layout.tsx`)가 나옵니다. 그 아래 `(site)`, `(apply)`, `(blog)`, `(blog-post)` 그룹은 각자의 스타일시트(`styles/site.css`, `apply.css`, `blog.css`, `blog-post.css`)를 불러오고 내용을 `.page-site` 같은 래퍼로 감쌉니다. 각 스타일시트의 규칙은 모두 자기 래퍼 안으로 한정(`:where(.page-blog) …`, `body:where(:has(.page-blog))`)되어 있어서, 여러 스타일시트가 함께 로드되어도 서로 섞이지 않습니다. 이 파일들에 규칙을 추가할 때도 같은 형식으로 쓰세요. 관리자 화면은 자체 레이아웃과 Tailwind 진입 파일 `styles/admin.css` 를 씁니다.
+루트 레이아웃은 두 개입니다: 공개 사이트 `app/(app)/layout.tsx` 와 관리자 `app/(admin)/layout.tsx`. 공개 페이지는 모두 같은 루트 레이아웃이라 페이지 이동이 새로고침 없이 이루어지고, **모든 페이지에 같은 헤더와 푸터**(`components/layout/site-layout.tsx`)가 나옵니다. 그 아래 `(site)`, `(apply)`, `(blog)`, `(blog-post)` 그룹은 각자의 스타일시트(`styles/site.css`, `apply.css`, `blog.css`, `blog-post.css`)를 불러오고 내용을 `.page-site` 같은 래퍼로 감쌉니다. 각 스타일시트의 규칙은 모두 자기 래퍼 안으로 한정(`:where(.page-blog) …`, `body:where(:has(.page-blog))`)되어 있어서, 여러 스타일시트가 함께 로드되어도 서로 섞이지 않습니다. 이 파일들에 규칙을 추가할 때도 같은 형식으로 쓰세요. 관리자 화면은 자체 레이아웃과 Tailwind 진입 파일 `styles/admin.css` 를 씁니다.
 
 ---
 
@@ -118,6 +118,5 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 ## 참고
 
-- 헤더 메뉴는 홈 화면의 각 섹션(`data-nav`)을 가리킵니다. 홈에서는 `public/js/home.js` 가 화면을 바로 전환하고, 다른 페이지에서는 `components/layout/header-nav.tsx` 가 `/#섹션` 주소로 이동시킵니다. EN/한글 선택은 모든 페이지에서 같이 유지됩니다.
-- 메인 홈페이지는 기존과 같은 한 페이지 앱입니다. HTML은 서버에서 미리 렌더링되고, `public/js/home.js` 가 하이드레이션 후 로드되어 기존과 똑같이 동작합니다.
+- 모든 메뉴와 본문 링크는 실제 페이지 주소(`/for-teachers/e2-visa/documents/` 등)로 이동합니다. 예전처럼 `#섹션` 주소로 화면을 전환하거나 내용을 불러오지 않습니다. 하위 메뉴가 있는 가이드(E-2 Visa, While in Korea)는 `lib/site-pages.ts` 의 `GUIDE_SUBPAGES` 에 목록이 있고, 내용은 `content/pages/for-teachers/<가이드>/` 의 파일마다 한 페이지입니다. EN/한글 선택은 모든 페이지에서 같이 유지됩니다.
 - 예전 정적 사이트 파일(`index.html`, `apply/`, `blog/`, `lessons/`, `assets/`, `support-guides.js`, `grade-curriculum.js`, `robots.txt`, `sitemap.xml`)과 생성 스크립트(`*.ps1`, `*.py`, `david-esl-homepage*.html`)는 참고용으로 `legacy/` 에 원래 폴더 구조 그대로 보관합니다. 빌드나 배포에는 포함되지 않으며, 스크립트는 예전 파일 구조 기준이라 새 구조에서는 동작하지 않습니다.

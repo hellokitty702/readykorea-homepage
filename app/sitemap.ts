@@ -4,7 +4,7 @@ import { getPublishedJobs } from '@/lib/job-board';
 import { jobPath } from '@/lib/job-fields';
 import { gradePath, grades, lessonPath, lessonsPath } from '@/lib/lessons';
 import { absoluteUrl } from '@/lib/site';
-import { FOR_TEACHERS_GUIDES, REGIONS } from '@/lib/site-pages';
+import { FOR_TEACHERS_GUIDES, GUIDE_SUBPAGES, REGIONS } from '@/lib/site-pages';
 
 // Built on every request, so jobs and posts appear as soon as they are published.
 export const dynamic = 'force-dynamic';
@@ -65,6 +65,9 @@ function pageEntries(): Entry[] {
     ...REGIONS.map(({ slug }) => `/regions/${slug}/`),
     '/for-teachers/',
     ...FOR_TEACHERS_GUIDES.map(({ slug }) => `/for-teachers/${slug}/`),
+    ...Object.entries(GUIDE_SUBPAGES).flatMap(([guide, { entries }]) =>
+      entries.filter(({ slug }) => slug).map(({ slug }) => `/for-teachers/${guide}/${slug}/`),
+    ),
     '/why-readykorea/',
     '/school-posting/',
     '/curriculum-consulting/',

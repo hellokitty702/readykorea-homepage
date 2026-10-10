@@ -1,13 +1,10 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import { SITE_ROUTES } from '@/lib/site-pages';
 
 declare global {
   interface Window {
-    rkRoutes?: Record<string, string>;
-    rkNavigate?: (href: string) => void;
     rkInitPage?: () => void;
     rkCleanupPage?: () => void;
   }
@@ -41,18 +38,15 @@ function loadScripts() {
  */
 export function PageScripts() {
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
-    window.rkRoutes = SITE_ROUTES;
-    window.rkNavigate = (href) => router.push(href);
     let active = true;
     loadScripts().then(() => active && window.rkInitPage?.(), console.error);
     return () => {
       active = false;
       window.rkCleanupPage?.();
     };
-  }, [pathname, router]);
+  }, [pathname]);
 
   return null;
 }

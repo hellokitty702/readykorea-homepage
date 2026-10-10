@@ -220,118 +220,6 @@ function savedLanguage() {
 }
 window.addEventListener('rk:lang', (e) => applyLanguage(e.detail));
 
-// ============ NAVIGATION ============
-// Buttons with data-nav="<target>" open the page for that target (window.rkRoutes, from lib/site-pages.ts).
-// A target on the current page (e.g. an E-2 visa sub-panel) only changes the #hash.
-function rkGo(target) {
-  const href = (window.rkRoutes || {})[target];
-  if (!href) return;
-  const url = new URL(href, location.href);
-  if (url.pathname === location.pathname) {
-    history.pushState(null, '', url.hash || url.pathname);
-    showHashTarget();
-    return;
-  }
-  if (window.rkNavigate) window.rkNavigate(url.pathname + url.hash);
-  else location.href = url.pathname + url.hash;
-}
-
-document.addEventListener('click', (e) => {
-  const el = e.target.closest('[data-nav]');
-  if (!el || el.closest('header.site')) return;
-  e.preventDefault();
-  rkGo(el.dataset.nav);
-});
-
-// ============ GUIDE SUB-PANELS (E-2 visa, While in Korea) ============
-const E2_VISA_PANELS = new Set([
-  'e2-hub', 'e2-process', 'e2-documents', 'e2-consular', 'e2-fukuoka',
-  'e2-downloads', 'e2-consulates', 'e2-workplace', 'e2-extension', 'e2-d10', 'e2-d4-change', 'e2-c45-camp'
-]);
-
-const WHILE_IN_KOREA_PANELS = new Set(['e2-medical', 'e2-arc']);
-
-const E2_PANEL_FROM_TARGET = {
-  'e2-visa': 'e2-hub',
-  'e2-hub': 'e2-hub',
-  'e2-process': 'e2-process',
-  'e2-workplace': 'e2-workplace',
-  'e2-extension': 'e2-extension',
-  'e2-d10': 'e2-d10',
-  'd10-job-seeker': 'e2-d10',
-  'e2-d4-change': 'e2-d4-change',
-  'd4-to-e2': 'e2-d4-change',
-  'e2-c45-camp': 'e2-c45-camp',
-  'c4-5-camp': 'e2-c45-camp',
-  'c45-camp': 'e2-c45-camp',
-  'e2-documents': 'e2-documents',
-  'e2-consular': 'e2-consular',
-  'fukuoka-visa-run': 'e2-fukuoka',
-  'e2-fukuoka': 'e2-fukuoka',
-  'e2-downloads': 'e2-downloads',
-  'e2-consulates': 'e2-consulates',
-};
-
-function setE2VisaPanel(panelId) {
-  const hub = document.querySelector('#e2-visa .e2-visa-hub');
-  if (!hub) return;
-  const active = E2_VISA_PANELS.has(panelId) ? panelId : 'e2-hub';
-  hub.querySelectorAll('[data-e2-panel]').forEach(p => {
-    p.classList.toggle('e2-panel-visible', p.dataset.e2Panel === active);
-  });
-  hub.querySelectorAll('.e2-visa-nav-btn[data-e2-panel]').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.e2Panel === active);
-  });
-}
-
-function setWhileInKoreaPanel(panelId) {
-  const hub = document.querySelector('#while-in-korea .e2-visa-hub');
-  if (!hub) return;
-  const active = WHILE_IN_KOREA_PANELS.has(panelId) ? panelId : 'e2-medical';
-  hub.querySelectorAll('[data-wik-panel]').forEach(p => {
-    p.classList.toggle('wik-panel-visible', p.dataset.wikPanel === active);
-  });
-  hub.querySelectorAll('.wik-nav-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.wikPanel === active);
-  });
-}
-
-// The #hash picks the sub-panel (e.g. /for-teachers/e2-visa/#e2-documents), or scrolls to an anchor.
-function showHashTarget() {
-  const id = location.hash.slice(1);
-  if (document.querySelector('#e2-visa .e2-visa-hub')) {
-    setE2VisaPanel(E2_PANEL_FROM_TARGET[id] || 'e2-hub');
-    if (id) document.getElementById('e2-visa').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
-  }
-  if (document.querySelector('#while-in-korea .e2-visa-hub')) {
-    setWhileInKoreaPanel(WHILE_IN_KOREA_PANELS.has(id) ? id : 'e2-medical');
-    return;
-  }
-  const el = id && document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-window.addEventListener('hashchange', showHashTarget);
-
-document.addEventListener('click', (e) => {
-  const panelBtn = e.target.closest('#e2-visa [data-e2-panel]');
-  if (panelBtn) {
-    if (!panelBtn.classList.contains('e2-visa-nav-btn') && !panelBtn.classList.contains('e2-hub-spoke') && !panelBtn.classList.contains('e2-hub-back')) return;
-    e.preventDefault();
-    const panel = panelBtn.dataset.e2Panel;
-    setE2VisaPanel(panel);
-    history.pushState(null, '', panel === 'e2-hub' ? location.pathname : '#' + panel);
-    return;
-  }
-  const wikBtn = e.target.closest('#while-in-korea .wik-nav-btn[data-wik-panel]');
-  if (wikBtn) {
-    e.preventDefault();
-    const panel = wikBtn.dataset.wikPanel;
-    setWhileInKoreaPanel(panel);
-    history.pushState(null, '', '#' + panel);
-  }
-});
-
 // ============ FORUM POST TOGGLE ============
 function toggleForumPost(key) {
   const post = document.querySelector('.forum-post[data-post="' + key + '"]');
@@ -1702,8 +1590,6 @@ window.rkInitPage = function () {
   document.getElementById('magnet-modal')?.addEventListener('click', function (event) {
     if (event.target === this) closeMagnetModal();
   }, { signal });
-  if (location.hash) setTimeout(showHashTarget, 150);
-  else showHashTarget();
 };
 
 window.rkCleanupPage = function () {

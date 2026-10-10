@@ -185,31 +185,25 @@ export async function SiteHeader() {
         <NavRow items={KO_NAV} label="School navigation" lang="ko" />
         <div className="nav-right">
           <div className="main-nav-dd nav-menu-mobile" id="nav-menu-mobile">
-            <button type="button" className="nav-menu-btn" aria-expanded="false" aria-haspopup="true">
-              <span className="en-only">Menu</span>
-              <span className="ko-only">메뉴</span>
+            <button type="button" className="nav-menu-btn" aria-expanded="false" aria-haspopup="true" aria-label="Menu">
+              {/* Phones show the icon (an X while open); wider screens show the label. */}
+              <svg className="nav-menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path className="nav-menu-icon-open" d="M4 7h16M4 12h16M4 17h16" />
+                <path className="nav-menu-icon-close" d="M6 6l12 12M18 6L6 18" />
+              </svg>
+              <span className="nav-menu-label en-only">Menu</span>
+              <span className="nav-menu-label ko-only">메뉴</span>
               <span className="caret" aria-hidden="true">
                 ▾
               </span>
             </button>
             <div className="main-nav-menu" role="menu">
+              <SearchField className="nav-search-field nav-search-field--menu" />
               <MobileLinks links={enMobile} lang="en" />
               <MobileLinks links={KO_MOBILE} lang="ko" />
             </div>
           </div>
-          <label className="nav-search-field">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M20 20l-4-4" />
-            </svg>
-            <input
-              type="search"
-              id="nav-search-input"
-              placeholder="Search"
-              autoComplete="off"
-              aria-label="Search site"
-            />
-          </label>
+          <SearchField className="nav-search-field nav-search-field--bar" />
           <Link className="nav-action nav-action--primary en-only" href="/apply/">
             Apply
           </Link>
@@ -227,5 +221,18 @@ export async function SiteHeader() {
         </div>
       </div>
     </header>
+  );
+}
+
+/** Site search; header-nav.tsx handles Enter. Shown in the bar, and inside the menu on phones. */
+function SearchField({ className }: { className: string }) {
+  return (
+    <label className={className}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-4-4" />
+      </svg>
+      <input type="search" placeholder="Search" autoComplete="off" aria-label="Search site" />
+    </label>
   );
 }

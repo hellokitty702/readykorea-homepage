@@ -1,5 +1,4 @@
-// Pages that used to be panels of the one-page homepage, plus the `#target` names the old site used
-// for them (menu entries, in-content buttons, and `/#target` links shared elsewhere).
+// Pages that used to be panels of the one-page homepage.
 // Client-safe: no server imports. Page markup lives in content/pages/ and content/sections/.
 
 import type { Metadata } from 'next';
@@ -33,66 +32,41 @@ export const REGIONS = [
   { slug: 'daechi', name: 'Daechi-dong' },
 ] as const;
 
-const LESSON_LEVELS = ['k1', 'k2', 'k3', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6'];
-
-/** Sub-panels of the E-2 visa guide, switched in place on /for-teachers/e2-visa/ by `#<panel>`. */
-const E2_PANELS: Record<string, string> = {
-  'e2-hub': '',
-  'e2-process': 'e2-process',
-  'e2-documents': 'e2-documents',
-  'e2-consular': 'e2-consular',
-  'e2-fukuoka': 'e2-fukuoka',
-  'fukuoka-visa-run': 'e2-fukuoka',
-  'e2-downloads': 'e2-downloads',
-  'e2-consulates': 'e2-consulates',
-  'e2-workplace': 'e2-workplace',
-  'e2-extension': 'e2-extension',
-  'e2-d10': 'e2-d10',
-  'd10-job-seeker': 'e2-d10',
-  'e2-d4-change': 'e2-d4-change',
-  'd4-to-e2': 'e2-d4-change',
-  'e2-c45-camp': 'e2-c45-camp',
-  'c4-5-camp': 'e2-c45-camp',
-  'c45-camp': 'e2-c45-camp',
-};
-
-/** Old `#target` name → page URL (with `#anchor` when the target is a part of the page). */
-export const SITE_ROUTES: Record<string, string> = {
-  home: '/',
-  jobs: '/jobs/',
-  lessons: '/lessons/',
-  ...Object.fromEntries(LESSON_LEVELS.map((level) => [level, `/lessons/${level}/`])),
-  'why-readykorea': '/why-readykorea/',
-  'school-posting': '/school-posting/',
-  'curriculum-consulting': '/curriculum-consulting/',
-  'why-korea': '/why-korea/',
-  calculators: '/why-korea/tools/',
-  'savings-calculator': '/why-korea/tools/#savings-calculator',
-  'visa-tracker-anchor': '/why-korea/tools/#visa-tracker-anchor',
-  survival: '/why-korea/survival/',
-  'k-survival': '/why-korea/survival/#k-survival',
-  'survival-faq': '/why-korea/survival/#survival-faq',
-  'english-bus-guide': '/why-korea/survival/#english-bus-guide',
-  regions: '/regions/',
-  ...Object.fromEntries(
-    REGIONS.flatMap(({ slug }) => [
-      [`region-${slug}`, `/regions/${slug}/`],
-      [`region-${slug}-jobs`, `/regions/${slug}/#region-${slug}-jobs`],
-    ]),
-  ),
-  teachers: '/for-teachers/',
-  'for-teachers': '/for-teachers/',
-  ...Object.fromEntries(FOR_TEACHERS_GUIDES.map(({ slug }) => [slug, `/for-teachers/${slug}/`])),
-  ...Object.fromEntries(
-    Object.entries(E2_PANELS).map(([target, panel]) => [target, `/for-teachers/e2-visa/${panel && `#${panel}`}`]),
-  ),
-  'e2-medical': '/for-teachers/while-in-korea/',
-  'e2-arc': '/for-teachers/while-in-korea/#e2-arc',
-  ailab: '/ai-lab/',
-  'ai-lab': '/ai-lab/',
-  forum: '/forum/',
-  tefl: '/tefl/',
-  support: '/support/',
+/**
+ * Guides split into sub-pages with a side menu: `/for-teachers/<guide>/` is the first entry (slug ''),
+ * the others are `/for-teachers/<guide>/<slug>/`. Each entry's markup is
+ * content/pages/for-teachers/<guide>/<slug or index>.html, followed by the guide's source.html.
+ */
+export const GUIDE_SUBPAGES: Partial<
+  Record<(typeof FOR_TEACHERS_GUIDES)[number]['slug'], { label: string; note?: string; entries: { slug: string; title: string }[]; footer: { href: string; title: string } }>
+> = {
+  'e2-visa': {
+    label: 'E-2 Visa',
+    entries: [
+      { slug: '', title: 'Master Guide' },
+      { slug: 'process', title: 'Visa Process' },
+      { slug: 'documents', title: 'Packing Checklist' },
+      { slug: 'consular', title: 'Consular Step' },
+      { slug: 'fukuoka', title: 'Visa Run · Fukuoka' },
+      { slug: 'downloads', title: 'Document Resource Hub' },
+      { slug: 'consulates', title: 'Jurisdiction Hub' },
+      { slug: 'workplace', title: 'Workplace Change' },
+      { slug: 'extension', title: 'Visa Extension' },
+      { slug: 'd10', title: 'D-10 Job-Seeker' },
+      { slug: 'd4-change', title: 'D-4 → E-2 Change' },
+      { slug: 'c45-camp', title: 'C-4-5 Camp Visa' },
+    ],
+    footer: { href: '/for-teachers/while-in-korea/', title: 'While in Korea →' },
+  },
+  'while-in-korea': {
+    label: 'While in Korea',
+    note: 'Post-arrival only · after your E-2 stamp',
+    entries: [
+      { slug: '', title: 'E-2 Visa Medical Check' },
+      { slug: 'arc', title: 'Residence Card (ARC)' },
+    ],
+    footer: { href: '/for-teachers/e2-visa/', title: '← E-2 Visa Master Guide' },
+  },
 };
 
 /** Title and description of each page made from a homepage panel (lessons, jobs and regions have their own). */
