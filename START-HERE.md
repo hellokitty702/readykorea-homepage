@@ -24,7 +24,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 1. `.env.example` 을 `.env.local` 로 복사하고 `DATABASE_URL` 을 입력합니다.
 2. `bun run db:migrate` → `bun run db:seed` → `bun run admin:create …`
-3. Vercel: 프로젝트 환경 변수에 `DATABASE_URL` 을 추가합니다 (Neon / Supabase / Vercel Postgres 등). 홈페이지는 빌드할 때 공고와 블로그 글을 읽으므로 **빌드 전에 DB가 있어야 합니다.** 배포 전에 운영 DB에 `bun run db:migrate` 를 실행하세요.
+3. Vercel: 프로젝트 환경 변수에 `DATABASE_URL` 을 추가합니다 (Neon / Supabase / Vercel Postgres 등). 홈페이지는 빌드할 때 공고와 블로그 글을 읽으므로 **빌드 전에 DB가 있어야 합니다.** 운영 배포는 빌드 전에 `bun run db:migrate` 를 자동으로 실행합니다 (`vercel.json`). 미리보기(Preview) 배포는 DB를 바꾸지 않습니다. 시드 데이터는 처음 한 번만 내 컴퓨터에서 넣습니다: `DATABASE_URL="운영 DB 주소" bun run db:seed`.
 
 ### 이미지 업로드 (미디어)
 
@@ -37,7 +37,7 @@ bun run db:studio      # DB 데이터 보기 (Drizzle Studio)
 
 사이트 주소: 코드 안의 링크는 모두 상대 주소(`/blog/…/`)입니다. 절대 주소가 꼭 필요한 곳(canonical·OG 태그, `sitemap.xml`, `robots.txt`, JSON-LD)만 `lib/site.ts` 의 주소를 씁니다. 이 주소는 코드에 고정되어 있지 않고 `SITE_URL` 환경 변수 → Vercel 운영 도메인(가장 짧은 커스텀 도메인) → 로컬 `http://localhost:3000` 순서로 정해집니다. `www.` 로 들어온 요청은 `next.config.ts` 에서 `www` 없는 주소로 308 리다이렉트합니다 (경로·쿼리 유지). Vercel → Settings → Domains 에는 두 도메인을 모두 연결하고 `readykoreaesl.com` 을 기본으로 두세요. 확실히 하려면 Vercel 환경 변수에 `SITE_URL=https://readykoreaesl.com` 을 넣습니다.
 
-배포: Vercel 이 Next.js 프로젝트로 자동 인식합니다 (`bun.lock` 이 있어서 `bun install` / `bun run build` 사용). 별도 설정은 필요 없습니다.
+배포: 설정은 `vercel.json` 에 있습니다 (`bun install`, 운영 배포에서만 `bun run db:migrate`, 그다음 `bun run build`). 마이그레이션이 실패하면 배포가 멈추므로, 새 코드가 예전 DB 구조로 실행되는 일은 없습니다.
 
 예전 주소 호환: `/apply` → `/apply/` 처럼 끝에 `/` 를 붙여 리다이렉트합니다 (`next.config.ts`). `.html` 로 끝나는 주소는 `.html` 을 뺀 주소로 리다이렉트합니다 (`/index.html` → `/`, `/blog/글.html` → `/blog/글/`).
 
