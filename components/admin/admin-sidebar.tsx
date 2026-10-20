@@ -2,6 +2,7 @@
 
 import {
   Briefcase,
+  CreditCard,
   ExternalLink,
   Image,
   Inbox,
@@ -35,6 +36,12 @@ const LINKS = [
   },
   { href: '/admin/blog/', label: 'Blog', icon: Newspaper, match: (p: string) => p.startsWith('/admin/blog') },
   { href: '/admin/media/', label: 'Media', icon: Image, match: (p: string) => p.startsWith('/admin/media') },
+  {
+    href: '/admin/payments/',
+    label: 'Payments',
+    icon: CreditCard,
+    match: (p: string) => p.startsWith('/admin/payments'),
+  },
   { href: '/admin/account/', label: 'Account', icon: UserRound, match: (p: string) => p.startsWith('/admin/account') },
 ];
 

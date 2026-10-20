@@ -7,12 +7,14 @@ import {
   categories,
   jobs,
   media,
+  payments,
   postTags,
   posts,
   tags,
   users,
   type ApplicationStatus,
   type Media,
+  type PaymentStatus,
   type PostStatus,
 } from '@/lib/db/schema';
 
@@ -405,4 +407,64 @@ export async function listMedia({ page = 1, search = '' }: { page?: number; sear
     pages: Math.max(1, Math.ceil(total / MEDIA_PAGE_SIZE)),
     total,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Payments
+// ---------------------------------------------------------------------------
+
+export type PaymentFilters = { status?: PaymentStatus; q?: string; page?: number };
+
+const PAYMENT_PAGE_SIZE = 50;
+
+function paymentWhere({ status, q }: PaymentFilters, withStatus = true) {
+  const where: SQL[] = [];
+  if (withStatus && status) where.push(eq(payments.status, status));
+  if (q) {
+    const like = `%${q.replace(/[\\%_]/g, (c) => `\\${c}`)}%`;
+    where.push(or(ilike(payments.name, like), ilike(payments.email, like), ilike(payments.description, like))!);
+  }
+  return where.length ? and(...where) : undefined;
+}
+
+export async function listPayments(filters: PaymentFilters = {}) {
+  const page = Math.max(1, filters.page ?? 1);
+  const where = paymentWhere(filters);
+  const [rows, [{ total }]] = await Promise.all([
+    db
+      .select()
+      .from(payments)
+      .where(where)
+      .orderBy(desc(payments.createdAt), desc(payments.id))
+      .limit(PAYMENT_PAGE_SIZE)
+      .offset((page - 1) * PAYMENT_PAGE_SIZE),
+    db.select({ total: count() }).from(payments).where(where),
+  ]);
+  return { rows, total, page, pages: Math.max(1, Math.ceil(total / PAYMENT_PAGE_SIZE)) };
+}
+
+/** Counts per status for the filter tabs (respecting the search). */
+export async function paymentStatusCounts(filters: PaymentFilters) {
+  const rows = await db
+    .select({ status: payments.status, value: count() })
+    .from(payments)
+    .where(paymentWhere(filters, false))
+    .groupBy(payments.status);
+  return Object.fromEntries(rows.map((r) => [r.status, r.value])) as Partial<Record<PaymentStatus, number>>;
+}
+
+/** Money received per mode and currency (test payments are kept apart from live ones). */
+export function paidTotals() {
+  return db
+    .select({
+      mode: payments.mode,
+      currency: payments.currency,
+      amount: sql<number>`sum(${payments.amount})`.mapWith(Number),
+      count: count(),
+    })
+    .from(payments)
+    .where(eq(payments.status, 'paid'))
+    .groupBy(payments.mode, payments.currency)
+    // Live before test.
+    .orderBy(asc(payments.mode), asc(payments.currency));
 }

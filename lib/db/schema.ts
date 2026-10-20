@@ -19,6 +19,8 @@ import {
   JOB_BADGES,
   JOB_STATUSES,
   MEDIA_DISKS,
+  PAYMENT_MODES,
+  PAYMENT_STATUSES,
   POST_STATUSES,
   type FormFieldType,
 } from './enums';
@@ -284,6 +286,46 @@ export const media = pgTable(
 );
 
 // ---------------------------------------------------------------------------
+// Settings (configured in the admin panel)
+// ---------------------------------------------------------------------------
+
+/** One row per settings group, e.g. `stripe` (lib/stripe.ts). */
+export const settings = pgTable('settings', {
+  key: varchar('key', { length: 60 }).primaryKey(),
+  value: jsonb('value').$type<Record<string, unknown>>().notNull().default({}),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
+// ---------------------------------------------------------------------------
+// Payments (Stripe Checkout)
+// ---------------------------------------------------------------------------
+
+export const payments = pgTable(
+  'payments',
+  {
+    id: serial('id').primaryKey(),
+    status: varchar('status', { length: 20, enum: PAYMENT_STATUSES }).notNull().default('pending'),
+    mode: varchar('mode', { length: 10, enum: PAYMENT_MODES }).notNull(),
+    /** In the currency's smallest unit (cents for USD, won for KRW), as Stripe counts it. */
+    amount: integer('amount').notNull(),
+    /** Lowercase ISO code, e.g. usd. */
+    currency: varchar('currency', { length: 3 }).notNull(),
+    name: varchar('name', { length: 160 }).notNull().default(''),
+    /** Typed on /pay/; replaced by the one entered on Stripe's page once paid. */
+    email: varchar('email', { length: 255 }).notNull().default(''),
+    description: varchar('description', { length: 300 }).notNull().default(''),
+    stripeSessionId: varchar('stripe_session_id', { length: 255 }).unique(),
+    stripePaymentIntentId: varchar('stripe_payment_intent_id', { length: 255 }),
+    paidAt: timestamp('paid_at', { withTimezone: true }),
+    ...timestamps,
+  },
+  (t) => [index('payments_status_idx').on(t.status), index('payments_created_at_idx').on(t.createdAt)],
+);
+
+// ---------------------------------------------------------------------------
 // Relations (for db.query)
 // ---------------------------------------------------------------------------
 
@@ -317,3 +359,4 @@ export type Post = typeof posts.$inferSelect;
 export type Category = typeof categories.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
 export type Media = typeof media.$inferSelect;
+export type Payment = typeof payments.$inferSelect;

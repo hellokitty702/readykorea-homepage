@@ -38,6 +38,17 @@ export type MediaDisk = (typeof MEDIA_DISKS)[number];
 export const APPLY_METHODS = ['standard', 'google_form', 'typeform', 'embed'] as const;
 export type ApplyMethod = (typeof APPLY_METHODS)[number];
 
+/**
+ * A Stripe payment: `pending` until Checkout is paid (or while a bank payment clears), then `paid`;
+ * `expired` when the Checkout page timed out or was left, `failed` when a delayed payment bounced.
+ */
+export const PAYMENT_STATUSES = ['pending', 'paid', 'failed', 'expired'] as const;
+export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
+
+/** Which Stripe keys took the payment: test (sk_test_…) or live (sk_live_…). */
+export const PAYMENT_MODES = ['test', 'live'] as const;
+export type PaymentMode = (typeof PAYMENT_MODES)[number];
+
 /** Question types of the ReadyKorea application form. */
 export const FORM_FIELD_TYPES = [
   'short_text',
