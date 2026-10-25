@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { STATUS_LABEL } from '@/lib/application-flow';
 import type { ApplicationStatus } from '@/lib/db/schema';
 import { JOB_STATUS_LABEL } from '@/lib/job-fields';
-import { JOB_STATUS_COLORS, STATUS_COLORS, badge, cx } from './styles';
+import { JOB_STATUS_COLORS, PAYMENT_STATUS_COLORS, STATUS_COLORS, badge, cx } from './styles';
 
 const KST: Intl.DateTimeFormatOptions = { timeZone: 'Asia/Seoul' };
 
@@ -34,6 +34,17 @@ const POST_STATUS_LABEL = { draft: 'Draft', published: 'Published' } as const;
 
 export function PostStatusBadge({ status }: { status: keyof typeof POST_STATUS_LABEL }) {
   return <span className={cx(badge, JOB_STATUS_COLORS[status])}>{POST_STATUS_LABEL[status]}</span>;
+}
+
+export const PAYMENT_STATUS_LABEL = {
+  paid: 'Paid',
+  pending: 'Pending',
+  failed: 'Failed',
+  expired: 'Expired',
+} as const;
+
+export function PaymentStatusBadge({ status }: { status: keyof typeof PAYMENT_STATUS_LABEL }) {
+  return <span className={cx(badge, PAYMENT_STATUS_COLORS[status])}>{PAYMENT_STATUS_LABEL[status]}</span>;
 }
 
 export function PageHeader({

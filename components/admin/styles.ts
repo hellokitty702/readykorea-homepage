@@ -112,6 +112,13 @@ export const JOB_STATUS_COLORS = {
   closed: 'bg-red-100 text-red-800',
 } as const;
 
+export const PAYMENT_STATUS_COLORS = {
+  paid: 'bg-green-100 text-green-800',
+  pending: 'bg-amber-100 text-amber-800',
+  failed: 'bg-red-100 text-red-800',
+  expired: 'bg-slate-100 text-slate-600',
+} as const;
+
 export const tag =
   'ml-1.5 inline-block rounded-full bg-slate-100 px-2 py-px align-[1px] text-2xs font-semibold text-slate-700';
 
